@@ -7,12 +7,15 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Entypo from 'react-native-vector-icons/Entypo';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import { ViewStyle } from 'react-native';
 import { theme } from 'utils/styles';
 import { unit } from 'utils/responsive';
 
 const useIconFamily = (family: IconFamily): any => {
   switch (family) {
+    case 'AntDesign':
+      return AntDesign;
     case 'Octicons':
       return Octicons;
     case 'Ionicons':
@@ -42,7 +45,8 @@ export type IconFamily =
   | 'MaterialIcon'
   | 'MaterialCommunityIcons'
   | 'Entypo'
-  | 'Fontisto';
+  | 'Fontisto'
+  | 'AntDesign';
 
 interface IconProps {
   family: IconFamily;
