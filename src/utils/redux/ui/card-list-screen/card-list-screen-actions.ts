@@ -5,6 +5,7 @@ import {
   GET_CARD_LIST_CALL,
   GET_CARD_LIST_ERROR,
   GET_CARD_LIST_SUCCESS,
+  GO_TO_CARD_DETAIL,
   SET_CARD_LIST,
 } from 'utils/redux/actions';
 import { RequestAction, RequestActionOptions } from 'utils/sagas/request-saga';
@@ -28,6 +29,13 @@ export interface SetCardList extends Action {
   payload: CardSections;
 }
 
+export interface GoToCardDetail extends Action {
+  type: typeof GO_TO_CARD_DETAIL;
+  payload: {
+    card: Card;
+  };
+}
+
 export type CardListScreenAction =
   | GetCardListCall
   | GetCardListError
@@ -49,15 +57,18 @@ export function getCardListCall({
   };
 }
 
-export function getCardListError(): GetCardListError {
-  return {
-    type: GET_CARD_LIST_ERROR,
-  };
-}
-
 export function setCardList(sections: CardSections): SetCardList {
   return {
     type: SET_CARD_LIST,
     payload: sections,
+  };
+}
+
+export function goToCardDetail(card: Card): GoToCardDetail {
+  return {
+    type: GO_TO_CARD_DETAIL,
+    payload: {
+      card,
+    },
   };
 }

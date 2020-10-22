@@ -1,4 +1,6 @@
+import { Batch } from './Batch';
 import { Currency, Money } from './Money';
+import { Movement } from './Movement';
 
 export interface CardType {
   id: number;
@@ -18,6 +20,8 @@ export interface ICard {
   ownerName?: string;
   qrUrl?: string;
   ownerType: OwnerType;
+  movements?: Movement[];
+  batches?: Batch[];
 }
 
 export class Card {
@@ -29,6 +33,8 @@ export class Card {
   public ownerName?: string;
   public qrUrl?: string;
   public ownerType: OwnerType;
+  public movements?: Movement[];
+  public batches?: Batch[];
 
   constructor(json: ICard) {
     this.id = json.id;
@@ -39,6 +45,8 @@ export class Card {
     this.qrUrl = json.qrUrl;
     this.currency = json.currency;
     this.ownerType = json.ownerType;
+    this.movements = json.movements;
+    this.batches = json.batches;
   }
 
   get color() {

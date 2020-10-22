@@ -56,9 +56,9 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* VolvoCashClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VolvoCashClientTests.m; sourceTree = "<group>"; };
 		0157B4AF2D2C44C7F208971F /* Pods-VolvoCashClient-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolvoCashClient-tvOS.release.xcconfig"; path = "Target Support Files/Pods-VolvoCashClient-tvOS/Pods-VolvoCashClient-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		018A5CBCF753416AA39239D7 /* VolvoNovum-MediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-MediumItalic.otf"; path = "../src/assets/fonts/VolvoNovum-MediumItalic.otf"; sourceTree = "<group>"; };
-		067F722459064F2685FA80D6 /* VolvoNovum-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Bold.otf"; path = "../src/assets/fonts/VolvoNovum-Bold.otf"; sourceTree = "<group>"; };
-		08470A348E6D41EF817F918E /* VolvoNovum-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-LightItalic.otf"; path = "../src/assets/fonts/VolvoNovum-LightItalic.otf"; sourceTree = "<group>"; };
+		018A5CBCF753416AA39239D7 /* VolvoNovum-MediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-MediumItalic.otf"; path = "../src/assets/fonts/VolvoNovum-MediumItalic.otf"; sourceTree = "<group>"; };
+		067F722459064F2685FA80D6 /* VolvoNovum-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Bold.otf"; path = "../src/assets/fonts/VolvoNovum-Bold.otf"; sourceTree = "<group>"; };
+		08470A348E6D41EF817F918E /* VolvoNovum-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-LightItalic.otf"; path = "../src/assets/fonts/VolvoNovum-LightItalic.otf"; sourceTree = "<group>"; };
 		0A3437DEE999254233668654 /* Pods-VolvoCashClient-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolvoCashClient-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-VolvoCashClient-tvOSTests/Pods-VolvoCashClient-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* VolvoCashClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VolvoCashClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = VolvoCashClient/AppDelegate.h; sourceTree = "<group>"; };
@@ -66,23 +66,23 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = VolvoCashClient/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = VolvoCashClient/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = VolvoCashClient/main.m; sourceTree = "<group>"; };
-		26C011EAC38A4B15A407F2CE /* VolvoNovum-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Medium.otf"; path = "../src/assets/fonts/VolvoNovum-Medium.otf"; sourceTree = "<group>"; };
+		26C011EAC38A4B15A407F2CE /* VolvoNovum-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Medium.otf"; path = "../src/assets/fonts/VolvoNovum-Medium.otf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* VolvoCashClient-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VolvoCashClient-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* VolvoCashClient-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VolvoCashClient-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		318D221CC66A47399BB4BE03 /* VolvoNovum-SemiLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-SemiLight.otf"; path = "../src/assets/fonts/VolvoNovum-SemiLight.otf"; sourceTree = "<group>"; };
+		318D221CC66A47399BB4BE03 /* VolvoNovum-SemiLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-SemiLight.otf"; path = "../src/assets/fonts/VolvoNovum-SemiLight.otf"; sourceTree = "<group>"; };
 		3201A7B1B51E6EBF1EDC894B /* Pods-VolvoCashClient-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolvoCashClient-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-VolvoCashClient-tvOSTests/Pods-VolvoCashClient-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		3E89CD2D97434DE7A5319559 /* VolvoBroadProDigital.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = VolvoBroadProDigital.otf; path = ../src/assets/fonts/VolvoBroadProDigital.otf; sourceTree = "<group>"; };
-		533E4578FFEF474A88D037F0 /* VolvoNovum-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-BoldItalic.otf"; path = "../src/assets/fonts/VolvoNovum-BoldItalic.otf"; sourceTree = "<group>"; };
-		594C487411184244A0353B9F /* VolvoNovum-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Regular.otf"; path = "../src/assets/fonts/VolvoNovum-Regular.otf"; sourceTree = "<group>"; };
+		3E89CD2D97434DE7A5319559 /* VolvoBroadProDigital.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = VolvoBroadProDigital.otf; path = ../src/assets/fonts/VolvoBroadProDigital.otf; sourceTree = "<group>"; };
+		533E4578FFEF474A88D037F0 /* VolvoNovum-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-BoldItalic.otf"; path = "../src/assets/fonts/VolvoNovum-BoldItalic.otf"; sourceTree = "<group>"; };
+		594C487411184244A0353B9F /* VolvoNovum-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Regular.otf"; path = "../src/assets/fonts/VolvoNovum-Regular.otf"; sourceTree = "<group>"; };
 		597C1C302DB67DCA566412F8 /* libPods-VolvoCashClient-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VolvoCashClient-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		771F644D0C3C40C1AA11727F /* VolvoNovum-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Italic.otf"; path = "../src/assets/fonts/VolvoNovum-Italic.otf"; sourceTree = "<group>"; };
+		771F644D0C3C40C1AA11727F /* VolvoNovum-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Italic.otf"; path = "../src/assets/fonts/VolvoNovum-Italic.otf"; sourceTree = "<group>"; };
 		7A6D451644B6613415AA998B /* Pods-VolvoCashClient-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolvoCashClient-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-VolvoCashClient-tvOS/Pods-VolvoCashClient-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = VolvoCashClient/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BF503EA2C020F714C14AD83 /* libPods-VolvoCashClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VolvoCashClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AEFF5C5033DFD3F57AA67BF /* libPods-VolvoCashClient-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VolvoCashClient-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF70A9718FDD2474D920CE1 /* Pods-VolvoCashClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolvoCashClient.debug.xcconfig"; path = "Target Support Files/Pods-VolvoCashClient/Pods-VolvoCashClient.debug.xcconfig"; sourceTree = "<group>"; };
-		D405DFD99625461BA784561B /* VolvoNovum-SemiLightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-SemiLightItalic.otf"; path = "../src/assets/fonts/VolvoNovum-SemiLightItalic.otf"; sourceTree = "<group>"; };
-		D93D99BECE6B43328A97D8B5 /* VolvoNovum-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Light.otf"; path = "../src/assets/fonts/VolvoNovum-Light.otf"; sourceTree = "<group>"; };
+		D405DFD99625461BA784561B /* VolvoNovum-SemiLightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-SemiLightItalic.otf"; path = "../src/assets/fonts/VolvoNovum-SemiLightItalic.otf"; sourceTree = "<group>"; };
+		D93D99BECE6B43328A97D8B5 /* VolvoNovum-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Light.otf"; path = "../src/assets/fonts/VolvoNovum-Light.otf"; sourceTree = "<group>"; };
 		DCE87207905763EEA545840A /* Pods-VolvoCashClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolvoCashClient.release.xcconfig"; path = "Target Support Files/Pods-VolvoCashClient/Pods-VolvoCashClient.release.xcconfig"; sourceTree = "<group>"; };
 		DCFB69E3CBA5478F54BD6787 /* Pods-VolvoCashClient-VolvoCashClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolvoCashClient-VolvoCashClientTests.debug.xcconfig"; path = "Target Support Files/Pods-VolvoCashClient-VolvoCashClientTests/Pods-VolvoCashClient-VolvoCashClientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -236,7 +236,6 @@
 				D405DFD99625461BA784561B /* VolvoNovum-SemiLightItalic.otf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -782,7 +781,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.angkorgroup.volvocashclient;
 				PRODUCT_NAME = VolvoCashClient;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -805,7 +804,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.angkorgroup.volvocashclient;
 				PRODUCT_NAME = VolvoCashClient;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
