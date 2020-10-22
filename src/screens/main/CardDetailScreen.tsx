@@ -26,11 +26,14 @@ import {
 } from 'utils/redux/ui/card-detail-screen/card-detail-screen-reducer';
 import { getCardDetailCall } from 'utils/redux/ui/card-detail-screen/card-detail-screen-action';
 import cardDetail from 'mocks/card-detail';
+import { useNavigation } from '@react-navigation/native';
+import * as routes from 'utils/routes';
 
 type CardDetailTab = 'Movimientos' | 'Vencimientos';
 
 const CardDetailScreen = () => {
   const [tab, setTab] = useState<CardDetailTab>('Movimientos');
+  const navigation = useNavigation();
 
   const card = useSelector(selectCard);
 
@@ -53,7 +56,9 @@ const CardDetailScreen = () => {
         {card.ownerType === 'primary' && (
           <Button
             title="Generar código QR"
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate(routes.QR_SCREEN);
+            }}
             icon={
               <Icon family="MaterialIcon" name="qr-code-2" size={unit(50)} />
             }

@@ -17,7 +17,7 @@ const VolvoCard: React.FC<VolvoCardProps> = ({ card, onPress }) => {
   return (
     <TouchableOpacity
       style={[styles.container, bgColor]}
-      activeOpacity={0.7}
+      activeOpacity={theme.opacity}
       onPress={onPress}>
       <Text style={styles.primaryText}>{card.cardType.displayName}</Text>
       <Text style={styles.secondaryText}>

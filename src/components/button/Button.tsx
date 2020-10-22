@@ -10,10 +10,11 @@ import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 
 interface ButtonProps {
-  onPress(): void;
+  onPress?(): void;
   title: string;
   style?: ViewStyle;
   loading?: boolean;
+  danger?: boolean;
   disabled?: boolean;
   icon?: JSX.Element;
 }
@@ -25,6 +26,7 @@ const Button: React.FC<ButtonProps> = ({
   loading,
   disabled,
   icon,
+  danger,
 }) => {
   const buttonStyle = [styles.container, style];
   const buttonTextStyle = [styles.buttonText] as any[];
@@ -32,12 +34,16 @@ const Button: React.FC<ButtonProps> = ({
     buttonStyle.push(theme.disabledSurface);
     buttonTextStyle.push(theme.secondary);
   }
+  if (danger) {
+    buttonTextStyle.push(theme.red);
+  }
   if (icon) {
     buttonStyle.push(styles.containerWithIcon);
     buttonTextStyle.push(styles.textWithIcon);
   }
   return (
     <TouchableOpacity
+      activeOpacity={theme.opacity}
       onPress={onPress}
       style={buttonStyle}
       disabled={disabled || loading}>

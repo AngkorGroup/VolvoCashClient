@@ -14,6 +14,7 @@ export const palette = {
 };
 
 export const theme = {
+  opacity: 0.7,
   shadow: {
     // ios
     shadowOffset: { width: 0, height: 5 },
@@ -65,6 +66,10 @@ export const theme = {
   medium: {
     fontSize: unit(18),
     fontFamily: 'VolvoNovum-Medium',
+  },
+  mediumLight: {
+    fontSize: unit(18),
+    fontFamily: 'VolvoNovum-Regular',
   },
   small: {
     fontSize: unit(15),
