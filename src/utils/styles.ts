@@ -67,6 +67,10 @@ export const theme = {
     fontSize: unit(18),
     fontFamily: 'VolvoNovum-Medium',
   },
+  mediumLight: {
+    fontSize: unit(18),
+    fontFamily: 'VolvoNovum-Regular',
+  },
   small: {
     fontSize: unit(15),
     fontFamily: 'VolvoNovum-Regular',
