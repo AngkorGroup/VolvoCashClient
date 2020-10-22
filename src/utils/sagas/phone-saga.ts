@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga/effects';
-import { navigate } from 'utils/navigation';
 import { REQUEST_CODE_SUCCESS } from 'utils/redux/actions';
+import { navigate } from 'utils/navigation';
 import * as routes from 'utils/routes';
 
 function* onRequestCodeSuccess() {
