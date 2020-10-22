@@ -7,9 +7,12 @@ import { selectCard } from 'utils/redux/ui/card-detail-screen/card-detail-screen
 import { useSelector } from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import * as routes from 'utils/routes';
 
 const QrScreen = () => {
   const card = useSelector(selectCard);
+  const navigation = useNavigation();
 
   if (!card) {
     return <ActivityIndicator animating={true} />;
@@ -23,7 +26,11 @@ const QrScreen = () => {
         leftButton={<BackButton />}
       />
       <View style={styles.content}>
-        <TouchableOpacity activeOpacity={theme.opacity}>
+        <TouchableOpacity
+          activeOpacity={theme.opacity}
+          onPress={() => {
+            navigation.navigate(routes.CONFIRMATION_MODAL);
+          }}>
           <FastImage
             source={{
               uri:
