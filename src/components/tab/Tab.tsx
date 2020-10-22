@@ -13,7 +13,7 @@ interface TabProps {
 const Tab: React.FC<TabProps> = ({ name, active, onPress }) => {
   return (
     <TouchableOpacity
-      activeOpacity={0.7}
+      activeOpacity={theme.opacity}
       onPress={onPress}
       containerStyle={styles.button}
       style={styles.button}>

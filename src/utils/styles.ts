@@ -14,6 +14,7 @@ export const palette = {
 };
 
 export const theme = {
+  opacity: 0.7,
   shadow: {
     // ios
     shadowOffset: { width: 0, height: 5 },
