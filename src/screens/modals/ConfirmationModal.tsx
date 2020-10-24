@@ -6,7 +6,7 @@ import { theme } from 'utils/styles';
 import { unit } from 'utils/responsive';
 import Button from 'components/button/Button';
 import InfoRow from 'components/card/InfoRow';
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
 
 const ConfirmationModal = () => {
@@ -34,7 +34,9 @@ const ConfirmationModal = () => {
           <Button
             title="Confirmar"
             style={styles.button}
-            onPress={() => navigation.navigate(routes.SUCCESS_MODAL)}
+            onPress={() =>
+              navigation.dispatch(StackActions.replace(routes.SUCCESS_MODAL))
+            }
           />
         </View>
       </View>
