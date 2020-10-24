@@ -32,7 +32,14 @@ const SuccessModal = () => {
           <Share onPress={handleSharePress} />
         </View>
         <View style={styles.buttonsContainer}>
-          <Button title="Confirmar" style={styles.button} />
+          <Button
+            title="Aceptar"
+            style={styles.button}
+            onPress={() => {
+              //FIXME: this should open OS share thing
+              navigation.goBack();
+            }}
+          />
         </View>
       </View>
     </View>
