@@ -43,17 +43,16 @@ export type CardListScreenAction =
   | SetCardList
   | DismissError;
 
-export function getCardListCall({
-  mockResponse,
-  mockData,
-}: RequestActionOptions): GetCardListCall {
+export function getCardListCall(
+  options?: RequestActionOptions,
+): GetCardListCall {
   return {
     type: GET_CARD_LIST_CALL,
-    payload: {},
-    meta: {
-      mockResponse,
-      mockData,
+    payload: {
+      url: '/cards',
+      method: 'get',
     },
+    meta: options,
   };
 }
 

@@ -1,6 +1,6 @@
 import { create } from 'apisauce';
 
-const localApi = create({
+export const developmentApi = create({
   baseURL: 'http://volvocashapi-dev.us-east-2.elasticbeanstalk.com/api',
   headers: {
     Accept: 'application/json',
@@ -15,5 +15,5 @@ export const apiNames = {
 };
 
 export default {
-  [apiNames.development]: localApi,
+  [apiNames.development]: developmentApi,
 };
