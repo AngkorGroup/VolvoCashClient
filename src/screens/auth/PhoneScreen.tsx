@@ -42,12 +42,7 @@ const PhoneScreen = () => {
   };
 
   const handleButtonPress = () => {
-    dispatch(
-      // FIXME: remove mock
-      requestCodeCall(phone, {
-        mockResponse: phone === '990300645' ? 'SUCCESS' : 'ERROR',
-      }),
-    );
+    dispatch(requestCodeCall(phone));
   };
 
   return (
