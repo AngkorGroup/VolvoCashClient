@@ -1,9 +1,5 @@
 import { Currency, Money } from './Money';
-
-export interface ICashier {
-  firstName: string;
-  lastName: string;
-}
+import { Cashier, ICashier } from './Cashier';
 
 export interface ICharge {
   id: number;
@@ -18,14 +14,14 @@ export class Charge {
   public amount: number;
   public currency: Currency;
   public displayName: string;
-  public cashier: ICashier;
+  public cashier: Cashier;
 
   constructor(json: ICharge) {
     this.id = json.id;
     this.amount = json.amount;
     this.currency = json.currency;
     this.displayName = json.displayName;
-    this.cashier = json.cashier;
+    this.cashier = new Cashier(json.cashier);
   }
 
   get money() {
