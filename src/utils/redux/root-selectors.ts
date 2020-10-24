@@ -7,3 +7,5 @@ export const selectCardListScreen = (state: RootState) =>
   state.ui.cardListScreen;
 export const selectCardDetailScreen = (state: RootState) =>
   state.ui.cardDetailScreen;
+export const selectConfirmationModal = (state: RootState) =>
+  state.ui.confirmationModal;

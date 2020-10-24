@@ -40,7 +40,7 @@ function* requestSaga(action: RequestAction) {
   } = action.payload;
 
   if (mockResponse) {
-    yield delay(1000);
+    yield delay(2000);
     yield put(
       defaultAction(action.type.replace('_CALL', '_' + mockResponse), mockData),
     );

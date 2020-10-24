@@ -1,45 +1,75 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CloseButton from 'components/header/CloseButton';
 import Header from 'components/header/Header';
-import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { theme } from 'utils/styles';
 import { unit } from 'utils/responsive';
 import Button from 'components/button/Button';
 import InfoRow from 'components/card/InfoRow';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectCharge,
+  selectLoading,
+} from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
+import { getChargeDetailCall } from 'utils/redux/services/charge-detail-actions';
+import chargeDetail from 'mocks/charge-detail';
+import { closeConfirmationModal } from 'utils/redux/ui/confirmation-modal/confirmation-modal-actions';
 
 const ConfirmationModal = () => {
   const navigation = useNavigation();
+  const loading = useSelector(selectLoading);
+  const charge = useSelector(selectCharge);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      getChargeDetailCall({ mockResponse: 'SUCCESS', mockData: chargeDetail }),
+    );
+  }, [dispatch]);
+
+  const handleClose = () => {
+    dispatch(closeConfirmationModal());
+  };
+
   return (
     <View style={styles.container}>
       <Header
         title={'Confirmar cobro'}
         alignment="center"
-        rightButton={<CloseButton />}
+        rightButton={<CloseButton onClose={handleClose} />}
       />
-      <View style={styles.card}>
-        <InfoRow label="Monto" value="S/ 1,200.00" />
-        <InfoRow label="Concepto" value="Lubricante HD-5000" />
-        <InfoRow label="Vendedor" value="Luis Ramos" />
-        <View style={styles.buttonsContainer}>
-          <Button
-            title="Rechazar"
-            danger
-            style={styles.button}
-            onPress={() => {
-              navigation.goBack();
-            }}
-          />
-          <Button
-            title="Confirmar"
-            style={styles.button}
-            onPress={() =>
-              navigation.dispatch(StackActions.replace(routes.SUCCESS_MODAL))
-            }
-          />
+      {loading && (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator animating={true} color={theme.secondary.color} />
         </View>
-      </View>
+      )}
+      {charge && (
+        <View style={styles.card}>
+          <InfoRow label="Monto" value={charge.money.toString()} />
+          <InfoRow label="Concepto" value={charge.displayName} />
+          <InfoRow label="Vendedor" value={charge.cashier.fullName} />
+          <View style={styles.buttonsContainer}>
+            <Button
+              title="Rechazar"
+              danger
+              style={styles.button}
+              onPress={() => {
+                // FIXME: call reject service
+                navigation.goBack();
+              }}
+            />
+            <Button
+              title="Confirmar"
+              style={styles.button}
+              onPress={() =>
+                navigation.dispatch(StackActions.replace(routes.SUCCESS_MODAL))
+              }
+            />
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -62,6 +92,9 @@ const styles = StyleSheet.create({
   },
   button: {
     marginVertical: unit(5),
+  },
+  loaderContainer: {
+    marginVertical: unit(10),
   },
 });
 

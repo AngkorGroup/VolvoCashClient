@@ -4,6 +4,7 @@ import phoneSaga from './phone-saga';
 import authSaga from './request-saga';
 import smsSaga from './sms-saga';
 import cardListSaga from './card-list-saga';
+import confirmationModalSaga from './confirmation-modal-saga';
 
 function* logger(action: any) {
   if (__DEV__ && LOG_REDUX_ACTIONS) {
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     ...phoneSaga,
     ...smsSaga,
     ...cardListSaga,
+    ...confirmationModalSaga,
     takeEvery('*', logger),
   ]);
 }
