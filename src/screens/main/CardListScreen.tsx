@@ -15,10 +15,11 @@ import {
 } from 'utils/redux/ui/card-list-screen/card-list-screen-actions';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
+import { Card } from 'models/Card';
 
 const SECTION_NAME_MAP: { [key: string]: string } = {
-  primary: 'Principales',
-  secondary: 'Adicionales',
+  Primary: 'Principales',
+  Secondary: 'Adicionales',
 };
 
 const CardListScreen = () => {
@@ -50,7 +51,7 @@ const CardListScreen = () => {
         keyExtractor={({ id }) => id.toString()}
         renderItem={({ item: card }) => (
           <VolvoCard
-            card={card}
+            card={new Card(card)}
             onPress={() => dispatch(goToCardDetail(card))}
           />
         )}

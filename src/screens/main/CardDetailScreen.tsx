@@ -25,7 +25,6 @@ import {
   selectCardBatches,
 } from 'utils/redux/ui/card-detail-screen/card-detail-screen-reducer';
 import { getCardDetailCall } from 'utils/redux/ui/card-detail-screen/card-detail-screen-action';
-import cardDetail from 'mocks/card-detail';
 import { useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
 
@@ -51,9 +50,9 @@ const CardDetailScreen = () => {
       <View style={styles.infoContainer}>
         <View>
           <Text style={styles.balanceLabel}>Saldo disponible</Text>
-          <Text style={styles.balanceText}>{card.money}</Text>
+          <Text style={styles.balanceText}>{card.balance}</Text>
         </View>
-        {card.ownerType === 'primary' && (
+        {card.contact.type === 'Primary' && (
           <Button
             title="Generar código QR"
             onPress={() => {

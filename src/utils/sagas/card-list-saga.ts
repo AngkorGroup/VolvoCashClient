@@ -9,29 +9,28 @@ import {
 import { navigate } from 'utils/navigation';
 import * as routes from 'utils/routes';
 import { getCardDetailCall } from 'utils/redux/ui/card-detail-screen/card-detail-screen-action';
-import cardDetail from 'mocks/card-detail';
 
 function* onGetCardListSuccess(action: GetCardListSuccess) {
   const cardSections = Object.entries(
-    action.payload.reduce((acc, card) => {
-      if (!acc[card.ownerType]) {
-        acc[card.ownerType] = [];
+    action.payload.reduce((acc, iCard) => {
+      const card = new Card(iCard);
+      if (!acc[card.contact.type]) {
+        acc[card.contact.type] = [];
       }
-      acc[card.ownerType].push(card);
+      acc[card.contact.type].push(card);
       return acc;
     }, {} as { [key: string]: Card[] }),
   ).map(([cardCategory, cardArr]: [string, Card[]]) => ({
     title: cardCategory,
     data: cardArr,
   }));
+  console.log('cardSections: ', cardSections);
   yield put(setCardList(cardSections));
 }
 
 function* onGoToCardDetail(_: GoToCardDetail) {
   navigate(routes.CARD_DETAIL_SCREEN);
-  yield put(
-    getCardDetailCall({ mockResponse: 'SUCCESS', mockData: cardDetail[0] }),
-  );
+  yield put(getCardDetailCall({ mockResponse: 'SUCCESS', mockData: {} }));
 }
 
 export default [

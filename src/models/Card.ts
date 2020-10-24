@@ -1,59 +1,55 @@
 import { Batch } from './Batch';
-import { Currency, Money } from './Money';
+import { Contact } from './Contact';
+import { Currency, IMoney, Money } from './Money';
 import { Movement } from './Movement';
 
-export interface CardType {
+export interface ICardType {
   id: number;
   name: string;
   displayName: string;
   color: string;
+  currency: Currency;
 }
-
-type OwnerType = 'primary' | 'secondary';
 
 export interface ICard {
   id: number;
-  cardType: CardType;
-  balance: number;
-  currency: Currency;
-  imageUrl?: string;
-  ownerName?: string;
+  code: string;
+  balance: IMoney;
+  calculatedBalance: IMoney;
   qrUrl?: string;
-  ownerType: OwnerType;
+  cardType: ICardType;
   movements?: Movement[];
   batches?: Batch[];
+  contact: Contact;
+  contactId: number;
 }
 
 export class Card {
   public id: number;
-  public cardType: CardType;
-  public balance: number;
-  public currency: Currency;
-  public imageUrl?: string;
-  public ownerName?: string;
+  public code: string;
+  public balance: Money;
+  public calculatedBalance: Money;
   public qrUrl?: string;
-  public ownerType: OwnerType;
+  public cardType: ICardType;
   public movements?: Movement[];
   public batches?: Batch[];
+  public contact: Contact;
+  public contactId: number;
 
   constructor(json: ICard) {
     this.id = json.id;
+    this.code = json.code;
     this.cardType = json.cardType;
-    this.balance = json.balance;
-    this.imageUrl = json.imageUrl;
-    this.ownerName = json.ownerName;
+    this.balance = new Money(json.balance);
+    this.calculatedBalance = new Money(json.calculatedBalance);
     this.qrUrl = json.qrUrl;
-    this.currency = json.currency;
-    this.ownerType = json.ownerType;
     this.movements = json.movements;
     this.batches = json.batches;
+    this.contact = new Contact(json.contact);
+    this.contactId = json.contactId;
   }
 
   get color() {
     return this.cardType.color;
-  }
-
-  get money() {
-    return new Money(this.balance, this.currency).toString();
   }
 }

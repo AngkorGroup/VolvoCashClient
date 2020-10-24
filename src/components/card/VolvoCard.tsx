@@ -21,9 +21,9 @@ const VolvoCard: React.FC<VolvoCardProps> = ({ card, onPress }) => {
       onPress={onPress}>
       <Text style={styles.primaryText}>{card.cardType.displayName}</Text>
       <Text style={styles.secondaryText}>
-        {card.ownerType === 'secondary' ? card.ownerName : ''}
+        {card.contact.type === 'Secondary' ? card.contact.fullName : ''}
       </Text>
-      <Text style={styles.primaryText}>{card.money}</Text>
+      <Text style={styles.primaryText}>{card.balance.toString()}</Text>
     </TouchableOpacity>
   );
 };
