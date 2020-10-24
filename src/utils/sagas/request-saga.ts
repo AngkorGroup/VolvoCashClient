@@ -36,7 +36,7 @@ function* requestSaga(action: RequestAction) {
     method = 'get',
     data,
     headers,
-    api = apiNames.localhost,
+    api = apiNames.development,
   } = action.payload;
 
   if (mockResponse) {
@@ -65,10 +65,11 @@ function* requestSaga(action: RequestAction) {
     );
     return;
   }
+  camelCaseKeys(responseData, { deep: true });
 
   yield put(
     defaultAction(
-      action.type.replace('_REQUEST', '_SUCCESS'),
+      action.type.replace('_CALL', '_SUCCESS'),
       camelCaseKeys(responseData, { deep: true }),
     ),
   );

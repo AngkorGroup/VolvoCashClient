@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 
 const localApi = create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://volvocashapi-dev.us-east-2.elasticbeanstalk.com/api',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -11,9 +11,9 @@ const localApi = create({
 export type apiMethod = 'get' | 'post' | 'patch' | 'delete';
 
 export const apiNames = {
-  localhost: 'localhost',
+  development: 'development',
 };
 
 export default {
-  [apiNames.localhost]: localApi,
+  [apiNames.development]: localApi,
 };
