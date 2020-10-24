@@ -7,9 +7,9 @@ export interface IMovement {
   displayName: string;
   description: string;
   amount: number;
+  currency: Currency;
   type: MovementType;
   date: string;
-  currency: Currency;
 }
 
 export class Movement {
