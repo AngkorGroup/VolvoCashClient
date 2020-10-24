@@ -13,7 +13,7 @@ export interface ICharge {
   cashier: ICashier;
 }
 
-export class Movement {
+export class Charge {
   public id: number;
   public amount: number;
   public currency: Currency;
