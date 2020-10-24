@@ -1,8 +1,6 @@
 import { Action } from 'redux';
 import { call, delay, put, takeEvery } from 'redux-saga/effects';
 import Api, { apiMethod, apiNames } from 'utils/api';
-const camelCaseKeys = require('camelcase-keys');
-const snakeCaseKeys = require('snakecase-keys');
 
 const defaultAction = (type: string, payload: any) => ({
   type,
