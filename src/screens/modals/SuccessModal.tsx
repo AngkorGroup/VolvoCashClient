@@ -7,8 +7,10 @@ import { unit } from 'utils/responsive';
 import Button from 'components/button/Button';
 import Share from 'components/button/Share';
 import InfoRow from 'components/card/InfoRow';
+import { useNavigation } from '@react-navigation/native';
 
 const SuccessModal = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Header
@@ -22,7 +24,7 @@ const SuccessModal = () => {
         <InfoRow label="Concepto" value="Lubricante HD-5000" />
         <InfoRow label="Vendedor" value="Luis Ramos" />
         <View style={styles.shareContainer}>
-          <Share />
+          <Share onPress={() => navigation.goBack()} />
         </View>
         <View style={styles.buttonsContainer}>
           <Button title="Confirmar" style={styles.button} />
