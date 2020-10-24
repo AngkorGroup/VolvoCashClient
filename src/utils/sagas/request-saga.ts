@@ -50,7 +50,7 @@ function* requestSaga(action: RequestAction) {
   const { ok, data: responseData, status, config, duration } = yield call(
     [Api[api], method as any],
     url,
-    snakeCaseKeys(data, { deep: true }),
+    data,
     headers ? { headers } : undefined,
   );
 
@@ -65,13 +65,9 @@ function* requestSaga(action: RequestAction) {
     );
     return;
   }
-  camelCaseKeys(responseData, { deep: true });
 
   yield put(
-    defaultAction(
-      action.type.replace('_CALL', '_SUCCESS'),
-      camelCaseKeys(responseData, { deep: true }),
-    ),
+    defaultAction(action.type.replace('_CALL', '_SUCCESS'), responseData),
   );
 }
 
