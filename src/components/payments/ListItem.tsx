@@ -40,7 +40,7 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
 const styles = StyleSheet.create({
   container: {
     ...theme.surface,
-    padding: unit(5),
+    padding: unit(15),
   },
   topContainer: {
     flexDirection: 'row',
