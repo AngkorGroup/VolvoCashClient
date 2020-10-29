@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 
 export const developmentApi = create({
-  baseURL: 'http://volvocashapi-test.us-east-2.elasticbeanstalk.com/api',
+  baseURL: 'https://dev-volvocash.angkor-apps.com//api',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
