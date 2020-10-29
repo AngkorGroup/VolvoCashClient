@@ -25,6 +25,8 @@ export class Charge {
   }
 
   get money() {
-    return new Money(this.amount, this.currency).toString();
+    // FIXME: this was changed due  to change in structure
+    return 'hola';
+    // return new Money(this.amount, this.currency).toString();
   }
 }

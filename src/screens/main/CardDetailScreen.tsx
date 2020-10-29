@@ -27,6 +27,7 @@ import {
 import { getCardDetailCall } from 'utils/redux/ui/card-detail-screen/card-detail-screen-action';
 import { useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
+import { Batch } from 'models/Batch';
 
 type CardDetailTab = 'Movimientos' | 'Vencimientos';
 
@@ -94,6 +95,12 @@ const Movements = () => {
     setQuery('');
   }, [movements]);
 
+  const card = useSelector(selectCard);
+
+  if (!card) {
+    return <ActivityIndicator animating={true} />;
+  }
+
   const handleChangeText = (text: string) => {
     setQuery(text);
     setFilteredMovements(
@@ -107,9 +114,7 @@ const Movements = () => {
   };
 
   const refresh = () => {
-    dispatch(
-      getCardDetailCall({ mockResponse: 'SUCCESS', mockData: cardDetail[1] }),
-    );
+    dispatch(getCardDetailCall(card.id));
   };
 
   return (
@@ -154,17 +159,21 @@ const Batches = () => {
     setQuery('');
   }, [batches]);
 
+  const card = useSelector(selectCard);
+
+  if (!card) {
+    return <ActivityIndicator animating={true} />;
+  }
+
   const refresh = () => {
-    dispatch(
-      getCardDetailCall({ mockResponse: 'SUCCESS', mockData: cardDetail[1] }),
-    );
+    dispatch(getCardDetailCall(card.id));
   };
 
   const handleChangeText = (text: string) => {
     setQuery(text);
     setFilteredBatches(
       batches.filter(
-        (batch) =>
+        (batch: Batch) =>
           formatDate(batch.expiresAt).includes(text) ||
           batch.money.toString().includes(text),
       ),
@@ -185,7 +194,7 @@ const Batches = () => {
         }
         style-={styles.list}
         data={filteredBatches}
-        keyExtractor={(batch) => batch.id.toString()}
+        keyExtractor={(batch: Batch) => batch.id.toString()}
         showsVerticalScrollIndicator={false}
         renderItem={({ item: batch }) => (
           <ListItem

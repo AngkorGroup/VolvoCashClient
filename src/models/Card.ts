@@ -1,5 +1,5 @@
 import { Batch } from './Batch';
-import { Contact } from './Contact';
+import { Contact, IContact } from './Contact';
 import { Currency, IMoney, Money } from './Money';
 import { Movement } from './Movement';
 
@@ -19,8 +19,8 @@ export interface ICard {
   qrUrl?: string;
   cardType: ICardType;
   movements?: Movement[];
-  batches?: Batch[];
-  contact: Contact;
+  cardBatches?: Batch[];
+  contact: IContact;
   contactId: number;
 }
 
@@ -44,7 +44,7 @@ export class Card {
     this.calculatedBalance = new Money(json.calculatedBalance);
     this.qrUrl = json.qrUrl;
     this.movements = json.movements;
-    this.batches = json.batches;
+    this.batches = json.cardBatches;
     this.contact = new Contact(json.contact);
     this.contactId = json.contactId;
   }

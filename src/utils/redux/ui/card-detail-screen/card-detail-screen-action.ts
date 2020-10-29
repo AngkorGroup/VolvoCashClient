@@ -11,17 +11,17 @@ export interface GetCardDetailCall extends RequestAction {
   type: typeof GET_CARD_DETAIL_CALL;
 }
 
-export function getCardDetailCall({
-  mockResponse,
-  mockData,
-}: RequestActionOptions): GetCardDetailCall {
+export function getCardDetailCall(
+  cardId: number,
+  options?: RequestActionOptions,
+): GetCardDetailCall {
   return {
     type: GET_CARD_DETAIL_CALL,
-    payload: {},
-    meta: {
-      mockResponse,
-      mockData,
+    payload: {
+      method: 'get',
+      url: `/cards/${cardId}`,
     },
+    meta: options,
   };
 }
 

@@ -3,13 +3,13 @@ export interface IContact {
   firstName: string;
   lastName: string;
   type: ContactType;
-  phone: string;
-  email: string;
-  documentType: string;
-  documentNumber: string;
-  status: string;
-  clientId: string;
-  contactParentId: number;
+  phone?: string;
+  email?: string;
+  documentType?: string;
+  documentNumber?: string;
+  status?: string;
+  clientId?: string;
+  contactParentId?: number;
 }
 
 export type ContactType = 'Primary' | 'Secondary';
@@ -19,13 +19,13 @@ export class Contact {
   public firstName: string;
   public lastName: string;
   public type: ContactType;
-  public phone: string;
-  public email: string;
-  public documentType: string;
-  public documentNumber: string;
-  public status: string;
-  public clientId: string;
-  public contactParentId: number;
+  public phone?: string;
+  public email?: string;
+  public documentType?: string;
+  public documentNumber?: string;
+  public status?: string;
+  public clientId?: string;
+  public contactParentId?: number;
 
   constructor(json: IContact) {
     this.id = json.id;
