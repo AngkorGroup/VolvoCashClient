@@ -17,10 +17,6 @@ const LoginScreen = () => {
         <View style={styles.container}>
           <View>
             <FastImage
-              source={require('assets/images/volvo-logo.png')}
-              style={styles.volvoLogo}
-            />
-            <FastImage
               source={require('assets/images/volvo-cash-logo.png')}
               style={styles.volvoCashLogo}
             />
