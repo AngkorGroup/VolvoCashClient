@@ -5,14 +5,19 @@ import { theme } from 'utils/styles';
 
 type Mode = 'positive' | 'negative';
 
-interface ListItem {
+interface ListItemProps {
   title: string;
   subtitle: string;
   value: string;
   mode: Mode;
 }
 
-const ListItem: React.FC<ListItem> = ({ title, subtitle, value, mode }) => {
+const ListItem: React.FC<ListItemProps> = ({
+  title,
+  subtitle,
+  value,
+  mode,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>

@@ -16,6 +16,7 @@ interface ButtonProps {
   loading?: boolean;
   danger?: boolean;
   disabled?: boolean;
+  small?: boolean;
   icon?: JSX.Element;
 }
 
@@ -27,6 +28,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   icon,
   danger,
+  small,
 }) => {
   const buttonStyle = [styles.container, style];
   const buttonTextStyle = [styles.buttonText] as any[];
@@ -40,6 +42,10 @@ const Button: React.FC<ButtonProps> = ({
   if (icon) {
     buttonStyle.push(styles.containerWithIcon);
     buttonTextStyle.push(styles.textWithIcon);
+  }
+  if (small) {
+    buttonStyle.push(styles.containerSmall);
+    buttonTextStyle.push(styles.textSmall);
   }
   return (
     <TouchableOpacity
@@ -74,6 +80,13 @@ const styles = StyleSheet.create({
   containerWithIcon: {
     width: unit(160),
     height: unit(60),
+  },
+  containerSmall: {
+    width: unit(90),
+    height: unit(18),
+  },
+  textSmall: {
+    fontSize: theme.small.fontSize,
   },
   textWithIcon: {
     fontSize: theme.small.fontSize,

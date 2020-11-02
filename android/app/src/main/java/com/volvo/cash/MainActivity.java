@@ -1,4 +1,4 @@
-package com.volvocashclient;
+package com.volvo.cash;
 
 import android.os.Bundle;
 

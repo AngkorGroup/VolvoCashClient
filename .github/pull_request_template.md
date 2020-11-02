@@ -1,0 +1,7 @@
+#### Contexto
+
+#### Notas
+
+| ios | android | 
+| --- | ------  |
+|  -  |    -    |

@@ -7,6 +7,7 @@ export interface ICharge {
   currency: Currency;
   displayName: string;
   cashier: ICashier;
+  date: string;
 }
 
 export class Charge {
@@ -15,12 +16,14 @@ export class Charge {
   public currency: Currency;
   public displayName: string;
   public cashier: Cashier;
+  public date: string;
 
   constructor(json: ICharge) {
     this.id = json.id;
     this.amount = json.amount;
     this.currency = json.currency;
     this.displayName = json.displayName;
+    this.date = json.date;
     this.cashier = new Cashier(json.cashier);
   }
 

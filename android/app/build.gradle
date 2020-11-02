@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.volvocashclient"
+        applicationId "com.volvo.cash"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
