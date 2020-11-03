@@ -10,7 +10,7 @@ export interface ICharge {
   displayName: string;
   status: Status;
   chargeType: Type;
-  cashier: ICashier;
+  cashier?: ICashier;
   createdAt: string;
 }
 
@@ -20,7 +20,7 @@ export class Charge {
   public displayName: string;
   public status: Status;
   public chargeType: Type;
-  public cashier: Cashier;
+  public cashier?: Cashier;
   public createdAt: string;
 
   constructor(json: ICharge) {
@@ -30,6 +30,6 @@ export class Charge {
     this.displayName = json.displayName;
     this.createdAt = json.createdAt;
     this.chargeType = json.chargeType;
-    this.cashier = new Cashier(json.cashier);
+    this.cashier = json.cashier ? new Cashier(json.cashier) : undefined;
   }
 }
