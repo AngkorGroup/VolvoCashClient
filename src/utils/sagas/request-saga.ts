@@ -1,6 +1,11 @@
 import { Action } from 'redux';
 import { call, delay, put, takeEvery } from 'redux-saga/effects';
 import Api, { apiMethod, apiNames } from 'utils/api';
+import { ErrorAction, logOut } from 'utils/redux/actions';
+
+enum StatusCode {
+  Unauthorized = 401,
+}
 
 const defaultAction = (type: string, payload: any) => ({
   type,
@@ -69,6 +74,16 @@ function* requestSaga(action: RequestAction) {
   );
 }
 
-const requestAction = (action: Action) => /^.*CALL$/.test(action.type);
+function* onRequestError(action: ErrorAction) {
+  if (action.payload.status === StatusCode.Unauthorized) {
+    yield put(logOut());
+  }
+}
 
-export default [takeEvery(requestAction, requestSaga)];
+const requestAction = (action: Action) => /^.*CALL$/.test(action.type);
+const errorAction = (action: Action) => /^.*ERROR$/.test(action.type);
+
+export default [
+  takeEvery(requestAction, requestSaga),
+  takeEvery(errorAction, onRequestError),
+];
