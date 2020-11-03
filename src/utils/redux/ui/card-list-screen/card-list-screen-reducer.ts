@@ -1,6 +1,6 @@
 import { Card } from 'models/Card';
 import {
-  DISMISS_ERROR,
+  DISMISS_ALERT,
   GET_CARD_LIST_CALL,
   GET_CARD_LIST_ERROR,
   GET_CARD_LIST_SUCCESS,
@@ -23,8 +23,13 @@ export const selectLoading = (state: RootState) =>
 
 export const selectError = (state: RootState) =>
   selectCardListScreen(state).error;
-export const selectSections = (state: RootState) =>
-  selectCardListScreen(state).sections;
+export const selectSections = (state: RootState) => {
+  const sections = selectCardListScreen(state).sections;
+  return sections.map((section) => ({
+    ...section,
+    data: section.data.map((card) => new Card(card)),
+  }));
+};
 
 const initialState: CardListScreenState = {
   loading: false,
@@ -60,7 +65,7 @@ export default function (
         ...state,
         sections: action.payload,
       };
-    case DISMISS_ERROR:
+    case DISMISS_ALERT:
       return {
         ...state,
         error: false,

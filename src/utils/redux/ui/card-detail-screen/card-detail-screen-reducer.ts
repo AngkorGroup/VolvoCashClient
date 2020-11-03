@@ -30,8 +30,12 @@ export type CardDetailScreenAction =
   | GetCardDetailCall
   | GetCardDetailError;
 
-export const selectCard = (state: RootState) =>
-  selectCardDetailScreen(state).card;
+export const selectCard = (state: RootState) => {
+  const json = selectCardDetailScreen(state).card;
+  if (json) {
+    return new Card(json);
+  }
+};
 
 export const selectLoading = (state: RootState) =>
   selectCardDetailScreen(state).loading;

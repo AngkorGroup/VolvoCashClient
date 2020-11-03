@@ -51,7 +51,7 @@ const CardListScreen = () => {
         keyExtractor={({ id }) => id.toString()}
         renderItem={({ item: card }) => (
           <VolvoCard
-            card={new Card(card)}
+            card={card}
             onPress={() => dispatch(goToCardDetail(card))}
           />
         )}
