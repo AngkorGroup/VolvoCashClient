@@ -36,13 +36,13 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
           <Text style={styles.title}>{charge.displayName}</Text>
         </View>
         <View style={styles.moneyContainer}>
-          <Text style={styles.money}>{charge.money}</Text>
+          <Text style={styles.money}>{charge.amount.toString()}</Text>
         </View>
       </View>
       <View style={styles.bottomContainer}>
         <View style={styles.subtitleContainer}>
-          <Text style={styles.subtitle}>{formatDate(charge.date)}</Text>
-          <Text style={styles.subtitle}>{charge.cashier.fullName}</Text>
+          <Text style={styles.subtitle}>{formatDate(charge.createdAt)}</Text>
+          <Text style={styles.subtitle}>{charge.cashier?.fullName}</Text>
         </View>
         <View style={styles.buttonsContainer}>
           <Button
