@@ -1,5 +1,5 @@
 import {
-  DISMISS_ERROR,
+  DISMISS_ALERT,
   VERIFY_CODE_CALL,
   VERIFY_CODE_ERROR,
   VERIFY_CODE_SUCCESS,
@@ -46,7 +46,7 @@ export default function (
         loading: false,
         error: true,
       };
-    case DISMISS_ERROR:
+    case DISMISS_ALERT:
       return {
         ...state,
         error: false,
