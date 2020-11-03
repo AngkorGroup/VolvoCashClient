@@ -30,8 +30,12 @@ export type ChargeDetailScreenAction =
   | GetChargeDetailCall
   | GetChargeDetailError;
 
-export const selectCharge = (state: RootState) =>
-  selectConfirmationModal(state).charge;
+export const selectCharge = (state: RootState) => {
+  const charge = selectConfirmationModal(state).charge;
+  if (charge) {
+    return new Charge(charge);
+  }
+};
 
 export const selectLoading = (state: RootState) =>
   selectConfirmationModal(state).loading;

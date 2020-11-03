@@ -21,7 +21,7 @@ const QrScreen = () => {
   return (
     <View style={styles.container}>
       <Header
-        title={`Código QR - ${card.cardType.displayName}`}
+        title={`Código QR - ${card.cardType?.displayName}`}
         alignment="left"
         leftButton={<BackButton />}
       />
@@ -33,8 +33,7 @@ const QrScreen = () => {
           }}>
           <FastImage
             source={{
-              uri:
-                'https://borealtech.com/wp-content/uploads/2018/10/codigo-qr-1024x1024.jpg',
+              uri: card.qrUrl,
             }}
             style={styles.qr}
             resizeMode={FastImage.resizeMode.contain}

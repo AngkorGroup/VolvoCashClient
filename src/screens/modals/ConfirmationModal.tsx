@@ -47,9 +47,9 @@ const ConfirmationModal = () => {
       )}
       {charge && (
         <View style={styles.card}>
-          <InfoRow label="Monto" value={charge.money.toString()} />
+          <InfoRow label="Monto" value={charge.amount.toString()} />
           <InfoRow label="Concepto" value={charge.displayName} />
-          <InfoRow label="Vendedor" value={charge.cashier.fullName} />
+          <InfoRow label="Vendedor" value={charge.cashier?.fullName || ''} />
           <View style={styles.buttonsContainer}>
             <Button
               title="Rechazar"
