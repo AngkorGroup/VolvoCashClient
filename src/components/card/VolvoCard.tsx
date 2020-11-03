@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
     lineHeight: unit(60),
     fontFamily: 'VolvoBroadProDigital',
     marginTop: unit(5),
+    backgroundColor: 'red',
+    textAlign: 'center',
   },
   secondaryText: {
     ...theme.header3,
@@ -50,6 +52,7 @@ const styles = StyleSheet.create({
     lineHeight: unit(28),
     alignItems: 'center',
     justifyContent: 'center',
+    textAlign: 'center',
     height: unit(28),
   },
 });
