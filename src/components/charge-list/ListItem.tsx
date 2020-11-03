@@ -9,6 +9,8 @@ import { formatDate } from 'utils/moment';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 import * as routes from 'utils/routes';
+import { useDispatch } from 'react-redux';
+import { confirmChargeSaga } from 'utils/redux/services/charge-detail-actions';
 
 interface ListItemProps {
   charge: Charge;
@@ -19,6 +21,7 @@ type Option = 'confirmar' | 'rechazar' | '';
 const ListItem: React.FC<ListItemProps> = ({ charge }) => {
   const [option, setOption] = useState<Option>('');
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const handleCancel = () => {
     setOption('');
@@ -26,7 +29,11 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
 
   const handleConfirm = () => {
     setOption('');
-    navigation.navigate(routes.SUCCESS_MODAL);
+    const confirmed = option === 'confirmar';
+    dispatch(confirmChargeSaga(charge.id, confirmed));
+    if (confirmed) {
+      navigation.navigate(routes.SUCCESS_MODAL);
+    }
   };
 
   return (

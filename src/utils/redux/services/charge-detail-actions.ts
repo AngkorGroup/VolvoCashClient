@@ -6,6 +6,7 @@ import {
   GET_CHARGE_DETAIL_SUCCESS,
   SET_CHARGE_ID,
   CONFIRM_CHARGE_CALL,
+  CONFIRM_CHARGE_SAGA,
 } from 'utils/redux/actions';
 import { RequestAction, RequestActionOptions } from 'utils/sagas/request-saga';
 
@@ -66,6 +67,27 @@ export function confirmChargeCall(
       data: {
         confirmed,
       },
+    },
+  };
+}
+
+export interface ConfirmChargeSaga extends Action {
+  type: typeof CONFIRM_CHARGE_SAGA;
+  payload: {
+    chargeId: number;
+    confirmed: boolean;
+  };
+}
+
+export function confirmChargeSaga(
+  chargeId: number,
+  confirmed: boolean,
+): ConfirmChargeSaga {
+  return {
+    type: CONFIRM_CHARGE_SAGA,
+    payload: {
+      chargeId,
+      confirmed,
     },
   };
 }

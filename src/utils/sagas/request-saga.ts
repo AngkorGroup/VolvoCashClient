@@ -1,7 +1,9 @@
 import { Action } from 'redux';
-import { call, delay, put, takeEvery } from 'redux-saga/effects';
+import { call, delay, put, select, takeEvery } from 'redux-saga/effects';
+import { developmentApi } from 'utils/api';
 import Api, { apiMethod, apiNames } from 'utils/api';
 import { ErrorAction, logOut } from 'utils/redux/actions';
+import { selectAuthToken } from 'utils/redux/auth/auth-reducer';
 
 enum StatusCode {
   Unauthorized = 401,
@@ -76,7 +78,12 @@ function* requestSaga(action: RequestAction) {
 
 function* onRequestError(action: ErrorAction) {
   if (action.payload.status === StatusCode.Unauthorized) {
-    yield put(logOut());
+    const authToken = yield select(selectAuthToken);
+    if (!authToken) {
+      yield put(logOut());
+    } else {
+      developmentApi.setHeader('Authorization', `Bearer ${authToken}`);
+    }
   }
 }
 
