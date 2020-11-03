@@ -5,6 +5,7 @@ import authSaga from './request-saga';
 import smsSaga from './sms-saga';
 import cardListSaga from './card-list-saga';
 import confirmationModalSaga from './confirmation-modal-saga';
+import qrSaga from './qr-saga';
 
 function* logger(action: any) {
   if (LOG_REDUX_ACTIONS === 'true' && __DEV__) {
@@ -23,6 +24,7 @@ export default function* rootSaga() {
     ...smsSaga,
     ...cardListSaga,
     ...confirmationModalSaga,
+    ...qrSaga,
     takeEvery('*', logger),
   ]);
 }

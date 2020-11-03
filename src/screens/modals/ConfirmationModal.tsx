@@ -11,23 +11,24 @@ import * as routes from 'utils/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCharge,
+  selectChargeId,
   selectLoading,
 } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
 import { getChargeDetailCall } from 'utils/redux/services/charge-detail-actions';
-import chargeDetail from 'mocks/charge-detail';
 import { closeConfirmationModal } from 'utils/redux/ui/confirmation-modal/confirmation-modal-actions';
 
 const ConfirmationModal = () => {
   const navigation = useNavigation();
   const loading = useSelector(selectLoading);
   const charge = useSelector(selectCharge);
+  const chargeId = useSelector(selectChargeId);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      getChargeDetailCall({ mockResponse: 'SUCCESS', mockData: chargeDetail }),
-    );
-  }, [dispatch]);
+    if (chargeId) {
+      dispatch(getChargeDetailCall(chargeId));
+    }
+  }, [dispatch, chargeId]);
 
   const handleClose = () => {
     dispatch(closeConfirmationModal());
