@@ -14,7 +14,10 @@ import {
   selectChargeId,
   selectLoading,
 } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
-import { getChargeDetailCall } from 'utils/redux/services/charge-detail-actions';
+import {
+  confirmChargeCall,
+  getChargeDetailCall,
+} from 'utils/redux/services/charge-detail-actions';
 import { closeConfirmationModal } from 'utils/redux/ui/confirmation-modal/confirmation-modal-actions';
 
 const ConfirmationModal = () => {
@@ -57,16 +60,21 @@ const ConfirmationModal = () => {
               danger
               style={styles.button}
               onPress={() => {
-                // FIXME: call reject service
+                if (chargeId) {
+                  dispatch(confirmChargeCall(chargeId, false));
+                }
                 navigation.goBack();
               }}
             />
             <Button
               title="Confirmar"
               style={styles.button}
-              onPress={() =>
-                navigation.dispatch(StackActions.replace(routes.SUCCESS_MODAL))
-              }
+              onPress={() => {
+                if (chargeId) {
+                  dispatch(confirmChargeCall(chargeId, true));
+                }
+                navigation.dispatch(StackActions.replace(routes.SUCCESS_MODAL));
+              }}
             />
           </View>
         </View>

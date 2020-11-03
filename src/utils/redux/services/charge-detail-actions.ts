@@ -5,6 +5,7 @@ import {
   GET_CHARGE_DETAIL_ERROR,
   GET_CHARGE_DETAIL_SUCCESS,
   SET_CHARGE_ID,
+  CONFIRM_CHARGE_CALL,
 } from 'utils/redux/actions';
 import { RequestAction, RequestActionOptions } from 'utils/sagas/request-saga';
 
@@ -47,4 +48,24 @@ export function setChargeId(chargeId: number): SetChargeId {
 
 export interface GetChargeDetailError extends Action {
   type: typeof GET_CHARGE_DETAIL_ERROR;
+}
+
+export interface ConfirmChargeCall extends RequestAction {
+  type: typeof CONFIRM_CHARGE_CALL;
+}
+
+export function confirmChargeCall(
+  chargeId: number,
+  confirmed: boolean,
+): ConfirmChargeCall {
+  return {
+    type: CONFIRM_CHARGE_CALL,
+    payload: {
+      url: `/charges/${chargeId}/confirm`,
+      method: 'post',
+      data: {
+        confirmed,
+      },
+    },
+  };
 }
