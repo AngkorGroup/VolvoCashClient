@@ -1,5 +1,5 @@
 import { all, takeEvery } from 'redux-saga/effects';
-import { LOG_REDUX_ACTIONS } from 'utils/constants';
+import { LOG_REDUX_ACTIONS } from '@env';
 import phoneSaga from './phone-saga';
 import authSaga from './request-saga';
 import smsSaga from './sms-saga';

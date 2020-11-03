@@ -1,7 +1,10 @@
 import { create } from 'apisauce';
+import { API_URL } from '@env';
+
+console.log('API_URL: ', API_URL);
 
 export const developmentApi = create({
-  baseURL: 'https://dev-volvocash.angkor-apps.com//api',
+  baseURL: API_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
