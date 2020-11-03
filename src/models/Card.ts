@@ -19,7 +19,7 @@ export interface ICard {
   qrUrl?: string;
   cardType?: ICardType;
   movements?: Movement[];
-  cardBatches?: Batch[];
+  cardBatchesWithBalance?: Batch[];
   contact: IContact;
   contactId?: number;
 }
@@ -32,7 +32,7 @@ export class Card {
   public qrUrl?: string;
   public cardType?: ICardType;
   public movements?: Movement[];
-  public batches?: Batch[];
+  public cardBatchesWithBalance?: Batch[];
   public contact: Contact;
   public contactId?: number;
 
@@ -44,7 +44,7 @@ export class Card {
     this.calculatedBalance = new Money(json.calculatedBalance);
     this.qrUrl = json.qrUrl;
     this.movements = json.movements;
-    this.batches = json.cardBatches;
+    this.cardBatchesWithBalance = json.cardBatchesWithBalance;
     this.contact = new Contact(json.contact);
     this.contactId = json.contactId;
   }

@@ -1,28 +1,46 @@
-import { Currency } from './Money';
+import { IMoney, Money } from './Money';
+
+export interface IOriginalBatch {
+  id: number;
+  amount: IMoney;
+  expiresAt: string;
+  expiresAtExtent: string;
+}
+
+export class OriginalBatch {
+  public id: number;
+  public amount: Money;
+  public expiresAt: string;
+  public expiresAtExtent: string;
+
+  constructor(json: IOriginalBatch) {
+    this.id = json.id;
+    this.amount = new Money(json.amount);
+    this.expiresAt = json.expiresAt;
+    this.expiresAtExtent = json.expiresAtExtent;
+  }
+}
 
 export interface IBatch {
   id: number;
-  balance: number;
-  currency: Currency;
+  balance: IMoney;
   expiresAt: string;
+  expiresAtExtent: string;
+  batch: IOriginalBatch;
 }
 
 export class Batch {
   public id: number;
-  public balance: number;
-  public currency: Currency;
+  public balance: Money;
   public expiresAt: string;
+  public expiresAtExtent: string;
+  public batch: OriginalBatch;
 
   constructor(json: IBatch) {
     this.id = json.id;
-    this.balance = json.balance;
-    this.currency = json.currency;
+    this.balance = new Money(json.balance);
     this.expiresAt = json.expiresAt;
-  }
-
-  get money() {
-    // FIXME: this was changed due  to change in structure
-    return 'hola';
-    // return new Money(this.balance, this.currency).toString();
+    this.expiresAtExtent = json.expiresAtExtent;
+    this.batch = new OriginalBatch(json.batch);
   }
 }

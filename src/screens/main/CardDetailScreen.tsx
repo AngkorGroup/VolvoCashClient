@@ -175,7 +175,7 @@ const Batches = () => {
       batches.filter(
         (batch: Batch) =>
           formatDate(batch.expiresAt).includes(text) ||
-          batch.money.toString().includes(text),
+          batch.balance.toString().includes(text),
       ),
     );
   };
@@ -200,7 +200,7 @@ const Batches = () => {
           <ListItem
             title="Recarga"
             subtitle={formatDate(batch.expiresAt)}
-            value={batch.money.toString()}
+            value={batch.balance.toString()}
             mode={
               new Date(batch.expiresAt) > new Date() ? 'positive' : 'negative'
             }

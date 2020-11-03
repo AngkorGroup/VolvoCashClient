@@ -1,3 +1,4 @@
+import { Batch } from 'models/Batch';
 import { Card } from 'models/Card';
 import { Movement } from 'models/Movement';
 import {
@@ -46,8 +47,11 @@ export const selectCardMovements = (state: RootState) => {
   return movements.map((movement) => new Movement(movement));
 };
 
-export const selectCardBatches = (state: RootState) =>
-  selectCardDetailScreen(state).card?.batches || [];
+export const selectCardBatches = (state: RootState) => {
+  const batches =
+    selectCardDetailScreen(state).card?.cardBatchesWithBalance || [];
+  return batches.map((batch) => new Batch(batch));
+};
 
 export default function (
   state: CardDetailScreenState = initialState,

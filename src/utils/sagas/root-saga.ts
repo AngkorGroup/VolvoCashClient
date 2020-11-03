@@ -7,7 +7,7 @@ import cardListSaga from './card-list-saga';
 import confirmationModalSaga from './confirmation-modal-saga';
 
 function* logger(action: any) {
-  if (__DEV__ && LOG_REDUX_ACTIONS) {
+  if (LOG_REDUX_ACTIONS === 'true' && __DEV__) {
     console.log('-----');
     console.log('type:   ', action.type);
     console.log('payload:', action?.payload);
