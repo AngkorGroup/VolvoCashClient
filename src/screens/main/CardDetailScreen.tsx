@@ -25,9 +25,9 @@ import {
   selectCardBatches,
 } from 'utils/redux/ui/card-detail-screen/card-detail-screen-reducer';
 import { getCardDetailCall } from 'utils/redux/ui/card-detail-screen/card-detail-screen-action';
-import cardDetail from 'mocks/card-detail';
 import { useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
+import { Batch } from 'models/Batch';
 
 type CardDetailTab = 'Movimientos' | 'Vencimientos';
 
@@ -44,16 +44,16 @@ const CardDetailScreen = () => {
   return (
     <View style={styles.container}>
       <Header
-        title={card.cardType.displayName}
+        title={card.cardType?.displayName || '-'}
         alignment="left"
         leftButton={<BackButton />}
       />
       <View style={styles.infoContainer}>
         <View>
           <Text style={styles.balanceLabel}>Saldo disponible</Text>
-          <Text style={styles.balanceText}>{card.money}</Text>
+          <Text style={styles.balanceText}>{card.balance.toString()}</Text>
         </View>
-        {card.ownerType === 'primary' && (
+        {card.contact.type === 'Primary' && (
           <Button
             title="Generar código QR"
             onPress={() => {
@@ -95,6 +95,12 @@ const Movements = () => {
     setQuery('');
   }, [movements]);
 
+  const card = useSelector(selectCard);
+
+  if (!card) {
+    return <ActivityIndicator animating={true} />;
+  }
+
   const handleChangeText = (text: string) => {
     setQuery(text);
     setFilteredMovements(
@@ -102,15 +108,13 @@ const Movements = () => {
         (movement) =>
           movement.displayName.includes(text) ||
           formatDate(movement.date).includes(text) ||
-          movement.money.toString().includes(text),
+          movement.amount.toString().includes(text),
       ),
     );
   };
 
   const refresh = () => {
-    dispatch(
-      getCardDetailCall({ mockResponse: 'SUCCESS', mockData: cardDetail[1] }),
-    );
+    dispatch(getCardDetailCall(card.id));
   };
 
   return (
@@ -133,8 +137,8 @@ const Movements = () => {
           <ListItem
             title={movement.displayName}
             subtitle={formatDate(movement.date)}
-            value={movement.money.toString()}
-            mode={movement.type === 'in' ? 'positive' : 'negative'}
+            value={movement.amount.toString()}
+            mode={movement.amount.value >= 0 ? 'positive' : 'negative'}
           />
         )}
         ItemSeparatorComponent={() => <View style={styles.divider} />}
@@ -155,19 +159,23 @@ const Batches = () => {
     setQuery('');
   }, [batches]);
 
+  const card = useSelector(selectCard);
+
+  if (!card) {
+    return <ActivityIndicator animating={true} />;
+  }
+
   const refresh = () => {
-    dispatch(
-      getCardDetailCall({ mockResponse: 'SUCCESS', mockData: cardDetail[1] }),
-    );
+    dispatch(getCardDetailCall(card.id));
   };
 
   const handleChangeText = (text: string) => {
     setQuery(text);
     setFilteredBatches(
       batches.filter(
-        (batch) =>
+        (batch: Batch) =>
           formatDate(batch.expiresAt).includes(text) ||
-          batch.money.toString().includes(text),
+          batch.balance.toString().includes(text),
       ),
     );
   };
@@ -186,13 +194,13 @@ const Batches = () => {
         }
         style-={styles.list}
         data={filteredBatches}
-        keyExtractor={(batch) => batch.id.toString()}
+        keyExtractor={(batch: Batch) => batch.id.toString()}
         showsVerticalScrollIndicator={false}
         renderItem={({ item: batch }) => (
           <ListItem
             title="Recarga"
             subtitle={formatDate(batch.expiresAt)}
-            value={batch.money.toString()}
+            value={batch.balance.toString()}
             mode={
               new Date(batch.expiresAt) > new Date() ? 'positive' : 'negative'
             }

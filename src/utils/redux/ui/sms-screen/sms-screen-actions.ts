@@ -27,7 +27,7 @@ export type SmsScreenAction =
   | DismissError;
 
 interface VerifyCodeRequest {
-  smsCode: string;
+  code: string;
   phone: string;
   deviceToken: string;
   devicePlatform: string;
@@ -40,6 +40,8 @@ export function verifyCodeCall(
   return {
     type: VERIFY_CODE_CALL,
     payload: {
+      method: 'post',
+      url: '/verify_sms_code',
       data,
     },
     meta: options,

@@ -1,7 +1,10 @@
 import { create } from 'apisauce';
+import { API_URL } from '@env';
 
-const localApi = create({
-  baseURL: 'http://localhost:3000/api',
+console.log('API_URL: ', API_URL);
+
+export const developmentApi = create({
+  baseURL: API_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -11,9 +14,9 @@ const localApi = create({
 export type apiMethod = 'get' | 'post' | 'patch' | 'delete';
 
 export const apiNames = {
-  localhost: 'localhost',
+  development: 'development',
 };
 
 export default {
-  [apiNames.localhost]: localApi,
+  [apiNames.development]: developmentApi,
 };

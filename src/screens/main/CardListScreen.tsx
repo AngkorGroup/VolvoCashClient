@@ -15,11 +15,10 @@ import {
 } from 'utils/redux/ui/card-list-screen/card-list-screen-actions';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
-import cardList from 'mocks/card-list';
 
 const SECTION_NAME_MAP: { [key: string]: string } = {
-  primary: 'Principales',
-  secondary: 'Adicionales',
+  Primary: 'Principales',
+  Secondary: 'Adicionales',
 };
 
 const CardListScreen = () => {
@@ -28,8 +27,7 @@ const CardListScreen = () => {
   const dispatch = useDispatch();
 
   const refresh = useCallback(() => {
-    // FIXME: remove mock
-    dispatch(getCardListCall({ mockResponse: 'SUCCESS', mockData: cardList }));
+    dispatch(getCardListCall());
   }, [dispatch]);
 
   useEffect(() => {

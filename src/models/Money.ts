@@ -1,13 +1,25 @@
-export type Currency = 'PEN';
+export type Currency = 'PEN' | 'USD';
 
 const CURRENCY_SYMBOL_MAP = {
   PEN: 'S/',
+  USD: '$',
 };
 
+export interface IMoney {
+  value: number;
+  currency: Currency;
+}
+
 export class Money {
-  constructor(public balance: number, public currency: Currency) {}
+  public value: number;
+  public currency: Currency;
+
+  constructor(json: IMoney) {
+    this.value = json.value;
+    this.currency = json.currency;
+  }
 
   toString() {
-    return `${CURRENCY_SYMBOL_MAP[this.currency]} ${this.balance.toFixed(2)}`;
+    return `${CURRENCY_SYMBOL_MAP[this.currency]} ${this.value.toFixed(2)}`;
   }
 }

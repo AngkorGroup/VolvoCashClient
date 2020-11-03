@@ -1,4 +1,6 @@
+import { Batch } from 'models/Batch';
 import { Card } from 'models/Card';
+import { Movement } from 'models/Movement';
 import {
   GET_CARD_DETAIL_CALL,
   GET_CARD_DETAIL_ERROR,
@@ -30,17 +32,26 @@ export type CardDetailScreenAction =
   | GetCardDetailCall
   | GetCardDetailError;
 
-export const selectCard = (state: RootState) =>
-  selectCardDetailScreen(state).card;
+export const selectCard = (state: RootState) => {
+  const json = selectCardDetailScreen(state).card;
+  if (json) {
+    return new Card(json);
+  }
+};
 
 export const selectLoading = (state: RootState) =>
   selectCardDetailScreen(state).loading;
 
-export const selectCardMovements = (state: RootState) =>
-  selectCardDetailScreen(state).card?.movements || [];
+export const selectCardMovements = (state: RootState) => {
+  const movements = selectCardDetailScreen(state).card?.movements || [];
+  return movements.map((movement) => new Movement(movement));
+};
 
-export const selectCardBatches = (state: RootState) =>
-  selectCardDetailScreen(state).card?.batches || [];
+export const selectCardBatches = (state: RootState) => {
+  const batches =
+    selectCardDetailScreen(state).card?.cardBatchesWithBalance || [];
+  return batches.map((batch) => new Batch(batch));
+};
 
 export default function (
   state: CardDetailScreenState = initialState,

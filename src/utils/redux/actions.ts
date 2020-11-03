@@ -20,27 +20,46 @@ export const GET_CHARGE_DETAIL_CALL = 'GET_CHARGE_DETAIL_CALL';
 export const GET_CHARGE_DETAIL_SUCCESS = 'GET_CHARGE_DETAIL_SUCCESS';
 export const GET_CHARGE_DETAIL_ERROR = 'GET_CHARGE_DETAIL_ERROR';
 
+export const GET_CHARGE_LIST_CALL = 'GET_CHARGE_LIST_CALL';
+export const GET_CHARGE_LIST_SUCCESS = 'GET_CHARGE_LIST_SUCCESS';
+export const GET_CHARGE_LIST_ERROR = 'GET_CHARGE_LIST_ERROR';
+
+export const CONFIRM_CHARGE_SAGA = 'CONFIRM_CHARGE_SAGA';
+export const CONFIRM_CHARGE_CALL = 'CONFIRM_CHARGE_CALL';
+export const CONFIRM_CHARGE_SUCCESS = 'CONFIRM_CHARGE_SUCCESS';
+export const CONFIRM_CHARGE_ERROR = 'CONFIRM_CHARGE_ERROR';
+
 export const SET_PHONE = 'SET_PHONE';
 export const SET_CARD_LIST = 'SET_CARD_LIST';
+export const SET_CHARGE_ID = 'SET_CHARGE_ID';
 
 export const GO_TO_CARD_DETAIL = 'GO_TO_CARD_DETAIL';
 export const CLOSE_CONFIRMATION_MODAL = 'CLOSE_CONFIRMATION_MODAL';
 
-export const DISMISS_ERROR = 'DISMISS_ERROR';
+export const DISMISS_ALERT = 'DISMISS_ALERT';
 
 export const LOG_OUT = 'LOG_OUT';
 
 export interface DismissError extends Action {
-  type: typeof DISMISS_ERROR;
+  type: typeof DISMISS_ALERT;
 }
 
 export interface LogOut extends Action {
   type: typeof LOG_OUT;
 }
 
+export interface ErrorAction extends Action {
+  payload: {
+    status: number;
+    data: any;
+    config: any;
+    duration: number;
+  };
+}
+
 export function dismissError(): DismissError {
   return {
-    type: DISMISS_ERROR,
+    type: DISMISS_ALERT,
   };
 }
 

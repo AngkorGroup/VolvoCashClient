@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as routes from 'utils/routes';
-import PaymentsScreen from './PaymentsScreen';
+import ChargeListScreen from './ChargeListScreen';
 import TransfersScreen from './TransfersScreen';
 import { unit } from 'utils/responsive';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -65,7 +65,7 @@ const AppTabNavigation = () => (
       />
       <Tab.Screen
         name={routes.PAYMENTS_SCREEN}
-        component={PaymentsScreen}
+        component={ChargeListScreen}
         options={{
           tabBarLabel: 'Pagos pendientes',
           tabBarIcon: ({ focused, size }) => (

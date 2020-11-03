@@ -35,18 +35,20 @@ export type PhoneScreenAction =
 
 export function requestCodeCall(
   phone: string,
-  { mockResponse, mockData }: RequestActionOptions,
+  options?: RequestActionOptions,
 ): RequestCodeCall {
   return {
     type: REQUEST_CODE_CALL,
     payload: {
+      method: 'post',
+      url: '/request_sms_code',
       data: {
         phone,
       },
     },
     meta: {
-      mockResponse,
-      mockData,
+      mockResponse: options?.mockResponse,
+      mockData: options?.mockData,
     },
   };
 }

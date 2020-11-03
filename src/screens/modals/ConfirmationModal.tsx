@@ -11,23 +11,27 @@ import * as routes from 'utils/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCharge,
+  selectChargeId,
   selectLoading,
 } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
-import { getChargeDetailCall } from 'utils/redux/services/charge-detail-actions';
-import chargeDetail from 'mocks/charge-detail';
+import {
+  confirmChargeCall,
+  getChargeDetailCall,
+} from 'utils/redux/services/charge-detail-actions';
 import { closeConfirmationModal } from 'utils/redux/ui/confirmation-modal/confirmation-modal-actions';
 
 const ConfirmationModal = () => {
   const navigation = useNavigation();
   const loading = useSelector(selectLoading);
   const charge = useSelector(selectCharge);
+  const chargeId = useSelector(selectChargeId);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      getChargeDetailCall({ mockResponse: 'SUCCESS', mockData: chargeDetail }),
-    );
-  }, [dispatch]);
+    if (chargeId) {
+      dispatch(getChargeDetailCall(chargeId));
+    }
+  }, [dispatch, chargeId]);
 
   const handleClose = () => {
     dispatch(closeConfirmationModal());
@@ -47,25 +51,30 @@ const ConfirmationModal = () => {
       )}
       {charge && (
         <View style={styles.card}>
-          <InfoRow label="Monto" value={charge.money.toString()} />
+          <InfoRow label="Monto" value={charge.amount.toString()} />
           <InfoRow label="Concepto" value={charge.displayName} />
-          <InfoRow label="Vendedor" value={charge.cashier.fullName} />
+          <InfoRow label="Vendedor" value={charge.cashier?.fullName || ''} />
           <View style={styles.buttonsContainer}>
             <Button
               title="Rechazar"
               danger
               style={styles.button}
               onPress={() => {
-                // FIXME: call reject service
+                if (chargeId) {
+                  dispatch(confirmChargeCall(chargeId, false));
+                }
                 navigation.goBack();
               }}
             />
             <Button
               title="Confirmar"
               style={styles.button}
-              onPress={() =>
-                navigation.dispatch(StackActions.replace(routes.SUCCESS_MODAL))
-              }
+              onPress={() => {
+                if (chargeId) {
+                  dispatch(confirmChargeCall(chargeId, true));
+                }
+                navigation.dispatch(StackActions.replace(routes.SUCCESS_MODAL));
+              }}
             />
           </View>
         </View>

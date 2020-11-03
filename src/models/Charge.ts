@@ -1,33 +1,35 @@
-import { Currency, Money } from './Money';
+import { IMoney, Money } from './Money';
 import { Cashier, ICashier } from './Cashier';
+
+type Status = 'Pending' | 'Accepted' | 'Rejected' | 'Canceled';
+type Type = 'Remote' | 'FaceToFace';
 
 export interface ICharge {
   id: number;
-  amount: number;
-  currency: Currency;
+  amount: IMoney;
   displayName: string;
-  cashier: ICashier;
-  date: string;
+  status: Status;
+  chargeType: Type;
+  cashier?: ICashier;
+  createdAt: string;
 }
 
 export class Charge {
   public id: number;
-  public amount: number;
-  public currency: Currency;
+  public amount: Money;
   public displayName: string;
-  public cashier: Cashier;
-  public date: string;
+  public status: Status;
+  public chargeType: Type;
+  public cashier?: Cashier;
+  public createdAt: string;
 
   constructor(json: ICharge) {
     this.id = json.id;
-    this.amount = json.amount;
-    this.currency = json.currency;
+    this.amount = new Money(json.amount);
+    this.status = json.status;
     this.displayName = json.displayName;
-    this.date = json.date;
-    this.cashier = new Cashier(json.cashier);
-  }
-
-  get money() {
-    return new Money(this.amount, this.currency).toString();
+    this.createdAt = json.createdAt;
+    this.chargeType = json.chargeType;
+    this.cashier = json.cashier ? new Cashier(json.cashier) : undefined;
   }
 }

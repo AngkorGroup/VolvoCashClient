@@ -21,16 +21,17 @@ const VolvoCard: React.FC<VolvoCardProps> = ({ card, onPress }) => {
       onPress={onPress}>
       <Text style={styles.primaryText}>{card.cardType.displayName}</Text>
       <Text style={styles.secondaryText}>
-        {card.ownerType === 'secondary' ? card.ownerName : ''}
+        {card.contact.type === 'Secondary' ? card.contact.fullName : ''}
       </Text>
-      <Text style={styles.primaryText}>{card.money}</Text>
+      <Text style={styles.primaryText}>{card.balance.toString()}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: unit(200),
+    minHeight: unit(220),
+    maxHeight: unit(250),
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: unit(10),
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
     lineHeight: unit(60),
     fontFamily: 'VolvoBroadProDigital',
     marginTop: unit(5),
+    textAlign: 'center',
   },
   secondaryText: {
     ...theme.header3,
@@ -50,6 +52,7 @@ const styles = StyleSheet.create({
     lineHeight: unit(28),
     alignItems: 'center',
     justifyContent: 'center',
+    textAlign: 'center',
     height: unit(28),
   },
 });

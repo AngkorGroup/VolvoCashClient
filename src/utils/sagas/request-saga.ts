@@ -1,8 +1,13 @@
 import { Action } from 'redux';
-import { call, delay, put, takeEvery } from 'redux-saga/effects';
+import { call, delay, put, select, takeEvery } from 'redux-saga/effects';
+import { developmentApi } from 'utils/api';
 import Api, { apiMethod, apiNames } from 'utils/api';
-const camelCaseKeys = require('camelcase-keys');
-const snakeCaseKeys = require('snakecase-keys');
+import { ErrorAction, logOut } from 'utils/redux/actions';
+import { selectAuthToken } from 'utils/redux/auth/auth-reducer';
+
+enum StatusCode {
+  Unauthorized = 401,
+}
 
 const defaultAction = (type: string, payload: any) => ({
   type,
@@ -36,7 +41,7 @@ function* requestSaga(action: RequestAction) {
     method = 'get',
     data,
     headers,
-    api = apiNames.localhost,
+    api = apiNames.development,
   } = action.payload;
 
   if (mockResponse) {
@@ -50,7 +55,7 @@ function* requestSaga(action: RequestAction) {
   const { ok, data: responseData, status, config, duration } = yield call(
     [Api[api], method as any],
     url,
-    snakeCaseKeys(data, { deep: true }),
+    data,
     headers ? { headers } : undefined,
   );
 
@@ -67,13 +72,25 @@ function* requestSaga(action: RequestAction) {
   }
 
   yield put(
-    defaultAction(
-      action.type.replace('_REQUEST', '_SUCCESS'),
-      camelCaseKeys(responseData, { deep: true }),
-    ),
+    defaultAction(action.type.replace('_CALL', '_SUCCESS'), responseData),
   );
 }
 
-const requestAction = (action: Action) => /^.*CALL$/.test(action.type);
+function* onRequestError(action: ErrorAction) {
+  if (action.payload.status === StatusCode.Unauthorized) {
+    const authToken = yield select(selectAuthToken);
+    if (!authToken) {
+      yield put(logOut());
+    } else {
+      developmentApi.setHeader('Authorization', `Bearer ${authToken}`);
+    }
+  }
+}
 
-export default [takeEvery(requestAction, requestSaga)];
+const requestAction = (action: Action) => /^.*CALL$/.test(action.type);
+const errorAction = (action: Action) => /^.*ERROR$/.test(action.type);
+
+export default [
+  takeEvery(requestAction, requestSaga),
+  takeEvery(errorAction, onRequestError),
+];

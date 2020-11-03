@@ -26,21 +26,12 @@ const SmsScreen = () => {
   const handleTextChange = (text: string) => {
     if (text.length === SMS_CODE_LENGTH) {
       dispatch(
-        verifyCodeCall(
-          {
-            smsCode: text,
-            phone,
-            deviceToken: 'token', // FIXME: send real device token
-            devicePlatform: Platform.OS,
-          },
-          {
-            // FIXME: remove mock
-            mockResponse: text === '1234' ? 'SUCCESS' : 'ERROR',
-            mockData: {
-              authToken: 'Bearer 123456789',
-            },
-          },
-        ),
+        verifyCodeCall({
+          code: text,
+          phone,
+          deviceToken: 'token', // FIXME: send real device token
+          devicePlatform: Platform.OS,
+        }),
       );
     }
   };

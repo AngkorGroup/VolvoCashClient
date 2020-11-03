@@ -9,6 +9,8 @@ import { formatDate } from 'utils/moment';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 import * as routes from 'utils/routes';
+import { useDispatch } from 'react-redux';
+import { confirmChargeSaga } from 'utils/redux/services/charge-detail-actions';
 
 interface ListItemProps {
   charge: Charge;
@@ -19,6 +21,7 @@ type Option = 'confirmar' | 'rechazar' | '';
 const ListItem: React.FC<ListItemProps> = ({ charge }) => {
   const [option, setOption] = useState<Option>('');
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const handleCancel = () => {
     setOption('');
@@ -26,7 +29,11 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
 
   const handleConfirm = () => {
     setOption('');
-    navigation.navigate(routes.SUCCESS_MODAL);
+    const confirmed = option === 'confirmar';
+    dispatch(confirmChargeSaga(charge.id, confirmed));
+    if (confirmed) {
+      navigation.navigate(routes.SUCCESS_MODAL);
+    }
   };
 
   return (
@@ -36,13 +43,13 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
           <Text style={styles.title}>{charge.displayName}</Text>
         </View>
         <View style={styles.moneyContainer}>
-          <Text style={styles.money}>{charge.money}</Text>
+          <Text style={styles.money}>{charge.amount.toString()}</Text>
         </View>
       </View>
       <View style={styles.bottomContainer}>
         <View style={styles.subtitleContainer}>
-          <Text style={styles.subtitle}>{formatDate(charge.date)}</Text>
-          <Text style={styles.subtitle}>{charge.cashier.fullName}</Text>
+          <Text style={styles.subtitle}>{formatDate(charge.createdAt)}</Text>
+          <Text style={styles.subtitle}>{charge.cashier?.fullName}</Text>
         </View>
         <View style={styles.buttonsContainer}>
           <Button
