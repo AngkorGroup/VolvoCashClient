@@ -138,7 +138,7 @@ const Movements = () => {
             title={movement.displayName}
             subtitle={formatDate(movement.date)}
             value={movement.amount.toString()}
-            mode={movement.type === 'in' ? 'positive' : 'negative'}
+            mode={movement.amount.value >= 0 ? 'positive' : 'negative'}
           />
         )}
         ItemSeparatorComponent={() => <View style={styles.divider} />}
