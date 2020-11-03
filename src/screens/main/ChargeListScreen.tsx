@@ -1,4 +1,4 @@
-import ListItem from 'components/payments/ListItem';
+import ListItem from 'components/charge-list/ListItem';
 import ExitButton from 'components/header/ExitButton';
 import Header from 'components/header/Header';
 import React from 'react';
@@ -8,7 +8,7 @@ import { theme } from 'utils/styles';
 import charges from 'mocks/charge-list';
 import { FlatList } from 'react-native-gesture-handler';
 
-const PaymentsScreen = () => {
+const ChargeListScreen = () => {
   return (
     <SafeAreaView edges={['bottom']} style={styles.safeContainer}>
       <Header
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PaymentsScreen;
+export default ChargeListScreen;
