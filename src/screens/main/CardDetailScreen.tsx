@@ -44,7 +44,7 @@ const CardDetailScreen = () => {
   return (
     <View style={styles.container}>
       <Header
-        title={card.cardType.displayName}
+        title={card.cardType?.displayName || '-'}
         alignment="left"
         leftButton={<BackButton />}
       />
@@ -108,7 +108,7 @@ const Movements = () => {
         (movement) =>
           movement.displayName.includes(text) ||
           formatDate(movement.date).includes(text) ||
-          movement.money.toString().includes(text),
+          movement.amount.toString().includes(text),
       ),
     );
   };
@@ -137,7 +137,7 @@ const Movements = () => {
           <ListItem
             title={movement.displayName}
             subtitle={formatDate(movement.date)}
-            value={movement.money.toString()}
+            value={movement.amount.toString()}
             mode={movement.type === 'in' ? 'positive' : 'negative'}
           />
         )}

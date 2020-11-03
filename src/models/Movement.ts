@@ -1,4 +1,4 @@
-import { Currency, Money } from './Money';
+import { Currency, IMoney, Money } from './Money';
 
 type MovementType = 'in' | 'out';
 
@@ -6,7 +6,7 @@ export interface IMovement {
   id: number;
   displayName: string;
   description: string;
-  amount: number;
+  amount: IMoney;
   currency: Currency;
   type: MovementType;
   date: string;
@@ -16,7 +16,7 @@ export class Movement {
   public id: number;
   public displayName: string;
   public description: string;
-  public amount: number;
+  public amount: Money;
   public type: MovementType;
   public date: string;
   public currency: Currency;
@@ -25,15 +25,9 @@ export class Movement {
     this.id = json.id;
     this.displayName = json.displayName;
     this.description = json.description;
-    this.amount = json.amount;
+    this.amount = new Money(json.amount);
     this.type = json.type;
     this.date = json.date;
     this.currency = json.currency;
-  }
-
-  get money() {
-    // FIXME: this was changed due  to change in structure
-    return 'hola';
-    // return new Money(this.amount, this.currency).toString();
   }
 }

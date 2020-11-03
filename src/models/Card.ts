@@ -17,11 +17,11 @@ export interface ICard {
   balance: IMoney;
   calculatedBalance: IMoney;
   qrUrl?: string;
-  cardType: ICardType;
+  cardType?: ICardType;
   movements?: Movement[];
   cardBatches?: Batch[];
   contact: IContact;
-  contactId: number;
+  contactId?: number;
 }
 
 export class Card {
@@ -30,11 +30,11 @@ export class Card {
   public balance: Money;
   public calculatedBalance: Money;
   public qrUrl?: string;
-  public cardType: ICardType;
+  public cardType?: ICardType;
   public movements?: Movement[];
   public batches?: Batch[];
   public contact: Contact;
-  public contactId: number;
+  public contactId?: number;
 
   constructor(json: ICard) {
     this.id = json.id;
@@ -50,6 +50,6 @@ export class Card {
   }
 
   get color() {
-    return this.cardType.color;
+    return this.cardType?.color;
   }
 }

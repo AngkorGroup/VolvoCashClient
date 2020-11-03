@@ -1,4 +1,5 @@
 import { Card } from 'models/Card';
+import { Movement } from 'models/Movement';
 import {
   GET_CARD_DETAIL_CALL,
   GET_CARD_DETAIL_ERROR,
@@ -40,8 +41,10 @@ export const selectCard = (state: RootState) => {
 export const selectLoading = (state: RootState) =>
   selectCardDetailScreen(state).loading;
 
-export const selectCardMovements = (state: RootState) =>
-  selectCardDetailScreen(state).card?.movements || [];
+export const selectCardMovements = (state: RootState) => {
+  const movements = selectCardDetailScreen(state).card?.movements || [];
+  return movements.map((movement) => new Movement(movement));
+};
 
 export const selectCardBatches = (state: RootState) =>
   selectCardDetailScreen(state).card?.batches || [];
