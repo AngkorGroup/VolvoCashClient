@@ -51,7 +51,7 @@ const CardDetailScreen = () => {
       <View style={styles.infoContainer}>
         <View>
           <Text style={styles.balanceLabel}>Saldo disponible</Text>
-          <Text style={styles.balanceText}>{card.balance}</Text>
+          <Text style={styles.balanceText}>{card.balance.toString()}</Text>
         </View>
         {card.contact.type === 'Primary' && (
           <Button
