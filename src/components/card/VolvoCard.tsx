@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     lineHeight: unit(60),
     fontFamily: 'VolvoBroadProDigital',
     marginTop: unit(5),
-    backgroundColor: 'red',
     textAlign: 'center',
   },
   secondaryText: {
