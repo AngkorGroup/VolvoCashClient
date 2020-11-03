@@ -30,7 +30,8 @@ const VolvoCard: React.FC<VolvoCardProps> = ({ card, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: unit(200),
+    minHeight: unit(220),
+    maxHeight: unit(250),
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: unit(10),
