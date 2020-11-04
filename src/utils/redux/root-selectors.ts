@@ -15,3 +15,4 @@ export const selectTransfersScreen = (state: RootState) =>
   state.ui.transfersScreen;
 export const selectContactFormScreen = (state: RootState) =>
   state.ui.contactFormScreen;
+export const selectCardScreen = (state: RootState) => state.ui.selectCardScreen;

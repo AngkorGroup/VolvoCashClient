@@ -39,6 +39,7 @@ export const CONFIRM_CHARGE_ERROR = 'CONFIRM_CHARGE_ERROR';
 
 export const SET_PHONE = 'SET_PHONE';
 export const SET_CARD_LIST = 'SET_CARD_LIST';
+export const SET_OWN_CARD_LIST = 'SET_OWN_CARD_LIST';
 export const SET_CHARGE_ID = 'SET_CHARGE_ID';
 
 export const GO_TO_CARD_DETAIL = 'GO_TO_CARD_DETAIL';

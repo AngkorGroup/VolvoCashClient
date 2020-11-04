@@ -8,6 +8,7 @@ import cardDetailScreen from 'utils/redux/ui/card-detail-screen/card-detail-scre
 import confirmationModal from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
 import transfersScreen from 'utils/redux/ui/transfers-screen/transfers-screen-reducer';
 import contactFormScreen from 'utils/redux/ui/contact-form-screen/contact-form-screen-reducer';
+import selectCardScreen from 'utils/redux/ui/select-card-screen/select-card-screen-reducer';
 
 const rootReducer = combineReducers({
   auth,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     confirmationModal,
     transfersScreen,
     contactFormScreen,
+    selectCardScreen,
   }),
 });
 

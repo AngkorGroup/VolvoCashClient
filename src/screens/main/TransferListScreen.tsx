@@ -7,7 +7,7 @@ import Divider from 'components/layout/Divider';
 import { Contact } from 'models/Contact';
 import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl, StyleSheet, Text, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContactListCall } from 'utils/redux/services/contact-actions';
 import {
@@ -84,14 +84,16 @@ const TransferListScreen = () => {
           refreshControl={
             <RefreshControl refreshing={loading} onRefresh={refresh} />
           }
-          style-={styles.list}
+          style={styles.list}
           data={filteredContacts}
           keyExtractor={(contact) => contact.id.toString()}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: contact }) => (
-            <View>
+            <TouchableOpacity
+              activeOpacity={theme.opacity}
+              onPress={() => navigation.navigate(routes.SELECT_CARD_SCREEN)}>
               <Text style={styles.itemLabel}>{contact.fullName}</Text>
-            </View>
+            </TouchableOpacity>
           )}
           ItemSeparatorComponent={Divider}
         />
