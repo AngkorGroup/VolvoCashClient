@@ -15,6 +15,10 @@ function* onGetCardListSuccess(action: GetCardListSuccess) {
   const cardSections = Object.entries(
     action.payload.reduce((acc, iCard) => {
       const card = new Card(iCard);
+      if (!card.contact) {
+        return acc;
+      }
+
       if (!acc[card.contact.type]) {
         acc[card.contact.type] = [];
       }
@@ -25,7 +29,6 @@ function* onGetCardListSuccess(action: GetCardListSuccess) {
     title: cardCategory,
     data: cardArr,
   }));
-  console.log('cardSections: ', cardSections);
   yield put(setCardList(cardSections));
 }
 
