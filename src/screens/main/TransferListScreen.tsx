@@ -80,7 +80,6 @@ const TransferListScreen = () => {
           )}
           ItemSeparatorComponent={Divider}
         />
-        <Divider />
       </View>
     </View>
   );
