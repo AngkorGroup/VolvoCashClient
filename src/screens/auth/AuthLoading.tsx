@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { selectAuthToken } from 'utils/redux/auth/auth-reducer';
 import ConfirmationModal from 'screens/modals/ConfirmationModal';
 import SuccessModal from 'screens/modals/SuccessModal';
+import { developmentApi } from 'utils/api';
 
 const RootStack = createStackNavigator();
 
@@ -15,6 +16,9 @@ const RootStack = createStackNavigator();
 const AuthLoading = () => {
   const authToken = useSelector(selectAuthToken);
 
+  if (authToken) {
+    developmentApi.setHeader('Authorization', `Bearer ${authToken}`);
+  }
   return (
     <RootStack.Navigator mode="modal" headerMode="none">
       {!authToken ? (
