@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as routes from 'utils/routes';
 import ChargeListScreen from './ChargeListScreen';
-import TransfersScreen from './TransfersScreen';
+import TransfersScreen from './TransferListScreen';
 import { unit } from 'utils/responsive';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
