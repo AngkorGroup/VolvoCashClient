@@ -18,11 +18,13 @@ import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 import * as routes from 'utils/routes';
 import { useNavigation } from '@react-navigation/native';
+import { selectContact } from 'utils/redux/auth/auth-reducer';
 
 const TransferListScreen = () => {
   const [query, setQuery] = useState('');
   const loading = useSelector(selectLoading);
   const contacts = useSelector(selectContactList);
+  const currentUser = useSelector(selectContact);
   const [filteredContacts, setFilteredContacts] = useState(contacts);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -54,17 +56,23 @@ const TransferListScreen = () => {
         alignment="center"
         rightButton={<ExitButton />}
       />
-      <View style={styles.infoContainer}>
-        <Button
-          title="Nuevo Contacto"
-          onPress={() => {
-            navigation.navigate(routes.CONTACT_FORM_SCREEN);
-          }}
-          icon={
-            <Icon family="SimpleLineIcons" name="user-follow" size={unit(30)} />
-          }
-        />
-      </View>
+      {currentUser?.type === 'Primary' && (
+        <View style={styles.infoContainer}>
+          <Button
+            title="Nuevo Contacto"
+            onPress={() => {
+              navigation.navigate(routes.CONTACT_FORM_SCREEN);
+            }}
+            icon={
+              <Icon
+                family="SimpleLineIcons"
+                name="user-follow"
+                size={unit(30)}
+              />
+            }
+          />
+        </View>
+      )}
       <View style={styles.listContainer}>
         <Search
           value={query}
