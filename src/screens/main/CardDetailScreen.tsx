@@ -53,7 +53,7 @@ const CardDetailScreen = () => {
           <Text style={styles.balanceLabel}>Saldo disponible</Text>
           <Text style={styles.balanceText}>{card.balance.toString()}</Text>
         </View>
-        {card.contact.type === 'Primary' && (
+        {card.contact?.type === 'Primary' && (
           <Button
             title="Generar código QR"
             onPress={() => {
