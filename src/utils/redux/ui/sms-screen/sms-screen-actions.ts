@@ -1,3 +1,4 @@
+import { IContact } from 'models/Contact';
 import { Action } from 'redux';
 import {
   DismissError,
@@ -50,6 +51,7 @@ export function verifyCodeCall(
 
 interface VerifyCodeResponse {
   authToken: string;
+  contact: IContact;
 }
 
 export function verifyCodeSuccess(

@@ -7,12 +7,20 @@ import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 import { useForm, Controller } from 'react-hook-form';
+import { IContact } from 'models/Contact';
+import { useDispatch, useSelector } from 'react-redux';
+import { postContactDetailCall } from 'utils/redux/services/contact-actions';
+import { selectLoading } from 'utils/redux/ui/contact-form-screen/contact-form-screen-reducer';
 
 const ContactFormScreen = () => {
-  const { control, handleSubmit, formState } = useForm({
-    mode: 'onTouched',
+  const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
+  const { control, handleSubmit, formState } = useForm<IContact>({
+    mode: 'all',
   });
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (contact: IContact) => {
+    dispatch(postContactDetailCall({ ...contact, documentType: 'DNI' }));
+  };
 
   return (
     <View style={styles.container}>
@@ -106,6 +114,7 @@ const ContactFormScreen = () => {
           title="Crear contacto"
           onPress={handleSubmit(onSubmit)}
           disabled={!formState.isValid}
+          loading={loading}
         />
       </KeyboardAvoidingView>
     </View>

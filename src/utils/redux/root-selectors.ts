@@ -13,3 +13,5 @@ export const selectConfirmationModal = (state: RootState) =>
   state.ui.confirmationModal;
 export const selectTransfersScreen = (state: RootState) =>
   state.ui.transfersScreen;
+export const selectContactFormScreen = (state: RootState) =>
+  state.ui.contactFormScreen;

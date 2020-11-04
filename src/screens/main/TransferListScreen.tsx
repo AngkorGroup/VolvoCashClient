@@ -9,7 +9,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContactListCall } from 'utils/redux/services/contact-list-actions';
+import { getContactListCall } from 'utils/redux/services/contact-actions';
 import {
   selectContactList,
   selectLoading,

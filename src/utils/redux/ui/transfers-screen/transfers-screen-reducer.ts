@@ -10,7 +10,7 @@ import {
   GetContactListCall,
   GetContactListError,
   GetContactListSuccess,
-} from 'utils/redux/services/contact-list-actions';
+} from 'utils/redux/services/contact-actions';
 
 interface ContactListScreenState {
   loading: boolean;

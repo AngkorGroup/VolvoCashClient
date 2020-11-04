@@ -7,6 +7,7 @@ import cardListSaga from './card-list-saga';
 import chargeListSaga from './charge-list-saga';
 import confirmationModalSaga from './confirmation-modal-saga';
 import qrSaga from './qr-saga';
+import contactFormSaga from './contact-form-saga';
 
 function* logger(action: any) {
   if (LOG_REDUX_ACTIONS === 'true' && __DEV__) {
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     ...chargeListSaga,
     ...confirmationModalSaga,
     ...qrSaga,
+    ...contactFormSaga,
     takeEvery('*', logger),
   ]);
 }
