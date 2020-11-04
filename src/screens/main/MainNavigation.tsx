@@ -2,13 +2,13 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as routes from 'utils/routes';
 import ChargeListScreen from './ChargeListScreen';
-import TransfersScreen from './TransferListScreen';
 import { unit } from 'utils/responsive';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 import { theme } from 'utils/styles';
 import Img from 'react-native-fast-image';
 import CardNavigation from './CardNavigation';
+import TransferNavigation from './TransferNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,8 +44,8 @@ const AppTabNavigation = () => (
         }}
       />
       <Tab.Screen
-        name={routes.TRANSFERS_SCREEN}
-        component={TransfersScreen}
+        name={routes.TRANSFER_STACK}
+        component={TransferNavigation}
         options={{
           tabBarLabel: 'Transferencias',
           tabBarIcon: ({ focused, size }) => (

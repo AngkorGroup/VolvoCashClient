@@ -16,6 +16,8 @@ import {
 } from 'utils/redux/ui/transfers-screen/transfers-screen-reducer';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
+import * as routes from 'utils/routes';
+import { useNavigation } from '@react-navigation/native';
 
 const TransferListScreen = () => {
   const [query, setQuery] = useState('');
@@ -23,6 +25,7 @@ const TransferListScreen = () => {
   const contacts = useSelector(selectContactList);
   const [filteredContacts, setFilteredContacts] = useState(contacts);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   useEffect(() => {
     setFilteredContacts(contacts);
@@ -51,7 +54,7 @@ const TransferListScreen = () => {
         <Button
           title="Nuevo Contacto"
           onPress={() => {
-            console.log('hoal');
+            navigation.navigate(routes.CONTACT_FORM_SCREEN);
           }}
           icon={
             <Icon family="SimpleLineIcons" name="user-follow" size={unit(30)} />
