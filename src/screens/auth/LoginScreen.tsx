@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Button from 'components/button/Button';
 import { unit } from 'utils/responsive';
@@ -28,6 +28,7 @@ const LoginScreen = () => {
                 navigation.navigate(routes.PHONE_SCREEN);
               }}
             />
+            <Text style={styles.text}>v 1.0.1</Text>
           </View>
         </View>
       </SafeAreaView>
@@ -63,6 +64,11 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginVertical: unit(20),
   },
+  text:{
+    paddingTop: unit(15),
+    textAlign:"center",
+    color:"#fff"
+  }
 });
 
 export default LoginScreen;
