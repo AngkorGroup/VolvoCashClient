@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Platform } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Button from 'components/button/Button';
 import { unit } from 'utils/responsive';
 import { useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import {theme} from '../../utils/styles'
+import {ANDROID_VERSION, IOS_VERSION} from '../../utils/constants'
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -28,7 +30,9 @@ const LoginScreen = () => {
                 navigation.navigate(routes.PHONE_SCREEN);
               }}
             />
-            <Text style={styles.text}>v 1.0.1</Text>
+            {Platform.OS=== "android" ?
+             <Text style={styles.text}>{ANDROID_VERSION}</Text>
+             :<Text style={styles.text}>{ANDROID_VERSION}</Text> }    
           </View>
         </View>
       </SafeAreaView>
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
   text:{
     paddingTop: unit(15),
     textAlign:"center",
-    color:"#fff"
+    ...theme.primaryOverDark
   }
 });
 
