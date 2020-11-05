@@ -20,11 +20,11 @@ function* onConfirmChargeSaga(action: ConfirmChargeSaga) {
   yield put(getChargeListCall());
 }
 
-function* onConfirmChargeSuccess() {
+function onConfirmChargeSuccess() {
   replace(routes.SUCCESS_MODAL);
 }
 
-function* onConfirmChargeError() {
+function onConfirmChargeError() {
   goBack();
 }
 
