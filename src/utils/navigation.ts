@@ -14,3 +14,7 @@ export function goBack() {
 export function popToTop() {
   navigationRef.current?.dispatch(StackActions.popToTop());
 }
+
+export function replace(name: string, params?: any) {
+  navigationRef.current?.dispatch(StackActions.replace(name, params));
+}

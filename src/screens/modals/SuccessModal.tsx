@@ -8,9 +8,13 @@ import Button from 'components/button/Button';
 import Share from 'components/button/Share';
 import InfoRow from 'components/card/InfoRow';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { selectCharge } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
 
 const SuccessModal = () => {
   const navigation = useNavigation();
+  const charge = useSelector(selectCharge);
+  console.log('charge2: ', charge);
 
   const handleSharePress = () => {
     //FIXME: this should open OS share thing
@@ -23,25 +27,27 @@ const SuccessModal = () => {
         alignment="center"
         rightButton={<CloseButton />}
       />
-      <View style={styles.card}>
-        <InfoRow label="Operación" value="001-12398273-5" />
-        <InfoRow label="Monto" value="S/ 1,200.00" />
-        <InfoRow label="Concepto" value="Lubricante HD-5000" />
-        <InfoRow label="Vendedor" value="Luis Ramos" />
-        <View style={styles.shareContainer}>
-          <Share onPress={handleSharePress} />
+      {charge && (
+        <View style={styles.card}>
+          <InfoRow label="Operación" value={charge.operationCode || '-'} />
+          <InfoRow label="Monto" value={charge.amount.toString()} />
+          <InfoRow label="Concepto" value={charge.description} />
+          <InfoRow label="Vendedor" value={charge.cashier?.fullName || ''} />
+          <View style={styles.shareContainer}>
+            <Share onPress={handleSharePress} />
+          </View>
+          <View style={styles.buttonsContainer}>
+            <Button
+              title="Aceptar"
+              style={styles.button}
+              onPress={() => {
+                //FIXME: this should open OS share thing
+                navigation.goBack();
+              }}
+            />
+          </View>
         </View>
-        <View style={styles.buttonsContainer}>
-          <Button
-            title="Aceptar"
-            style={styles.button}
-            onPress={() => {
-              //FIXME: this should open OS share thing
-              navigation.goBack();
-            }}
-          />
-        </View>
-      </View>
+      )}
     </View>
   );
 };

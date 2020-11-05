@@ -7,6 +7,8 @@ import {
   SET_CHARGE_ID,
   CONFIRM_CHARGE_CALL,
   CONFIRM_CHARGE_SAGA,
+  CONFIRM_CHARGE_SUCCESS,
+  CONFIRM_CHARGE_ERROR,
 } from 'utils/redux/actions';
 import { RequestAction, RequestActionOptions } from 'utils/sagas/request-saga';
 
@@ -33,6 +35,10 @@ export interface GetChargeDetailSuccess extends Action {
   payload: Charge;
 }
 
+export interface GetChargeDetailError extends Action {
+  type: typeof GET_CHARGE_DETAIL_ERROR;
+}
+
 export interface SetChargeId extends Action {
   type: typeof SET_CHARGE_ID;
   payload: {
@@ -45,10 +51,6 @@ export function setChargeId(chargeId: number): SetChargeId {
     type: SET_CHARGE_ID,
     payload: { chargeId },
   };
-}
-
-export interface GetChargeDetailError extends Action {
-  type: typeof GET_CHARGE_DETAIL_ERROR;
 }
 
 export interface ConfirmChargeCall extends RequestAction {
@@ -69,6 +71,15 @@ export function confirmChargeCall(
       },
     },
   };
+}
+
+export interface ConfirmChargeSuccess extends Action {
+  type: typeof CONFIRM_CHARGE_SUCCESS;
+  payload: Charge;
+}
+
+export interface ConfirmChargeError extends Action {
+  type: typeof CONFIRM_CHARGE_ERROR;
 }
 
 export interface ConfirmChargeSaga extends Action {

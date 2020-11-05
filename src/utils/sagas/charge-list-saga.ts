@@ -1,4 +1,5 @@
 import { put, take, takeEvery } from 'redux-saga/effects';
+import { goBack, replace } from 'utils/navigation';
 import {
   CONFIRM_CHARGE_ERROR,
   CONFIRM_CHARGE_SAGA,
@@ -9,6 +10,7 @@ import {
   ConfirmChargeSaga,
 } from 'utils/redux/services/charge-detail-actions';
 import { getChargeListCall } from 'utils/redux/services/charge-list-actions';
+import * as routes from 'utils/routes';
 
 function* onConfirmChargeSaga(action: ConfirmChargeSaga) {
   yield put(
@@ -18,4 +20,16 @@ function* onConfirmChargeSaga(action: ConfirmChargeSaga) {
   yield put(getChargeListCall());
 }
 
-export default [takeEvery(CONFIRM_CHARGE_SAGA, onConfirmChargeSaga)];
+function* onConfirmChargeSuccess() {
+  replace(routes.SUCCESS_MODAL);
+}
+
+function* onConfirmChargeError() {
+  goBack();
+}
+
+export default [
+  takeEvery(CONFIRM_CHARGE_SAGA, onConfirmChargeSaga),
+  takeEvery(CONFIRM_CHARGE_SUCCESS, onConfirmChargeSuccess),
+  takeEvery(CONFIRM_CHARGE_ERROR, onConfirmChargeError),
+];

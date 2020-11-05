@@ -6,12 +6,11 @@ import { theme } from 'utils/styles';
 import { unit } from 'utils/responsive';
 import Button from 'components/button/Button';
 import InfoRow from 'components/card/InfoRow';
-import { StackActions, useNavigation } from '@react-navigation/native';
-import * as routes from 'utils/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCharge,
   selectChargeId,
+  selectConfirmLoading,
   selectLoading,
 } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
 import {
@@ -21,8 +20,8 @@ import {
 import { closeConfirmationModal } from 'utils/redux/ui/confirmation-modal/confirmation-modal-actions';
 
 const ConfirmationModal = () => {
-  const navigation = useNavigation();
   const loading = useSelector(selectLoading);
+  const confirmLoading = useSelector(selectConfirmLoading);
   const charge = useSelector(selectCharge);
   const chargeId = useSelector(selectChargeId);
   const dispatch = useDispatch();
@@ -52,10 +51,11 @@ const ConfirmationModal = () => {
       {charge && (
         <View style={styles.card}>
           <InfoRow label="Monto" value={charge.amount.toString()} />
-          <InfoRow label="Concepto" value={charge.displayName} />
+          <InfoRow label="Concepto" value={charge.description} />
           <InfoRow label="Vendedor" value={charge.cashier?.fullName || ''} />
           <View style={styles.buttonsContainer}>
             <Button
+              loading={loading || confirmLoading}
               title="Rechazar"
               danger
               style={styles.button}
@@ -63,17 +63,16 @@ const ConfirmationModal = () => {
                 if (chargeId) {
                   dispatch(confirmChargeCall(chargeId, false));
                 }
-                navigation.goBack();
               }}
             />
             <Button
+              loading={loading || confirmLoading}
               title="Confirmar"
               style={styles.button}
               onPress={() => {
                 if (chargeId) {
                   dispatch(confirmChargeCall(chargeId, true));
                 }
-                navigation.dispatch(StackActions.replace(routes.SUCCESS_MODAL));
               }}
             />
           </View>
