@@ -14,11 +14,15 @@ import VolvoCard from 'components/card/VolvoCard';
 import { unit } from 'utils/responsive';
 import Divider from 'components/layout/Divider';
 import Spacing from 'components/layout/Spacing';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import * as routes from 'utils/routes';
 
 const SelectCardScreen = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const loading = useSelector(selectLoading);
   const cards = useSelector(selectCardList);
+  const { params } = useRoute();
 
   const refresh = useCallback(() => {
     dispatch(getCardListCall());
@@ -41,12 +45,17 @@ const SelectCardScreen = () => {
         }
         style={styles.list}
         data={cards}
-        keyExtractor={(contact) => contact.id.toString()}
+        keyExtractor={(card) => card.id.toString()}
         showsVerticalScrollIndicator={false}
         renderItem={({ item: card }) => (
           <VolvoCard
             card={card}
-            onPress={() => console.log('toque card', card)}
+            onPress={() =>
+              navigation.navigate(routes.TRANSFER_FORM_SCREEN, {
+                card,
+                contact: (params as any).contact,
+              })
+            }
           />
         )}
         ListHeaderComponent={() => <Spacing size={unit(30)} />}

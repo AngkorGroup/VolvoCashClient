@@ -4,6 +4,7 @@ import * as routes from 'utils/routes';
 import TransferListScreen from './TransferListScreen';
 import ContactFormScreen from './ContactFormScreen';
 import SelectCardScreen from './SelectCardScreen';
+import TransferFormScreen from './TransferFormScreen';
 
 const TransferStack = createStackNavigator();
 
@@ -20,6 +21,10 @@ const TransferNavigation = () => (
     <TransferStack.Screen
       name={routes.SELECT_CARD_SCREEN}
       component={SelectCardScreen}
+    />
+    <TransferStack.Screen
+      name={routes.TRANSFER_FORM_SCREEN}
+      component={TransferFormScreen}
     />
   </TransferStack.Navigator>
 );

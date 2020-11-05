@@ -91,7 +91,9 @@ const TransferListScreen = () => {
           renderItem={({ item: contact }) => (
             <TouchableOpacity
               activeOpacity={theme.opacity}
-              onPress={() => navigation.navigate(routes.SELECT_CARD_SCREEN)}>
+              onPress={() =>
+                navigation.navigate(routes.SELECT_CARD_SCREEN, { contact })
+              }>
               <Text style={styles.itemLabel}>{contact.fullName}</Text>
             </TouchableOpacity>
           )}

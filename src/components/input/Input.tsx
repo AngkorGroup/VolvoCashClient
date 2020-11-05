@@ -1,15 +1,23 @@
 import Icon, { IconFamily } from 'components/icon/Icon';
 import React from 'react';
-import { StyleSheet, TextInputProps, View, ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInputProps,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 
 interface InputProps {
-  placeholder: string;
+  placeholder?: string;
   iconFamily?: IconFamily;
   iconName?: string;
   containerStyle?: ViewStyle;
+  innerLabel?: string;
+  editableStyles?: boolean;
 }
 
 const Input: React.FC<InputProps & TextInputProps> = ({
@@ -17,17 +25,19 @@ const Input: React.FC<InputProps & TextInputProps> = ({
   iconFamily,
   iconName,
   containerStyle,
+  innerLabel,
+  editableStyles = true,
   ...props
 }) => {
   const containerStyles: any[] = [styles.container];
   const inputStyles: any[] = [styles.input];
-  if (props.editable === false) {
+  if (props.editable === false && editableStyles) {
     containerStyles.push(theme.disabledSurface);
   }
   if (containerStyle) {
     containerStyles.push(containerStyle);
   }
-  if (!iconName && !iconFamily) {
+  if (!iconName && !iconFamily && !innerLabel) {
     inputStyles.push(styles.inputMargin);
   }
   return (
@@ -35,6 +45,7 @@ const Input: React.FC<InputProps & TextInputProps> = ({
       {iconFamily && iconName && (
         <Icon family={iconFamily} name={iconName} style={styles.icon} />
       )}
+      {innerLabel && <Text style={styles.inputMargin}>{innerLabel}</Text>}
       <TextInput
         style={inputStyles}
         numberOfLines={1}
