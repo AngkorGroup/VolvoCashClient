@@ -13,23 +13,38 @@ import { Card } from 'models/Card';
 import { Contact } from 'models/Contact';
 import { selectContact } from 'utils/redux/auth/auth-reducer';
 import { CURRENCY_SYMBOL_MAP } from 'models/Money';
+import { postTransferDetailCall } from 'utils/redux/services/transfer-actions';
+import { selectLoading } from 'utils/redux/ui/phone-screen/phone-screen-reducer';
 
 interface Params {
   card: Card;
   contact: Contact;
 }
 
+interface Form {
+  amount: number;
+}
+
 const TransferFormScreen = () => {
   const dispatch = useDispatch();
   const { params } = useRoute();
   const me = useSelector(selectContact);
+  const loading = useSelector(selectLoading);
   const { control, handleSubmit, formState } = useForm({
     mode: 'all',
   });
 
-  const onSubmit = () => {
-    // dispatch(postContactDetailCall({ ...contact, documentType: 'DNI' }));
-    console.log('submit');
+  const onSubmit = (form: Form) => {
+    dispatch(
+      postTransferDetailCall({
+        amount: {
+          currency: card.balance.currency,
+          value: form.amount,
+        },
+        originCardId: card.id,
+        contactId: contact.id,
+      }),
+    );
   };
 
   const { card, contact } = params as Params;
@@ -77,7 +92,7 @@ const TransferFormScreen = () => {
           title="Transferir"
           onPress={handleSubmit(onSubmit)}
           disabled={!formState.isValid}
-          // loading={loading}
+          loading={loading}
         />
       </View>
     </View>
