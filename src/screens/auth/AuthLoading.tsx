@@ -8,6 +8,7 @@ import { selectAuthToken } from 'utils/redux/auth/auth-reducer';
 import ConfirmationModal from 'screens/modals/ConfirmationModal';
 import SuccessModal from 'screens/modals/SuccessModal';
 import { developmentApi } from 'utils/api';
+import TransferSuccessModal from 'screens/modals/TransferSuccessModal';
 
 const RootStack = createStackNavigator();
 
@@ -36,6 +37,10 @@ const AuthLoading = () => {
           <RootStack.Screen
             name={routes.SUCCESS_MODAL}
             component={SuccessModal}
+          />
+          <RootStack.Screen
+            name={routes.TRANSFER_SUCCESS_MODAL}
+            component={TransferSuccessModal}
           />
         </>
       )}

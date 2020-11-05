@@ -14,7 +14,8 @@ import { Contact } from 'models/Contact';
 import { selectContact } from 'utils/redux/auth/auth-reducer';
 import { CURRENCY_SYMBOL_MAP } from 'models/Money';
 import { postTransferDetailCall } from 'utils/redux/services/transfer-actions';
-import { selectLoading } from 'utils/redux/ui/phone-screen/phone-screen-reducer';
+import { selectLoading } from 'utils/redux/ui/transfer-form-screen/transfer-form-screen-reducer';
+import { Keyboard } from 'react-native';
 
 interface Params {
   card: Card;
@@ -35,6 +36,7 @@ const TransferFormScreen = () => {
   });
 
   const onSubmit = (form: Form) => {
+    Keyboard.dismiss();
     dispatch(
       postTransferDetailCall({
         amount: {

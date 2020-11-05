@@ -1,5 +1,5 @@
 import { Card, ICard } from './Card';
-import { IMoney } from './Money';
+import { IMoney, Money } from './Money';
 
 export interface ITransfer {
   id: number;
@@ -29,7 +29,7 @@ export class Transfer {
   constructor(json: ITransfer) {
     this.id = json.id;
     this.operationCode = json.operationCode;
-    this.amount = json.amount;
+    this.amount = new Money(json.amount);
     this.displayName = json.displayName;
     this.imageUrl = json.imageUrl;
     this.originCardId = json.originCardId;
