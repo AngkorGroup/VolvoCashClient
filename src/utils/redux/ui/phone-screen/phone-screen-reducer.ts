@@ -24,7 +24,7 @@ const initialState: PhoneScreenState = {
 };
 
 export default function (
-  state: PhoneScreenState = initialState,
+  state: PhoneScreenState = initialState, // NOSONAR
   action: PhoneScreenAction,
 ): PhoneScreenState {
   switch (action.type) {

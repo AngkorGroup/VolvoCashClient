@@ -38,7 +38,7 @@ const initialState: CardListScreenState = {
 };
 
 export default function (
-  state: CardListScreenState = initialState,
+  state: CardListScreenState = initialState, // NOSONAR
   action: CardListScreenAction,
 ): CardListScreenState {
   switch (action.type) {

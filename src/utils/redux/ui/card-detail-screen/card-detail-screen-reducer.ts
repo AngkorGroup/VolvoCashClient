@@ -54,7 +54,7 @@ export const selectCardBatches = (state: RootState) => {
 };
 
 export default function (
-  state: CardDetailScreenState = initialState,
+  state: CardDetailScreenState = initialState, // NOSONAR
   action: CardDetailScreenAction,
 ): CardDetailScreenState {
   switch (action.type) {

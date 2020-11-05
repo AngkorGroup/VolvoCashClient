@@ -24,7 +24,7 @@ const initialState: SmsScreenState = {
 };
 
 export default function (
-  state: SmsScreenState = initialState,
+  state: SmsScreenState = initialState, // NOSONAR
   action: SmsScreenAction,
 ): SmsScreenState {
   switch (action.type) {

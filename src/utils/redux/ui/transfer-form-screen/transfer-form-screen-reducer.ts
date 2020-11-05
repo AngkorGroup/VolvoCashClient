@@ -43,7 +43,7 @@ type TransferFormAction =
   | PostTransferDetailError;
 
 export default function (
-  state: TransferFormState = initialState,
+  state: TransferFormState = initialState, // NOSONAR
   action: TransferFormAction,
 ): TransferFormState {
   switch (action.type) {

@@ -63,7 +63,7 @@ export const selectConfirmLoading = (state: RootState) =>
   selectConfirmationModal(state).confirmLoading;
 
 export default function (
-  state: ChargeDetailScreenState = initialState,
+  state: ChargeDetailScreenState = initialState, // NOSONAR
   action: ChargeDetailScreenAction,
 ): ChargeDetailScreenState {
   switch (action.type) {

@@ -42,7 +42,7 @@ type ContactListScreenAction =
   | GetContactListError;
 
 export default function (
-  state: ContactListScreenState = initialState,
+  state: ContactListScreenState = initialState, // NOSONAR
   action: ContactListScreenAction,
 ): ContactListScreenState {
   switch (action.type) {

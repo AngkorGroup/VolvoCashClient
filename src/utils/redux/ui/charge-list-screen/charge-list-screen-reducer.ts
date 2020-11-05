@@ -42,7 +42,7 @@ type ChargeListScreenAction =
   | GetChargeListError;
 
 export default function (
-  state: ChargeListScreenState = initialState,
+  state: ChargeListScreenState = initialState, // NOSONAR
   action: ChargeListScreenAction,
 ): ChargeListScreenState {
   switch (action.type) {

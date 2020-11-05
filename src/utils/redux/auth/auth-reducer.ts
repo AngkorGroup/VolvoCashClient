@@ -37,7 +37,7 @@ export const selectContact = (state: RootState) => {
 type AuthAction = VerifyCodeSuccess | SetPhone | LogOut;
 
 export default function (
-  state: AuthState = initialState,
+  state: AuthState = initialState, // NOSONAR
   action: AuthAction,
 ): AuthState {
   switch (action.type) {

@@ -30,7 +30,7 @@ type ContactFormScreenAction =
   | PostContactDetailError;
 
 export default function (
-  state: ContactFormScreenState = initialState,
+  state: ContactFormScreenState = initialState, // NOSONAR
   action: ContactFormScreenAction,
 ): ContactFormScreenState {
   switch (action.type) {
