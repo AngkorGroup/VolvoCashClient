@@ -4,43 +4,38 @@ import {
   GET_CARD_LIST_CALL,
   GET_CARD_LIST_ERROR,
   GET_CARD_LIST_SUCCESS,
-  SET_CARD_LIST,
+  SET_OWN_CARD_LIST,
 } from 'utils/redux/actions';
 import { RootState } from 'utils/redux/root-reducer';
-import { selectCardListScreen } from 'utils/redux/root-selectors';
+import { selectCardScreen } from 'utils/redux/root-selectors';
 import { CardListScreenAction } from 'utils/redux/ui/card-list-screen/card-list-screen-actions';
 
-export type CardSections = { title: string; data: Card[] }[];
-
-interface CardListScreenState {
+interface SelectCardsScreenState {
   loading: boolean;
   error: boolean;
-  sections: CardSections;
+  cardList: Card[];
 }
 
 export const selectLoading = (state: RootState) =>
-  selectCardListScreen(state).loading;
+  selectCardScreen(state).loading;
 
-export const selectError = (state: RootState) =>
-  selectCardListScreen(state).error;
-export const selectSections = (state: RootState) => {
-  const sections = selectCardListScreen(state).sections;
-  return sections.map((section) => ({
-    ...section,
-    data: section.data.map((card) => new Card(card)),
-  }));
+export const selectError = (state: RootState) => selectCardScreen(state).error;
+
+export const selectCardList = (state: RootState) => {
+  const cards = selectCardScreen(state).cardList;
+  return cards.map((card) => new Card(card));
 };
 
-const initialState: CardListScreenState = {
+const initialState: SelectCardsScreenState = {
   loading: false,
   error: false,
-  sections: [],
+  cardList: [],
 };
 
 export default function (
-  state: CardListScreenState = initialState, // NOSONAR
+  state: SelectCardsScreenState = initialState, // NOSONAR
   action: CardListScreenAction,
-): CardListScreenState {
+): SelectCardsScreenState {
   switch (action.type) {
     case GET_CARD_LIST_CALL:
       return {
@@ -60,10 +55,10 @@ export default function (
         loading: false,
         error: true,
       };
-    case SET_CARD_LIST:
+    case SET_OWN_CARD_LIST:
       return {
         ...state,
-        sections: action.payload,
+        cardList: action.payload,
       };
     case DISMISS_ALERT:
       return {

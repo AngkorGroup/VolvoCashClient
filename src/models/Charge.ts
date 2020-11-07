@@ -8,6 +8,8 @@ export interface ICharge {
   id: number;
   amount: IMoney;
   displayName: string;
+  description: string;
+  operationCode: string;
   status: Status;
   chargeType: Type;
   cashier?: ICashier;
@@ -18,6 +20,8 @@ export class Charge {
   public id: number;
   public amount: Money;
   public displayName: string;
+  public description: string;
+  public operationCode: string;
   public status: Status;
   public chargeType: Type;
   public cashier?: Cashier;
@@ -28,6 +32,8 @@ export class Charge {
     this.amount = new Money(json.amount);
     this.status = json.status;
     this.displayName = json.displayName;
+    this.description = json.description;
+    this.operationCode = json.operationCode;
     this.createdAt = json.createdAt;
     this.chargeType = json.chargeType;
     this.cashier = json.cashier ? new Cashier(json.cashier) : undefined;

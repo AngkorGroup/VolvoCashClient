@@ -53,7 +53,7 @@ const CardDetailScreen = () => {
           <Text style={styles.balanceLabel}>Saldo disponible</Text>
           <Text style={styles.balanceText}>{card.balance.toString()}</Text>
         </View>
-        {card.contact.type === 'Primary' && (
+        {card.contact?.type === 'Primary' && (
           <Button
             title="Generar código QR"
             onPress={() => {
@@ -129,7 +129,7 @@ const Movements = () => {
         refreshControl={
           <RefreshControl refreshing={loading} onRefresh={refresh} />
         }
-        style-={styles.list}
+        style={styles.list}
         data={filteredMovements}
         keyExtractor={(movement) => movement.id.toString()}
         showsVerticalScrollIndicator={false}
@@ -192,7 +192,7 @@ const Batches = () => {
         refreshControl={
           <RefreshControl refreshing={loading} onRefresh={refresh} />
         }
-        style-={styles.list}
+        style={styles.list}
         data={filteredBatches}
         keyExtractor={(batch: Batch) => batch.id.toString()}
         showsVerticalScrollIndicator={false}

@@ -11,3 +11,10 @@ export const selectCardDetailScreen = (state: RootState) =>
   state.ui.cardDetailScreen;
 export const selectConfirmationModal = (state: RootState) =>
   state.ui.confirmationModal;
+export const selectTransfersScreen = (state: RootState) =>
+  state.ui.transfersScreen;
+export const selectContactFormScreen = (state: RootState) =>
+  state.ui.contactFormScreen;
+export const selectCardScreen = (state: RootState) => state.ui.selectCardScreen;
+export const selectTransferFormScreen = (state: RootState) =>
+  state.ui.transferFormScreen;

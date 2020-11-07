@@ -1,6 +1,6 @@
 export type Currency = 'PEN' | 'USD';
 
-const CURRENCY_SYMBOL_MAP = {
+export const CURRENCY_SYMBOL_MAP = {
   PEN: 'S/',
   USD: '$',
 };

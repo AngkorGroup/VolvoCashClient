@@ -1,3 +1,4 @@
+import { Contact, IContact } from 'models/Contact';
 import {
   LogOut,
   LOG_OUT,
@@ -12,11 +13,13 @@ import { VerifyCodeSuccess } from '../ui/sms-screen/sms-screen-actions';
 interface AuthState {
   authToken?: string;
   phone: string;
+  contact?: IContact;
 }
 
 const initialState: AuthState = {
   authToken: undefined,
   phone: '',
+  contact: undefined,
 };
 
 export const selectAuthToken = (state: RootState) =>
@@ -24,10 +27,17 @@ export const selectAuthToken = (state: RootState) =>
 
 export const selectPhone = (state: RootState) => selectAuth(state).phone;
 
+export const selectContact = (state: RootState) => {
+  const contact = selectAuth(state).contact;
+  if (contact) {
+    return new Contact(contact);
+  }
+};
+
 type AuthAction = VerifyCodeSuccess | SetPhone | LogOut;
 
 export default function (
-  state: AuthState = initialState,
+  state: AuthState = initialState, // NOSONAR
   action: AuthAction,
 ): AuthState {
   switch (action.type) {
@@ -35,6 +45,7 @@ export default function (
       return {
         ...state,
         authToken: action.payload.authToken,
+        contact: action.payload.contact,
       };
     case SET_PHONE:
       return {

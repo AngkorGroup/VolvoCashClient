@@ -1,6 +1,9 @@
 import { Charge } from 'models/Charge';
 import {
   CLOSE_CONFIRMATION_MODAL,
+  CONFIRM_CHARGE_CALL,
+  CONFIRM_CHARGE_ERROR,
+  CONFIRM_CHARGE_SUCCESS,
   GET_CHARGE_DETAIL_CALL,
   GET_CHARGE_DETAIL_ERROR,
   GET_CHARGE_DETAIL_SUCCESS,
@@ -9,6 +12,9 @@ import {
 import { RootState } from 'utils/redux/root-reducer';
 import { selectConfirmationModal } from 'utils/redux/root-selectors';
 import {
+  ConfirmChargeCall,
+  ConfirmChargeError,
+  ConfirmChargeSuccess,
   GetChargeDetailCall,
   GetChargeDetailError,
   GetChargeDetailSuccess,
@@ -17,7 +23,8 @@ import {
 import { CloseConfirmationModal } from './confirmation-modal-actions';
 
 interface ChargeDetailScreenState {
-  loading: boolean;
+  loading: boolean; // get call
+  confirmLoading: boolean;
   charge?: Charge;
   chargeId?: number;
 }
@@ -25,6 +32,7 @@ interface ChargeDetailScreenState {
 const initialState: ChargeDetailScreenState = {
   charge: undefined,
   loading: false,
+  confirmLoading: false,
   chargeId: undefined,
 };
 
@@ -33,7 +41,10 @@ export type ChargeDetailScreenAction =
   | GetChargeDetailSuccess
   | GetChargeDetailCall
   | GetChargeDetailError
-  | SetChargeId;
+  | SetChargeId
+  | ConfirmChargeCall
+  | ConfirmChargeSuccess
+  | ConfirmChargeError;
 
 export const selectCharge = (state: RootState) => {
   const charge = selectConfirmationModal(state).charge;
@@ -48,8 +59,11 @@ export const selectChargeId = (state: RootState) =>
 export const selectLoading = (state: RootState) =>
   selectConfirmationModal(state).loading;
 
+export const selectConfirmLoading = (state: RootState) =>
+  selectConfirmationModal(state).confirmLoading;
+
 export default function (
-  state: ChargeDetailScreenState = initialState,
+  state: ChargeDetailScreenState = initialState, // NOSONAR
   action: ChargeDetailScreenAction,
 ): ChargeDetailScreenState {
   switch (action.type) {
@@ -79,6 +93,22 @@ export default function (
         ...state,
         loading: false,
         charge: action.payload,
+      };
+    case CONFIRM_CHARGE_CALL:
+      return {
+        ...state,
+        confirmLoading: true,
+      };
+    case CONFIRM_CHARGE_SUCCESS:
+      return {
+        ...state,
+        confirmLoading: false,
+        charge: action.payload,
+      };
+    case CONFIRM_CHARGE_ERROR:
+      return {
+        ...state,
+        confirmLoading: false,
       };
     default:
       return state;

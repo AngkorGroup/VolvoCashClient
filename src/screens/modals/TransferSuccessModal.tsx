@@ -7,31 +7,35 @@ import { unit } from 'utils/responsive';
 import Button from 'components/button/Button';
 import Share from 'components/button/Share';
 import InfoRow from 'components/card/InfoRow';
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { selectCharge } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
+import { selectTransfer } from 'utils/redux/ui/transfer-form-screen/transfer-form-screen-reducer';
 
-const SuccessModal = () => {
+const TransferSuccessModal = () => {
   const navigation = useNavigation();
-  const charge = useSelector(selectCharge);
+  const transfer = useSelector(selectTransfer);
 
   const handleSharePress = () => {
     //FIXME: this should open OS share thing
     navigation.goBack();
   };
+
+  const closeModal = () => {
+    navigation.goBack();
+    navigation.dispatch(StackActions.popToTop());
+  };
   return (
     <View style={styles.container}>
       <Header
-        title={'Cobro exitoso'}
+        title={'Transferencia exitosa'}
         alignment="center"
-        rightButton={<CloseButton />}
+        rightButton={<CloseButton onClose={closeModal} />}
       />
-      {charge && (
+      {transfer && (
         <View style={styles.card}>
-          <InfoRow label="Operación" value={charge.operationCode || '-'} />
-          <InfoRow label="Monto" value={charge.amount.toString()} />
-          <InfoRow label="Concepto" value={charge.description} />
-          <InfoRow label="Vendedor" value={charge.cashier?.fullName || ''} />
+          <InfoRow label="Operación" value={transfer.operationCode || '-'} />
+          <InfoRow label="Monto" value={transfer.amount.toString()} />
+          <InfoRow label="Concepto" value={transfer.displayName} />
           <View style={styles.shareContainer}>
             <Share onPress={handleSharePress} />
           </View>
@@ -39,9 +43,7 @@ const SuccessModal = () => {
             <Button
               title="Aceptar"
               style={styles.button}
-              onPress={() => {
-                navigation.goBack();
-              }}
+              onPress={closeModal}
             />
           </View>
         </View>
@@ -75,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SuccessModal;
+export default TransferSuccessModal;

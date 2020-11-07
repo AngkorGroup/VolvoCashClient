@@ -20,7 +20,7 @@ export interface ICard {
   cardType?: ICardType;
   movements?: Movement[];
   cardBatchesWithBalance?: Batch[];
-  contact: IContact;
+  contact?: IContact;
   contactId?: number;
 }
 
@@ -33,7 +33,7 @@ export class Card {
   public cardType?: ICardType;
   public movements?: Movement[];
   public cardBatchesWithBalance?: Batch[];
-  public contact: Contact;
+  public contact?: Contact;
   public contactId?: number;
 
   constructor(json: ICard) {
@@ -45,7 +45,7 @@ export class Card {
     this.qrUrl = json.qrUrl;
     this.movements = json.movements;
     this.cardBatchesWithBalance = json.cardBatchesWithBalance;
-    this.contact = new Contact(json.contact);
+    this.contact = json.contact ? new Contact(json.contact) : undefined;
     this.contactId = json.contactId;
   }
 

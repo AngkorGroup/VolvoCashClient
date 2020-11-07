@@ -36,7 +36,7 @@ const ChargeListScreen = () => {
         refreshControl={
           <RefreshControl refreshing={loading} onRefresh={refresh} />
         }
-        style-={styles.list}
+        style={styles.list}
         data={chargeList}
         keyExtractor={(charge) => charge.id.toString()}
         showsVerticalScrollIndicator={false}

@@ -19,7 +19,10 @@ const ExitButton = () => {
         confirmText="Si"
         cancelText="No"
         onCancel={() => setAlert(false)}
-        onConfirm={() => dispatch(logOut())}
+        onConfirm={() => {
+          setAlert(false);
+          dispatch(logOut());
+        }}
       />
     </>
   );
