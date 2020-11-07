@@ -1,8 +1,10 @@
 import { Contact, IContact } from 'models/Contact';
+import { Action } from 'redux';
 import {
   LogOut,
   LOG_OUT,
   SET_PHONE,
+  SET_PUSH_TOKEN,
   VERIFY_CODE_SUCCESS,
 } from 'utils/redux/actions';
 import { RootState } from '../root-reducer';
@@ -12,6 +14,7 @@ import { VerifyCodeSuccess } from '../ui/sms-screen/sms-screen-actions';
 
 interface AuthState {
   authToken?: string;
+  pushToken?: string;
   phone: string;
   contact?: IContact;
 }
@@ -20,6 +23,7 @@ const initialState: AuthState = {
   authToken: undefined,
   phone: '',
   contact: undefined,
+  pushToken: undefined,
 };
 
 export const selectAuthToken = (state: RootState) =>
@@ -33,6 +37,22 @@ export const selectContact = (state: RootState) => {
     return new Contact(contact);
   }
 };
+
+export interface SetPushToken extends Action {
+  type: typeof SET_PUSH_TOKEN;
+  payload: {
+    pushToken: string;
+  };
+}
+
+export function setPushToken(pushToken: string): SetPushToken {
+  return {
+    type: SET_PUSH_TOKEN,
+    payload: {
+      pushToken,
+    },
+  };
+}
 
 type AuthAction = VerifyCodeSuccess | SetPhone | LogOut;
 

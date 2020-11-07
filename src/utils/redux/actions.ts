@@ -45,6 +45,7 @@ export const SET_PHONE = 'SET_PHONE';
 export const SET_CARD_LIST = 'SET_CARD_LIST';
 export const SET_OWN_CARD_LIST = 'SET_OWN_CARD_LIST';
 export const SET_CHARGE_ID = 'SET_CHARGE_ID';
+export const SET_PUSH_TOKEN = 'SET_PUSH_TOKEN';
 
 export const GO_TO_CARD_DETAIL = 'GO_TO_CARD_DETAIL';
 export const CLOSE_CONFIRMATION_MODAL = 'CLOSE_CONFIRMATION_MODAL';
