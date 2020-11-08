@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import BackButton from 'components/header/BackButton';
 import Header from 'components/header/Header';
 import { RefreshControl, StyleSheet, View } from 'react-native';
-import { theme } from 'utils/styles';
+import { theme, palette } from 'utils/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCardListCall } from 'utils/redux/ui/card-list-screen/card-list-screen-actions';
 import {
@@ -10,7 +10,7 @@ import {
   selectLoading,
 } from 'utils/redux/ui/select-card-screen/select-card-screen-reducer';
 import { FlatList } from 'react-native-gesture-handler';
-import VolvoCard from 'components/card/VolvoCard';
+import VolvoCard from 'components/card/VolvoCardItem';
 import { unit } from 'utils/responsive';
 import Divider from 'components/layout/Divider';
 import Spacing from 'components/layout/Spacing';
@@ -39,28 +39,36 @@ const SelectCardScreen = () => {
         alignment="left"
         leftButton={<BackButton />}
       />
-      <FlatList
-        refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={refresh} />
-        }
-        style={styles.list}
-        data={cards}
-        keyExtractor={(card) => card.id.toString()}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item: card }) => (
-          <VolvoCard
-            card={card}
-            onPress={() =>
-              navigation.navigate(routes.TRANSFER_FORM_SCREEN, {
-                card,
-                contact: (params as any).contact,
-              })
-            }
-          />
-        )}
-        ListHeaderComponent={() => <Spacing size={unit(30)} />}
-        ItemSeparatorComponent={Divider}
-      />
+      <View>
+        <FlatList
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={refresh} />
+          }
+          style={styles.list}
+          data={cards}
+          keyExtractor={(card) => card.id.toString()}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item: card }) => (
+            <VolvoCard
+              card={card}
+              onPress={() =>
+                navigation.navigate(routes.TRANSFER_FORM_SCREEN, {
+                  card,
+                  contact: (params as any).contact,
+                })
+              }
+            />
+          )}
+          ListHeaderComponent={() => (
+            <View>
+              <Spacing size={unit(30)} />
+              <View style={styles.fullDivider} />
+            </View>
+          )}
+          ListFooterComponent={() => <View style={styles.fullDivider} />}
+          ItemSeparatorComponent={() => <View style={styles.divider} />}
+        />
+      </View>
     </View>
   );
 };
@@ -71,8 +79,20 @@ const styles = StyleSheet.create({
     ...theme.background,
   },
   list: {
-    flex: 1,
-    marginHorizontal: unit(30),
+    borderLeftWidth: 5,
+    borderLeftColor: palette.ocean,
+  },
+  divider: {
+    height: 1,
+    width: '83%',
+    alignSelf: 'flex-end',
+    backgroundColor: palette.ocean,
+  },
+  fullDivider: {
+    height: 1,
+    alignSelf: 'flex-end',
+    width: '100%',
+    backgroundColor: palette.ocean,
   },
 });
 
