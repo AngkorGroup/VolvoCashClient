@@ -68,13 +68,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     paddingRight: 30,
-    // borderLeftWidth: 5,
-    // borderLeftColor: palette.ocean,
   },
   infoContainer: {
     justifyContent: 'space-between',
     width: width * 0.8,
-    // backgroundColor: 'blue',
     alignContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
