@@ -13,6 +13,7 @@ export interface ICharge {
   status: Status;
   chargeType: Type;
   cashier?: ICashier;
+  imageUrl?: string;
   createdAt: string;
 }
 
@@ -24,6 +25,7 @@ export class Charge {
   public operationCode: string;
   public status: Status;
   public chargeType: Type;
+  public imageUrl: string;
   public cashier?: Cashier;
   public createdAt: string;
 
@@ -35,6 +37,7 @@ export class Charge {
     this.description = json.description;
     this.operationCode = json.operationCode;
     this.createdAt = json.createdAt;
+    this.imageUrl = json.imageUrl || '';
     this.chargeType = json.chargeType;
     this.cashier = json.cashier ? new Cashier(json.cashier) : undefined;
   }
