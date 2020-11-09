@@ -20,10 +20,13 @@
 		2DCD954D1E0B4F2C00145EB5 /* VolvoCashClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* VolvoCashClientTests.m */; };
 		2F36DF4C4C664D49B584D390 /* VolvoNovum-SemiLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D405DFD99625461BA784561B /* VolvoNovum-SemiLightItalic.otf */; };
 		41F3FDB279D05A3BB31D0867 /* libPods-VolvoCashClient-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AEFF5C5033DFD3F57AA67BF /* libPods-VolvoCashClient-tvOSTests.a */; };
+		5F750C212558EE8600F4950B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F750C172558ED2000F4950B /* Social.framework */; };
+		5F750C222558EE9000F4950B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F750C192558ED2B00F4950B /* MessageUI.framework */; };
 		5F75449B2541448A00501BBA /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F75449A2541448A00501BBA /* main.jsbundle */; };
 		5FC91443254DCACC00B45A24 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 5FC91442254DCACC00B45A24 /* assets */; };
 		5FC91521255633AA00B45A24 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC91520255633AA00B45A24 /* NotificationService.swift */; };
 		5FC91525255633AA00B45A24 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5FC9151E255633AA00B45A24 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5FDDA84F2558EFAD005BB2A5 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FDDA84E2558EFAD005BB2A5 /* libRNShare.a */; };
 		61D30E4918B34D4D9EE2B0BD /* VolvoNovum-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 08470A348E6D41EF817F918E /* VolvoNovum-LightItalic.otf */; };
 		63935E8B4AB8B2DDFA51673E /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C8B0DA4FA1DF8BB30BD891 /* libPods-OneSignalNotificationServiceExtension.a */; };
 		76E75ADCCA1044E280F8F18D /* VolvoNovum-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 771F644D0C3C40C1AA11727F /* VolvoNovum-Italic.otf */; };
@@ -52,6 +55,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "VolvoCashClient-tvOS";
+		};
+		5F750C0E2558ECD100F4950B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F750C0A2558ECD100F4950B /* RNShare.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNShare;
 		};
 		5FC91523255633AA00B45A24 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -100,6 +110,9 @@
 		533E4578FFEF474A88D037F0 /* VolvoNovum-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-BoldItalic.otf"; path = "../src/assets/fonts/VolvoNovum-BoldItalic.otf"; sourceTree = "<group>"; };
 		594C487411184244A0353B9F /* VolvoNovum-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Regular.otf"; path = "../src/assets/fonts/VolvoNovum-Regular.otf"; sourceTree = "<group>"; };
 		597C1C302DB67DCA566412F8 /* libPods-VolvoCashClient-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VolvoCashClient-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F750C0A2558ECD100F4950B /* RNShare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
+		5F750C172558ED2000F4950B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		5F750C192558ED2B00F4950B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		5F75449A2541448A00501BBA /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		5F94E01B2556380900FFF1EB /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		5FC91442254DCACC00B45A24 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
@@ -107,6 +120,7 @@
 		5FC9151E255633AA00B45A24 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FC91520255633AA00B45A24 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5FC91522255633AA00B45A24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FDDA84E2558EFAD005BB2A5 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNShare.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		771F644D0C3C40C1AA11727F /* VolvoNovum-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "VolvoNovum-Italic.otf"; path = "../src/assets/fonts/VolvoNovum-Italic.otf"; sourceTree = "<group>"; };
 		7A6D451644B6613415AA998B /* Pods-VolvoCashClient-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolvoCashClient-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-VolvoCashClient-tvOS/Pods-VolvoCashClient-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = VolvoCashClient/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -139,6 +153,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FDDA84F2558EFAD005BB2A5 /* libRNShare.a in Frameworks */,
+				5F750C212558EE8600F4950B /* Social.framework in Frameworks */,
+				5F750C222558EE9000F4950B /* MessageUI.framework in Frameworks */,
 				998344E0194B4BA5184618F2 /* libPods-VolvoCashClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,6 +239,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5FDDA84E2558EFAD005BB2A5 /* libRNShare.a */,
+				5F750C192558ED2B00F4950B /* MessageUI.framework */,
+				5F750C172558ED2000F4950B /* Social.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				8BF503EA2C020F714C14AD83 /* libPods-VolvoCashClient.a */,
@@ -231,6 +251,14 @@
 				E1C8B0DA4FA1DF8BB30BD891 /* libPods-OneSignalNotificationServiceExtension.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5F750C0B2558ECD100F4950B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F750C0F2558ECD100F4950B /* libRNShare.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		5FC9151F255633AA00B45A24 /* OneSignalNotificationServiceExtension */ = {
@@ -246,6 +274,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				5F750C0A2558ECD100F4950B /* RNShare.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -447,6 +476,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5F750C0B2558ECD100F4950B /* Products */;
+					ProjectRef = 5F750C0A2558ECD100F4950B /* RNShare.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* VolvoCashClient */,
@@ -457,6 +492,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5F750C0F2558ECD100F4950B /* libRNShare.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNShare.a;
+			remoteRef = 5F750C0E2558ECD100F4950B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
