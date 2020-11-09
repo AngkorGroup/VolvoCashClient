@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import LoginNavigation from 'screens/auth/LoginNavigation';
 import MainNavigation from 'screens/main/MainNavigation';
 import * as routes from 'utils/routes';

@@ -12,7 +12,6 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import VolvoCard from 'components/card/VolvoCardItem';
 import { unit } from 'utils/responsive';
-import Divider from 'components/layout/Divider';
 import Spacing from 'components/layout/Spacing';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as routes from 'utils/routes';

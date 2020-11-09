@@ -1,7 +1,6 @@
 import VolvoCard from 'components/card/VolvoCardItem';
 import ExitButton from 'components/header/ExitButton';
 import Header from 'components/header/Header';
-import Spacing from 'components/layout/Spacing';
 import React, { useCallback, useEffect } from 'react';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
