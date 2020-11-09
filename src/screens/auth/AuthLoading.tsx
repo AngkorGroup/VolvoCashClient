@@ -24,6 +24,7 @@ const AuthLoading = () => {
 
   useEffect(() => {
     OneSignal.init(PUSH_TOKEN);
+    console.log('PUSH_TOKEN: ', PUSH_TOKEN);
     OneSignal.addEventListener('received', onReceived);
     OneSignal.addEventListener('opened', onOpened);
     OneSignal.addEventListener('ids', onIds);
@@ -36,19 +37,20 @@ const AuthLoading = () => {
   }, []);
 
   function onOpened(notification: any) {
-    const push = notification.payload.additionalData;
+    const push = notification.payload?.additionalData;
     // TODO: redirect to confirmation screen
-    console.log(push);
+    console.log('onOpened', push);
   }
 
   function onIds(device: any) {
+    console.log('device.userId: ', device.userId);
     dispatch(setPushToken(device.userId));
   }
 
   function onReceived(notification: any) {
-    const push = notification.payload.additionalData;
-    if (push) {
-      dispatch(setChargeId(push.chargeId));
+    const { chargeId } = notification?.payload?.additionalData;
+    if (chargeId) {
+      dispatch(setChargeId(chargeId));
       navigate(routes.CONFIRMATION_MODAL);
     }
   }
@@ -65,22 +67,22 @@ const AuthLoading = () => {
           component={LoginNavigation}
         />
       ) : (
-          <>
-            <RootStack.Screen name={routes.APP_TAB} component={MainNavigation} />
-            <RootStack.Screen
-              name={routes.CONFIRMATION_MODAL}
-              component={ConfirmationModal}
-            />
-            <RootStack.Screen
-              name={routes.SUCCESS_MODAL}
-              component={SuccessModal}
-            />
-            <RootStack.Screen
-              name={routes.TRANSFER_SUCCESS_MODAL}
-              component={TransferSuccessModal}
-            />
-          </>
-        )}
+        <>
+          <RootStack.Screen name={routes.APP_TAB} component={MainNavigation} />
+          <RootStack.Screen
+            name={routes.CONFIRMATION_MODAL}
+            component={ConfirmationModal}
+          />
+          <RootStack.Screen
+            name={routes.SUCCESS_MODAL}
+            component={SuccessModal}
+          />
+          <RootStack.Screen
+            name={routes.TRANSFER_SUCCESS_MODAL}
+            component={TransferSuccessModal}
+          />
+        </>
+      )}
     </RootStack.Navigator>
   );
 };
