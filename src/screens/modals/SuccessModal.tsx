@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CloseButton from 'components/header/CloseButton';
 import Header from 'components/header/Header';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, ActivityIndicator } from 'react-native';
 import { theme } from 'utils/styles';
 import { unit } from 'utils/responsive';
 import Button from 'components/button/Button';
@@ -12,11 +12,10 @@ import { useSelector } from 'react-redux';
 import Share from 'react-native-share';
 import RNFetchBlob from 'rn-fetch-blob';
 import { selectCharge } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
-import { navigate } from 'utils/navigation';
 
 const SuccessModal = () => {
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const charge = useSelector(selectCharge);
 
   const handleSharePress = async (imageUrl: string) => {
@@ -54,6 +53,9 @@ const SuccessModal = () => {
         alignment="center"
         rightButton={<CloseButton />}
       />
+      {loading && (
+        <ActivityIndicator animating={true} color={theme.secondary.color} />
+      )}
       {charge && (
         <View style={styles.card}>
           <InfoRow label="Operación" value={charge.operationCode || '-'} />
