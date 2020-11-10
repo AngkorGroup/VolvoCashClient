@@ -46,26 +46,25 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
           <Text style={styles.money}>{charge.amount.toString()}</Text>
         </View>
       </View>
-      <View style={styles.bottomContainer}>
-        <View style={styles.subtitleContainer}>
-          <Text style={styles.subtitle}>{formatDate(charge.createdAt)}</Text>
-          <Text style={styles.subtitle}>{charge.cashier?.fullName}</Text>
-        </View>
-        <View style={styles.buttonsContainer}>
-          <Button
-            title="Confirmar"
-            small
-            onPress={() => setOption('confirmar')}
-          />
-          <Spacing size={10} />
-          <Button
-            title="Rechazar"
-            small
-            danger
-            onPress={() => setOption('rechazar')}
-          />
-        </View>
+      <View style={styles.subtitleContainer}>
+        <Text style={styles.subtitle}>{formatDate(charge.createdAt)}</Text>
+        <Text style={styles.subtitle}>{charge.cashier?.fullName}</Text>
       </View>
+      <View style={styles.buttonsContainer}>
+        <Button
+          title="Confirmar"
+          small
+          onPress={() => setOption('confirmar')}
+        />
+        <Spacing size={10} />
+        <Button
+          title="Rechazar"
+          small
+          danger
+          onPress={() => setOption('rechazar')}
+        />
+      </View>
+
       <Alert
         visible={!!option}
         title={`¿Está seguro que desea ${option}?`}
@@ -84,9 +83,6 @@ const styles = StyleSheet.create({
     padding: unit(15),
   },
   topContainer: {
-    flexDirection: 'row',
-  },
-  bottomContainer: {
     flexDirection: 'row',
   },
   titleContainer: {
