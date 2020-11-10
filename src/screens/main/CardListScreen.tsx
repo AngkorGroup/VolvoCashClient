@@ -1,7 +1,6 @@
-import VolvoCard from 'components/card/VolvoCard';
+import VolvoCard from 'components/card/VolvoCardItem';
 import ExitButton from 'components/header/ExitButton';
 import Header from 'components/header/Header';
-import Spacing from 'components/layout/Spacing';
 import React, { useCallback, useEffect } from 'react';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +13,7 @@ import {
   goToCardDetail,
 } from 'utils/redux/ui/card-list-screen/card-list-screen-actions';
 import { unit } from 'utils/responsive';
-import { theme } from 'utils/styles';
+import { theme, palette } from 'utils/styles';
 
 const SECTION_NAME_MAP: { [key: string]: string } = {
   Primary: 'Principales',
@@ -41,26 +40,31 @@ const CardListScreen = () => {
         alignment="center"
         rightButton={<ExitButton />}
       />
-      <SectionList
-        refreshing={loading}
-        onRefresh={refresh}
-        stickySectionHeadersEnabled={false}
-        style={styles.list}
-        sections={sections}
-        keyExtractor={({ id }) => id.toString()}
-        renderItem={({ item: card }) => (
-          <VolvoCard
-            card={card}
-            onPress={() => dispatch(goToCardDetail(card))}
-          />
-        )}
-        showsVerticalScrollIndicator={false}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.header}>{SECTION_NAME_MAP[title]}</Text>
-        )}
-        ItemSeparatorComponent={() => <Spacing size={unit(15)} />}
-        renderSectionFooter={() => <Spacing size={unit(20)} />}
-      />
+      <View>
+        <SectionList
+          refreshing={loading}
+          onRefresh={refresh}
+          stickySectionHeadersEnabled={false}
+          style={styles.list}
+          sections={sections}
+          keyExtractor={({ id }) => id.toString()}
+          renderItem={({ item: card }) => (
+            <VolvoCard
+              card={card}
+              onPress={() => dispatch(goToCardDetail(card))}
+            />
+          )}
+          showsVerticalScrollIndicator={false}
+          renderSectionHeader={({ section: { title } }) => (
+            <View>
+              <Text style={styles.header}>{SECTION_NAME_MAP[title]}</Text>
+              <View style={styles.fullDivider} />
+            </View>
+          )}
+          ItemSeparatorComponent={() => <View style={styles.divider} />}
+          renderSectionFooter={() => <View style={styles.fullDivider} />}
+        />
+      </View>
     </View>
   );
 };
@@ -71,14 +75,27 @@ const styles = StyleSheet.create({
     ...theme.background,
   },
   list: {
-    flex: 1,
-    marginHorizontal: unit(30),
+    borderLeftWidth: 5,
+    borderLeftColor: palette.ocean,
   },
   header: {
     ...theme.primary,
     ...theme.medium,
     fontFamily: 'VolvoNovum-Regular',
     marginVertical: unit(10),
+    marginLeft: unit(10),
+  },
+  divider: {
+    height: 1,
+    width: '83%',
+    alignSelf: 'flex-end',
+    backgroundColor: palette.ocean,
+  },
+  fullDivider: {
+    height: 1,
+    alignSelf: 'flex-end',
+    width: '100%',
+    backgroundColor: palette.ocean,
   },
 });
 

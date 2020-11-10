@@ -42,6 +42,8 @@ const TransferFormScreen = () => {
         amount: {
           currency: card.balance.currency,
           value: form.amount,
+          label: card.calculatedBalance.label,
+          currencyLabel: card.calculatedBalance.currencyLabel,
         },
         originCardId: card.id,
         contactId: contact.id,

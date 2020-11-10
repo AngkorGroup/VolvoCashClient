@@ -97,7 +97,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  label: { fontFamily: 'VolvoBroadProDigital', fontSize: unit(16) },
+  label: {
+    fontFamily: 'VolvoBroadProDigital',
+    fontSize: unit(16),
+  },
   tab: {
     alignItems: 'center',
     justifyContent: 'center',

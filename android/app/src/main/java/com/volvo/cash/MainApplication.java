@@ -8,10 +8,11 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
+import cl.json.ShareApplication;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends Application implements ShareApplication, ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -38,6 +39,11 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
+  }
+
+  @Override
+  public String getFileProviderAuthority() {
+    return BuildConfig.APPLICATION_ID + ".provider";
   }
 
   @Override

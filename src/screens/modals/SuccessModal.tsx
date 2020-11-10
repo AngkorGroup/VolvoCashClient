@@ -1,24 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CloseButton from 'components/header/CloseButton';
 import Header from 'components/header/Header';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Alert, ActivityIndicator } from 'react-native';
 import { theme } from 'utils/styles';
 import { unit } from 'utils/responsive';
 import Button from 'components/button/Button';
-import Share from 'components/button/Share';
+import ShareButton from 'components/button/Share';
 import InfoRow from 'components/card/InfoRow';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import Share from 'react-native-share';
+import RNFetchBlob from 'rn-fetch-blob';
 import { selectCharge } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
 
 const SuccessModal = () => {
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
   const charge = useSelector(selectCharge);
 
-  const handleSharePress = () => {
-    //FIXME: this should open OS share thing
-    navigation.goBack();
+  const handleSharePress = async (imageUrl: string) => {
+    setLoading(true);
+    RNFetchBlob.fetch('GET', imageUrl, {
+      'Content-Type': 'multipart/form-data',
+    })
+      .then((res) => {
+        setLoading(false);
+        const status = res.info().status;
+        if (status === 200) {
+          Share.open({
+            url: `data:image/jpeg;base64,${res.base64()}`,
+          }).catch(() => {
+            return Alert.alert(
+              'Error',
+              'Hubo un problema al momento de compartir el comprobante.',
+            );
+          });
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+        return Alert.alert(
+          'Error',
+          'Hubo un problema al momento de compartir el comprobante.',
+        );
+      });
   };
+
   return (
     <View style={styles.container}>
       <Header
@@ -26,6 +53,9 @@ const SuccessModal = () => {
         alignment="center"
         rightButton={<CloseButton />}
       />
+      {loading && (
+        <ActivityIndicator animating={true} color={theme.secondary.color} />
+      )}
       {charge && (
         <View style={styles.card}>
           <InfoRow label="Operación" value={charge.operationCode || '-'} />
@@ -33,7 +63,7 @@ const SuccessModal = () => {
           <InfoRow label="Concepto" value={charge.description} />
           <InfoRow label="Vendedor" value={charge.cashier?.fullName || ''} />
           <View style={styles.shareContainer}>
-            <Share onPress={handleSharePress} />
+            <ShareButton onPress={() => handleSharePress(charge.imageUrl)} />
           </View>
           <View style={styles.buttonsContainer}>
             <Button
