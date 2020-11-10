@@ -48,7 +48,8 @@ const AuthLoading = () => {
   }
 
   function onReceived(notification: any) {
-    const { chargeId } = notification?.payload?.additionalData;
+    console.log('notification: ', notification);
+    const { chargeId } = notification?.payload?.additionalData || {};
     if (chargeId) {
       dispatch(setChargeId(chargeId));
       navigate(routes.CONFIRMATION_MODAL);
