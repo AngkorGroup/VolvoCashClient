@@ -10,7 +10,7 @@ import qrSaga from './qr-saga';
 import contactFormSaga from './contact-form-saga';
 import transfersSaga from './transfers-saga';
 
-function* logger(action: any) {
+function logger(action: any) {
   if (LOG_REDUX_ACTIONS === 'true' && __DEV__) {
     console.log('-----');
     console.log('type:   ', action.type);

@@ -1,5 +1,6 @@
+import { Alert } from 'react-native';
 import { put, take, takeEvery } from 'redux-saga/effects';
-import { goBack, replace } from 'utils/navigation';
+import { goBack, navigate } from 'utils/navigation';
 import {
   CONFIRM_CHARGE_ERROR,
   CONFIRM_CHARGE_SAGA,
@@ -8,8 +9,10 @@ import {
 import {
   confirmChargeCall,
   ConfirmChargeSaga,
+  ConfirmChargeSuccess,
 } from 'utils/redux/services/charge-detail-actions';
 import { getChargeListCall } from 'utils/redux/services/charge-list-actions';
+import { getCardListCall } from 'utils/redux/ui/card-list-screen/card-list-screen-actions';
 import * as routes from 'utils/routes';
 
 function* onConfirmChargeSaga(action: ConfirmChargeSaga) {
@@ -17,11 +20,19 @@ function* onConfirmChargeSaga(action: ConfirmChargeSaga) {
     confirmChargeCall(action.payload.chargeId, action.payload.confirmed),
   );
   yield take([CONFIRM_CHARGE_SUCCESS, CONFIRM_CHARGE_ERROR]);
+
   yield put(getChargeListCall());
+  yield put(getCardListCall());
 }
 
-function onConfirmChargeSuccess() {
-  replace(routes.SUCCESS_MODAL);
+function onConfirmChargeSuccess(action: ConfirmChargeSuccess) {
+  if (action.payload.status === 'Accepted') {
+    navigate(routes.SUCCESS_MODAL);
+  }
+
+  if (action.payload.status === 'Rejected') {
+    Alert.alert('Se rechazó el cobro');
+  }
 }
 
 function onConfirmChargeError() {
