@@ -16,6 +16,7 @@ const width = Dimensions.get('window').width;
 interface VolvoCardProps {
   card: Card;
   onPress(): void;
+  type?: string;
 }
 
 export const getCurrency = (val: string) => {
@@ -26,7 +27,11 @@ export const getCurrency = (val: string) => {
   }
 };
 
-const VolvoCardItem: React.FC<VolvoCardProps> = ({ card, onPress }) => {
+const VolvoCardItem: React.FC<VolvoCardProps> = ({
+  card,
+  onPress,
+  type = '',
+}) => {
   const bgColor = {
     color: card.color,
   };
@@ -47,7 +52,10 @@ const VolvoCardItem: React.FC<VolvoCardProps> = ({ card, onPress }) => {
           <Text ellipsizeMode={'tail'} numberOfLines={1} style={styles.title}>
             {card.calculatedBalance.label}
           </Text>
-          <Text style={styles.info}>Saldo disponible</Text>
+          <Text style={styles.info}>
+            Saldo disponible{' '}
+            {type === 'Secondary' && ` - ${card.contact?.fullName}`}
+          </Text>
         </View>
         <Icon
           style={styles.arrow}

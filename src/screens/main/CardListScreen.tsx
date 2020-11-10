@@ -22,7 +22,8 @@ const SECTION_NAME_MAP: { [key: string]: string } = {
 
 const CardListScreen = () => {
   const loading = useSelector(selectLoading);
-  const sections = useSelector(selectSections);
+  let sections = useSelector(selectSections);
+
   const dispatch = useDispatch();
 
   const refresh = useCallback(() => {
@@ -40,31 +41,31 @@ const CardListScreen = () => {
         alignment="center"
         rightButton={<ExitButton />}
       />
-      <View>
-        <SectionList
-          refreshing={loading}
-          onRefresh={refresh}
-          stickySectionHeadersEnabled={false}
-          style={styles.list}
-          sections={sections}
-          keyExtractor={({ id }) => id.toString()}
-          renderItem={({ item: card }) => (
-            <VolvoCard
-              card={card}
-              onPress={() => dispatch(goToCardDetail(card))}
-            />
-          )}
-          showsVerticalScrollIndicator={false}
-          renderSectionHeader={({ section: { title } }) => (
-            <View>
-              <Text style={styles.header}>{SECTION_NAME_MAP[title]}</Text>
-              <View style={styles.fullDivider} />
-            </View>
-          )}
-          ItemSeparatorComponent={() => <View style={styles.divider} />}
-          renderSectionFooter={() => <View style={styles.fullDivider} />}
-        />
-      </View>
+      <SectionList
+        refreshing={loading}
+        onRefresh={refresh}
+        contentInsetAdjustmentBehavior="always"
+        stickySectionHeadersEnabled={false}
+        style={styles.list}
+        sections={sections}
+        keyExtractor={({ id }) => id.toString()}
+        renderItem={(section) => (
+          <VolvoCard
+            card={section.item}
+            type={section.section.title}
+            onPress={() => dispatch(goToCardDetail(section.item))}
+          />
+        )}
+        showsVerticalScrollIndicator={false}
+        renderSectionHeader={({ section: { title } }) => (
+          <View>
+            <Text style={styles.header}>{SECTION_NAME_MAP[title]}</Text>
+            <View style={styles.fullDivider} />
+          </View>
+        )}
+        ItemSeparatorComponent={() => <View style={styles.divider} />}
+        renderSectionFooter={() => <View style={styles.fullDivider} />}
+      />
     </View>
   );
 };
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
   },
   list: {
     borderLeftWidth: 5,
+    flex: 2,
     borderLeftColor: palette.ocean,
   },
   header: {
