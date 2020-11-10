@@ -9,7 +9,7 @@ export interface IMovement {
   amount: IMoney;
   currency: Currency;
   type: MovementType;
-  date: string;
+  createdAt: string;
 }
 
 export class Movement {
@@ -18,7 +18,7 @@ export class Movement {
   public description: string;
   public amount: Money;
   public type: MovementType;
-  public date: string;
+  public createdAt: string;
   public currency: Currency;
 
   constructor(json: IMovement) {
@@ -27,7 +27,7 @@ export class Movement {
     this.description = json.description;
     this.amount = new Money(json.amount);
     this.type = json.type;
-    this.date = json.date;
+    this.createdAt = json.createdAt;
     this.currency = json.currency;
   }
 }

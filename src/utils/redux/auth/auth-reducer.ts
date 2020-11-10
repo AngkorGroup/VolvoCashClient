@@ -1,8 +1,8 @@
 import { Contact, IContact } from 'models/Contact';
 import { Action } from 'redux';
 import {
-  LogOut,
-  LOG_OUT,
+  LogOutCall,
+  LOG_OUT_CALL,
   SET_PHONE,
   SET_PUSH_TOKEN,
   VERIFY_CODE_SUCCESS,
@@ -29,6 +29,9 @@ const initialState: AuthState = {
 export const selectAuthToken = (state: RootState) =>
   selectAuth(state).authToken;
 
+export const selectPushToken = (state: RootState) =>
+  selectAuth(state).pushToken || '';
+
 export const selectPhone = (state: RootState) => selectAuth(state).phone;
 
 export const selectContact = (state: RootState) => {
@@ -54,7 +57,7 @@ export function setPushToken(pushToken: string): SetPushToken {
   };
 }
 
-type AuthAction = VerifyCodeSuccess | SetPhone | LogOut;
+type AuthAction = VerifyCodeSuccess | SetPhone | LogOutCall | SetPushToken;
 
 export default function (
   state: AuthState = initialState, // NOSONAR
@@ -72,7 +75,12 @@ export default function (
         ...state,
         phone: action.payload.phone,
       };
-    case LOG_OUT:
+    case SET_PUSH_TOKEN:
+      return {
+        ...state,
+        pushToken: action.payload.pushToken,
+      };
+    case LOG_OUT_CALL:
       return {
         ...state,
         ...initialState,

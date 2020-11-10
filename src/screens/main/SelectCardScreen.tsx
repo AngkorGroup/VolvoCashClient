@@ -38,36 +38,34 @@ const SelectCardScreen = () => {
         alignment="left"
         leftButton={<BackButton />}
       />
-      <View>
-        <FlatList
-          refreshControl={
-            <RefreshControl refreshing={loading} onRefresh={refresh} />
-          }
-          style={styles.list}
-          data={cards}
-          keyExtractor={(card) => card.id.toString()}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item: card }) => (
-            <VolvoCard
-              card={card}
-              onPress={() =>
-                navigation.navigate(routes.TRANSFER_FORM_SCREEN, {
-                  card,
-                  contact: (params as any).contact,
-                })
-              }
-            />
-          )}
-          ListHeaderComponent={() => (
-            <View>
-              <Spacing size={unit(30)} />
-              <View style={styles.fullDivider} />
-            </View>
-          )}
-          ListFooterComponent={() => <View style={styles.fullDivider} />}
-          ItemSeparatorComponent={() => <View style={styles.divider} />}
-        />
-      </View>
+      <FlatList
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={refresh} />
+        }
+        style={styles.list}
+        data={cards}
+        keyExtractor={(card) => card.id.toString()}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item: card }) => (
+          <VolvoCard
+            card={card}
+            onPress={() =>
+              navigation.navigate(routes.TRANSFER_FORM_SCREEN, {
+                card,
+                contact: (params as any).contact,
+              })
+            }
+          />
+        )}
+        ListHeaderComponent={() => (
+          <View>
+            <Spacing size={unit(30)} />
+            <View style={styles.fullDivider} />
+          </View>
+        )}
+        ListFooterComponent={() => <View style={styles.fullDivider} />}
+        ItemSeparatorComponent={() => <View style={styles.divider} />}
+      />
     </View>
   );
 };
@@ -78,6 +76,7 @@ const styles = StyleSheet.create({
     ...theme.background,
   },
   list: {
+    flex: 2,
     borderLeftWidth: 5,
     borderLeftColor: palette.ocean,
   },

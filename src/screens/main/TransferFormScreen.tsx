@@ -88,7 +88,7 @@ const TransferFormScreen = () => {
               placeholder="Monto"
               innerLabel={CURRENCY_SYMBOL_MAP[card.cardType?.currency || 'USD']}
               containerStyle={styles.input}
-              keyboardType="number-pad"
+              keyboardType="numeric"
             />
           )}
         />

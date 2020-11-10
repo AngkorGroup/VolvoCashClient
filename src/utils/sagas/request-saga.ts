@@ -4,6 +4,7 @@ import { developmentApi } from 'utils/api';
 import Api, { apiMethod, apiNames } from 'utils/api';
 import { ErrorAction, logOut } from 'utils/redux/actions';
 import { selectAuthToken } from 'utils/redux/auth/auth-reducer';
+import { Alert } from 'react-native';
 
 enum StatusCode {
   Unauthorized = 401,
@@ -68,6 +69,11 @@ function* requestSaga(action: RequestAction) {
         duration,
       }),
     );
+
+    if (responseData?.errorMessage) {
+      Alert.alert('Error', responseData?.errorMessage);
+    }
+
     return;
   }
 

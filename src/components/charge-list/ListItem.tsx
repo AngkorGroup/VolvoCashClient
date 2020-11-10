@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import Alert from 'components/alert/Alert';
 import Button from 'components/button/Button';
 import Spacing from 'components/layout/Spacing';
@@ -8,7 +7,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { formatDate } from 'utils/moment';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
-import * as routes from 'utils/routes';
 import { useDispatch } from 'react-redux';
 import { confirmChargeSaga } from 'utils/redux/services/charge-detail-actions';
 
@@ -20,7 +18,6 @@ type Option = 'confirmar' | 'rechazar' | '';
 
 const ListItem: React.FC<ListItemProps> = ({ charge }) => {
   const [option, setOption] = useState<Option>('');
-  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const handleCancel = () => {
@@ -31,9 +28,6 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
     setOption('');
     const confirmed = option === 'confirmar';
     dispatch(confirmChargeSaga(charge.id, confirmed));
-    if (confirmed) {
-      navigation.navigate(routes.SUCCESS_MODAL);
-    }
   };
 
   return (
@@ -46,26 +40,25 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
           <Text style={styles.money}>{charge.amount.toString()}</Text>
         </View>
       </View>
-      <View style={styles.bottomContainer}>
-        <View style={styles.subtitleContainer}>
-          <Text style={styles.subtitle}>{formatDate(charge.createdAt)}</Text>
-          <Text style={styles.subtitle}>{charge.cashier?.fullName}</Text>
-        </View>
-        <View style={styles.buttonsContainer}>
-          <Button
-            title="Confirmar"
-            small
-            onPress={() => setOption('confirmar')}
-          />
-          <Spacing size={10} />
-          <Button
-            title="Rechazar"
-            small
-            danger
-            onPress={() => setOption('rechazar')}
-          />
-        </View>
+      <View style={styles.subtitleContainer}>
+        <Text style={styles.subtitle}>{formatDate(charge.createdAt)}</Text>
+        <Text style={styles.subtitle}>{charge.cashier?.fullName}</Text>
       </View>
+      <View style={styles.buttonsContainer}>
+        <Button
+          title="Confirmar"
+          small
+          onPress={() => setOption('confirmar')}
+        />
+        <Spacing size={10} />
+        <Button
+          title="Rechazar"
+          small
+          danger
+          onPress={() => setOption('rechazar')}
+        />
+      </View>
+
       <Alert
         visible={!!option}
         title={`¿Está seguro que desea ${option}?`}
@@ -84,9 +77,6 @@ const styles = StyleSheet.create({
     padding: unit(15),
   },
   topContainer: {
-    flexDirection: 'row',
-  },
-  bottomContainer: {
     flexDirection: 'row',
   },
   titleContainer: {

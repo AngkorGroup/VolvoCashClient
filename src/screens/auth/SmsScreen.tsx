@@ -13,7 +13,7 @@ import {
   selectError,
 } from 'utils/redux/ui/sms-screen/sms-screen-reducer';
 import { verifyCodeCall } from 'utils/redux/ui/sms-screen/sms-screen-actions';
-import { selectPhone } from 'utils/redux/auth/auth-reducer';
+import { selectPhone, selectPushToken } from 'utils/redux/auth/auth-reducer';
 import { SMS_CODE_LENGTH } from 'utils/constants';
 import { dismissError } from 'utils/redux/actions';
 
@@ -22,6 +22,7 @@ const SmsScreen = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const phone = useSelector(selectPhone);
+  const deviceToken = useSelector(selectPushToken);
 
   const handleTextChange = (text: string) => {
     if (text.length === SMS_CODE_LENGTH) {
@@ -29,7 +30,7 @@ const SmsScreen = () => {
         verifyCodeCall({
           code: text,
           phone,
-          deviceToken: 'token', // FIXME: send real device token
+          deviceToken,
           devicePlatform: Platform.OS,
         }),
       );
