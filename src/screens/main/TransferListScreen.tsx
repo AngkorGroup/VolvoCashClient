@@ -95,6 +95,7 @@ const TransferListScreen = () => {
                 navigation.navigate(routes.SELECT_CARD_SCREEN, { contact })
               }>
               <Text style={styles.itemLabel}>{contact.fullName}</Text>
+              <Text style={styles.phoneLabel}>{contact.phone}</Text>
             </TouchableOpacity>
           )}
           ItemSeparatorComponent={Divider}
@@ -119,7 +120,12 @@ const styles = StyleSheet.create({
   itemLabel: {
     ...theme.small,
     ...theme.primary,
-    marginVertical: unit(5),
+    marginTop: unit(5),
+  },
+  phoneLabel: {
+    ...theme.small,
+    ...theme.secondary,
+    marginBottom: unit(5),
   },
   listContainer: {
     flex: 1,
