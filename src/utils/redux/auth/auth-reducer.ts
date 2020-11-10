@@ -29,6 +29,9 @@ const initialState: AuthState = {
 export const selectAuthToken = (state: RootState) =>
   selectAuth(state).authToken;
 
+export const selectPushToken = (state: RootState) =>
+  selectAuth(state).pushToken || '';
+
 export const selectPhone = (state: RootState) => selectAuth(state).phone;
 
 export const selectContact = (state: RootState) => {
@@ -54,7 +57,7 @@ export function setPushToken(pushToken: string): SetPushToken {
   };
 }
 
-type AuthAction = VerifyCodeSuccess | SetPhone | LogOut;
+type AuthAction = VerifyCodeSuccess | SetPhone | LogOut | SetPushToken;
 
 export default function (
   state: AuthState = initialState, // NOSONAR
@@ -71,6 +74,11 @@ export default function (
       return {
         ...state,
         phone: action.payload.phone,
+      };
+    case SET_PUSH_TOKEN:
+      return {
+        ...state,
+        pushToken: action.payload.pushToken,
       };
     case LOG_OUT:
       return {
