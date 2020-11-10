@@ -1,4 +1,5 @@
 import { Action } from 'redux';
+import { RequestAction } from 'utils/sagas/request-saga';
 
 export const REQUEST_CODE_CALL = 'REQUEST_CODE_CALL';
 export const REQUEST_CODE_SUCCESS = 'REQUEST_CODE_SUCCESS';
@@ -52,14 +53,16 @@ export const CLOSE_CONFIRMATION_MODAL = 'CLOSE_CONFIRMATION_MODAL';
 
 export const DISMISS_ALERT = 'DISMISS_ALERT';
 
-export const LOG_OUT = 'LOG_OUT';
+export const LOG_OUT_CALL = 'LOG_OUT_CALL';
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
+export const LOG_OUT_ERROR = 'LOG_OUT_ERROR';
 
 export interface DismissError extends Action {
   type: typeof DISMISS_ALERT;
 }
 
-export interface LogOut extends Action {
-  type: typeof LOG_OUT;
+export interface LogOutCall extends RequestAction {
+  type: typeof LOG_OUT_CALL;
 }
 
 export interface ErrorAction extends Action {
@@ -77,8 +80,12 @@ export function dismissError(): DismissError {
   };
 }
 
-export function logOut(): LogOut {
+export function logOut(): LogOutCall {
   return {
-    type: LOG_OUT,
+    type: LOG_OUT_CALL,
+    payload: {
+      url: '/logout',
+      method: 'delete',
+    },
   };
 }

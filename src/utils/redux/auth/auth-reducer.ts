@@ -1,8 +1,8 @@
 import { Contact, IContact } from 'models/Contact';
 import { Action } from 'redux';
 import {
-  LogOut,
-  LOG_OUT,
+  LogOutCall,
+  LOG_OUT_CALL,
   SET_PHONE,
   SET_PUSH_TOKEN,
   VERIFY_CODE_SUCCESS,
@@ -57,7 +57,7 @@ export function setPushToken(pushToken: string): SetPushToken {
   };
 }
 
-type AuthAction = VerifyCodeSuccess | SetPhone | LogOut | SetPushToken;
+type AuthAction = VerifyCodeSuccess | SetPhone | LogOutCall | SetPushToken;
 
 export default function (
   state: AuthState = initialState, // NOSONAR
@@ -80,7 +80,7 @@ export default function (
         ...state,
         pushToken: action.payload.pushToken,
       };
-    case LOG_OUT:
+    case LOG_OUT_CALL:
       return {
         ...state,
         ...initialState,
