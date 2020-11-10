@@ -16,7 +16,6 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
-import { formatDate } from 'utils/moment';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCard,
@@ -107,7 +106,7 @@ const Movements = () => {
       movements.filter(
         (movement) =>
           movement.displayName.includes(text) ||
-          formatDate(movement.date).includes(text) ||
+          movement.createdAt.includes(text) ||
           movement.amount.toString().includes(text),
       ),
     );
@@ -136,7 +135,7 @@ const Movements = () => {
         renderItem={({ item: movement }) => (
           <ListItem
             title={movement.displayName}
-            subtitle={formatDate(movement.date)}
+            subtitle={movement.createdAt}
             value={movement.amount.toString()}
             mode={movement.amount.value >= 0 ? 'positive' : 'negative'}
           />
@@ -174,7 +173,7 @@ const Batches = () => {
     setFilteredBatches(
       batches.filter(
         (batch: Batch) =>
-          formatDate(batch.expiresAt).includes(text) ||
+          batch.expiresAt.includes(text) ||
           batch.balance.toString().includes(text),
       ),
     );
@@ -199,7 +198,7 @@ const Batches = () => {
         renderItem={({ item: batch }) => (
           <ListItem
             title="Recarga"
-            subtitle={formatDate(batch.expiresAt)}
+            subtitle={batch.expiresAt}
             value={batch.balance.toString()}
             mode={
               new Date(batch.expiresAt) > new Date() ? 'positive' : 'negative'
