@@ -41,7 +41,7 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
         </View>
       </View>
       <View style={styles.subtitleContainer}>
-        <Text style={styles.subtitle}>{formatDate(charge.createdAt)}</Text>
+        <Text style={styles.subtitle}>{charge.createdAt}</Text>
         <Text style={styles.subtitle}>{charge.cashier?.fullName}</Text>
       </View>
       <View style={styles.buttonsContainer}>
