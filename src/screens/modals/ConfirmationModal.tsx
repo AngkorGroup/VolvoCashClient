@@ -53,29 +53,35 @@ const ConfirmationModal = () => {
           <InfoRow label="Monto" value={charge.amount.toString()} />
           <InfoRow label="Concepto" value={charge.description} />
           <InfoRow label="Vendedor" value={charge.cashier?.fullName || ''} />
-          <View style={styles.buttonsContainer}>
-            <Button
-              loading={loading || confirmLoading}
-              title="Rechazar"
-              danger
-              style={styles.button}
-              onPress={() => {
-                if (chargeId) {
-                  dispatch(confirmChargeCall(chargeId, false));
-                }
-              }}
-            />
-            <Button
-              loading={loading || confirmLoading}
-              title="Confirmar"
-              style={styles.button}
-              onPress={() => {
-                if (chargeId) {
-                  dispatch(confirmChargeCall(chargeId, true));
-                }
-              }}
-            />
-          </View>
+          {loading || confirmLoading ? (
+            <ActivityIndicator animating={true} color={theme.secondary.color} />
+          ) : (
+            <View style={styles.buttonsContainer}>
+              <Button
+                title="Rechazar"
+                danger
+                style={styles.button}
+                onPress={() => {
+                  if (chargeId) {
+                    dispatch(
+                      confirmChargeCall(chargeId, false, { replace: true }),
+                    );
+                  }
+                }}
+              />
+              <Button
+                title="Confirmar"
+                style={styles.button}
+                onPress={() => {
+                  if (chargeId) {
+                    dispatch(
+                      confirmChargeCall(chargeId, true, { replace: true }),
+                    );
+                  }
+                }}
+              />
+            </View>
+          )}
         </View>
       )}
     </View>

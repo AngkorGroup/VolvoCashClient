@@ -1,8 +1,7 @@
 import { Alert } from 'react-native';
-import { put, take, takeEvery } from 'redux-saga/effects';
-import { goBack, navigate } from 'utils/navigation';
+import { put, takeEvery } from 'redux-saga/effects';
+import { navigate, replace } from 'utils/navigation';
 import {
-  CONFIRM_CHARGE_ERROR,
   CONFIRM_CHARGE_SAGA,
   CONFIRM_CHARGE_SUCCESS,
 } from 'utils/redux/actions';
@@ -19,30 +18,30 @@ import * as routes from 'utils/routes';
 function* onConfirmChargeSaga(action: ConfirmChargeSaga) {
   yield put(setChargeId(action.payload.chargeId));
   yield put(
-    confirmChargeCall(action.payload.chargeId, action.payload.confirmed),
+    confirmChargeCall(action.payload.chargeId, action.payload.confirmed, {
+      replace: false,
+    }),
   );
-  yield take([CONFIRM_CHARGE_SUCCESS, CONFIRM_CHARGE_ERROR]);
-
-  yield put(getChargeListCall());
-  yield put(getCardListCall());
 }
 
-function onConfirmChargeSuccess(action: ConfirmChargeSuccess) {
+function* onConfirmChargeSuccess(action: ConfirmChargeSuccess) {
   if (action.payload.status === 'Accepted') {
-    navigate(routes.SUCCESS_MODAL);
+    if (action.meta.replace) {
+      replace(routes.SUCCESS_MODAL);
+    } else {
+      navigate(routes.SUCCESS_MODAL);
+    }
   }
 
   if (action.payload.status === 'Rejected') {
     Alert.alert('Se rechazó el cobro');
   }
-}
 
-function onConfirmChargeError() {
-  goBack();
+  yield put(getChargeListCall());
+  yield put(getCardListCall());
 }
 
 export default [
   takeEvery(CONFIRM_CHARGE_SAGA, onConfirmChargeSaga),
   takeEvery(CONFIRM_CHARGE_SUCCESS, onConfirmChargeSuccess),
-  takeEvery(CONFIRM_CHARGE_ERROR, onConfirmChargeError),
 ];
