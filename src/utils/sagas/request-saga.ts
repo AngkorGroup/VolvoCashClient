@@ -10,9 +10,10 @@ enum StatusCode {
   Unauthorized = 401,
 }
 
-const defaultAction = (type: string, payload: any) => ({
+const defaultAction = (type: string, payload: any, meta?: any) => ({
   type,
   payload,
+  meta,
 });
 
 export type MockResponse = 'SUCCESS' | 'ERROR';
@@ -22,15 +23,17 @@ export interface RequestActionOptions {
   mockData?: any;
 }
 
+export interface RequestPayload {
+  api?: string;
+  method?: apiMethod;
+  headers?: any;
+  url?: string;
+  data?: any;
+}
+
 export interface RequestAction extends Action {
   type: string;
-  payload: {
-    api?: string;
-    method?: apiMethod;
-    headers?: any;
-    url?: string;
-    data?: any;
-  };
+  payload: RequestPayload;
   meta?: RequestActionOptions;
 }
 
@@ -48,7 +51,11 @@ function* requestSaga(action: RequestAction) {
   if (mockResponse) {
     yield delay(2000);
     yield put(
-      defaultAction(action.type.replace('_CALL', '_' + mockResponse), mockData),
+      defaultAction(
+        action.type.replace('_CALL', '_' + mockResponse),
+        mockData,
+        action.meta,
+      ),
     );
     return;
   }
@@ -62,12 +69,16 @@ function* requestSaga(action: RequestAction) {
 
   if (!ok) {
     yield put(
-      defaultAction(action.type.replace('_CALL', '_ERROR'), {
-        status,
-        data: responseData,
-        config,
-        duration,
-      }),
+      defaultAction(
+        action.type.replace('_CALL', '_ERROR'),
+        {
+          status,
+          data: responseData,
+          config,
+          duration,
+        },
+        action.meta,
+      ),
     );
 
     if (responseData?.errorMessage) {
@@ -78,7 +89,11 @@ function* requestSaga(action: RequestAction) {
   }
 
   yield put(
-    defaultAction(action.type.replace('_CALL', '_SUCCESS'), responseData),
+    defaultAction(
+      action.type.replace('_CALL', '_SUCCESS'),
+      responseData,
+      action.meta,
+    ),
   );
 }
 

@@ -10,7 +10,11 @@ import {
   CONFIRM_CHARGE_SUCCESS,
   CONFIRM_CHARGE_ERROR,
 } from 'utils/redux/actions';
-import { RequestAction, RequestActionOptions } from 'utils/sagas/request-saga';
+import {
+  RequestAction,
+  RequestActionOptions,
+  RequestPayload,
+} from 'utils/sagas/request-saga';
 
 export interface GetChargeDetailCall extends RequestAction {
   type: typeof GET_CHARGE_DETAIL_CALL;
@@ -53,13 +57,20 @@ export function setChargeId(chargeId: number): SetChargeId {
   };
 }
 
-export interface ConfirmChargeCall extends RequestAction {
+export interface ConfirmChargeCall {
   type: typeof CONFIRM_CHARGE_CALL;
+  payload: RequestPayload;
+  meta: {
+    replace: boolean;
+  };
 }
 
 export function confirmChargeCall(
   chargeId: number,
   confirmed: boolean,
+  options: {
+    replace: boolean;
+  },
 ): ConfirmChargeCall {
   return {
     type: CONFIRM_CHARGE_CALL,
@@ -70,12 +81,18 @@ export function confirmChargeCall(
         confirmed,
       },
     },
+    meta: {
+      replace: options.replace,
+    },
   };
 }
 
 export interface ConfirmChargeSuccess extends Action {
   type: typeof CONFIRM_CHARGE_SUCCESS;
   payload: Charge;
+  meta: {
+    replace: boolean;
+  };
 }
 
 export interface ConfirmChargeError extends Action {

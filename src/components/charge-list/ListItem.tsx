@@ -3,12 +3,15 @@ import Button from 'components/button/Button';
 import Spacing from 'components/layout/Spacing';
 import { Charge } from 'models/Charge';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { formatDate } from 'utils/moment';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { confirmChargeSaga } from 'utils/redux/services/charge-detail-actions';
+import {
+  selectChargeId,
+  selectConfirmLoading,
+} from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
 
 interface ListItemProps {
   charge: Charge;
@@ -19,6 +22,8 @@ type Option = 'confirmar' | 'rechazar' | '';
 const ListItem: React.FC<ListItemProps> = ({ charge }) => {
   const [option, setOption] = useState<Option>('');
   const dispatch = useDispatch();
+  const loading = useSelector(selectConfirmLoading);
+  const chargeId = useSelector(selectChargeId);
 
   const handleCancel = () => {
     setOption('');
@@ -41,23 +46,27 @@ const ListItem: React.FC<ListItemProps> = ({ charge }) => {
         </View>
       </View>
       <View style={styles.subtitleContainer}>
-        <Text style={styles.subtitle}>{formatDate(charge.createdAt)}</Text>
+        <Text style={styles.subtitle}>{charge.createdAt}</Text>
         <Text style={styles.subtitle}>{charge.cashier?.fullName}</Text>
       </View>
-      <View style={styles.buttonsContainer}>
-        <Button
-          title="Confirmar"
-          small
-          onPress={() => setOption('confirmar')}
-        />
-        <Spacing size={10} />
-        <Button
-          title="Rechazar"
-          small
-          danger
-          onPress={() => setOption('rechazar')}
-        />
-      </View>
+      {loading && chargeId === charge.id ? (
+        <ActivityIndicator animating={true} color={theme.secondary.color} />
+      ) : (
+        <View style={styles.buttonsContainer}>
+          <Button
+            title="Confirmar"
+            small
+            onPress={() => setOption('confirmar')}
+          />
+          <Spacing size={10} />
+          <Button
+            title="Rechazar"
+            small
+            danger
+            onPress={() => setOption('rechazar')}
+          />
+        </View>
+      )}
 
       <Alert
         visible={!!option}
