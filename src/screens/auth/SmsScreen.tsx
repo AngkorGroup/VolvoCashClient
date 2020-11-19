@@ -57,7 +57,9 @@ const SmsScreen = () => {
       <Alert
         visible={error}
         title="Código inválido o expirado"
-        message="Asegúrate que has escrito bien el código o vuelve a solicitar un código."
+        message={`Asegúrate que has escrito bien el código o vuelve a solicitar un código${
+          deviceToken ? '.' : ''
+        }`}
         confirmText="OK"
         onConfirm={() => dispatch(dismissError())}
       />
