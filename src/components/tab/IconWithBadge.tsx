@@ -4,10 +4,19 @@ import { unit } from 'utils/responsive';
 import Img from 'react-native-fast-image';
 import { theme } from 'utils/styles';
 
-export default function IconWithBadge({ name, badgeCount, size }: any) {
+interface BadgeProps {
+    name: number;
+    badgeCount: number;
+    size: number;
+}
+
+const IconWithBadge: React.FC<BadgeProps> = ({ name, badgeCount, size }) => {
+
+    const styleBadge = { width: size * 1.5, height: size * 1 }
+
     return (
-        <View style={{ width: size * 1.5, height: size * 1 }}>
-            <Img source={name} style={{ width: unit(37), height: unit(30) }} />
+        <View style={styleBadge}>
+            <Img source={name} style={styles.icon} />
             {badgeCount > 0 && (
                 <View
                     style={styles.container}
@@ -38,5 +47,12 @@ const styles = StyleSheet.create({
         color: theme.surface.backgroundColor,
         fontSize: unit(10),
         fontWeight: "bold",
-    }
-})
+    },
+    icon: {
+        width: unit(37),
+        height: unit(30),
+    },
+});
+
+
+export default IconWithBadge;

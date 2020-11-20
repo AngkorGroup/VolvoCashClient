@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator();
 
 const AppTabNavigation = () => {
   const chargeList = useSelector(selectChargeList);
-  const items = chargeList.length;
+  const chargeCount = chargeList.length;
   const dispatch = useDispatch();
 
   const refresh = useCallback(() => {
@@ -91,7 +91,7 @@ const AppTabNavigation = () => {
               <IconWithBadge name={focused
                 ? require('assets/images/payment-filled.png')
                 : require('assets/images/payment.png')}
-                badgeCount={items}
+                badgeCount={chargeCount}
                 size={size}
               />
             ),
