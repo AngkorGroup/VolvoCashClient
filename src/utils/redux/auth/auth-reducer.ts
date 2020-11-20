@@ -84,6 +84,7 @@ export default function (
       return {
         ...state,
         ...initialState,
+        pushToken: state.pushToken,
       };
     default:
       return state;
