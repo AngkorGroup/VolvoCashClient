@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 import { put, takeEvery } from 'redux-saga/effects';
-import { navigate, replace } from 'utils/navigation';
+import { goBack, navigate, replace } from 'utils/navigation';
 import {
   CONFIRM_CHARGE_SAGA,
   CONFIRM_CHARGE_SUCCESS,
@@ -35,6 +35,9 @@ function* onConfirmChargeSuccess(action: ConfirmChargeSuccess) {
 
   if (action.payload.status === 'Rejected') {
     Alert.alert('Se rechazó el cobro');
+    if (action.meta.replace) {
+      goBack();
+    }
   }
 
   yield put(getChargeListCall());
