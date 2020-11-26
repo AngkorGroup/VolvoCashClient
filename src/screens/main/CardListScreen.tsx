@@ -1,8 +1,9 @@
 import VolvoCard from 'components/card/VolvoCardItem';
 import ExitButton from 'components/header/ExitButton';
 import Header from 'components/header/Header';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectLoading,
@@ -30,9 +31,10 @@ const CardListScreen = () => {
     dispatch(getCardListCall());
   }, [dispatch]);
 
-  useEffect(() => {
-    refresh();
-  }, [refresh]);
+  useFocusEffect(
+    refresh
+  );
+
 
   return (
     <View style={styles.container}>

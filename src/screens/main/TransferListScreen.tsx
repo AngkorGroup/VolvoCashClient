@@ -5,7 +5,8 @@ import Icon from 'components/icon/Icon';
 import Search from 'components/input/Search';
 import Divider from 'components/layout/Divider';
 import { Contact } from 'models/Contact';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,18 +30,20 @@ const TransferListScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  useEffect(() => {
-    setFilteredContacts(contacts);
-    setQuery('');
-  }, [contacts]);
+  useFocusEffect(
+    useCallback(() => {
+      setFilteredContacts(contacts);
+      setQuery('');
+    }, [contacts])
+  );
 
   const refresh = useCallback(() => {
     dispatch(getContactListCall());
   }, [dispatch]);
 
-  useEffect(() => {
-    refresh();
-  }, [refresh]);
+  useFocusEffect(
+    refresh
+  );
 
   const handleChangeText = (text: string) => {
     setQuery(text);
