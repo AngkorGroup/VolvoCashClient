@@ -4,6 +4,7 @@ import Header from 'components/header/Header';
 import { RefreshControl, StyleSheet, View } from 'react-native';
 import { theme, palette } from 'utils/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 import { getCardListCall } from 'utils/redux/ui/card-list-screen/card-list-screen-actions';
 import {
   selectCardList,
@@ -27,9 +28,9 @@ const SelectCardScreen = () => {
     dispatch(getCardListCall());
   }, [dispatch]);
 
-  useEffect(() => {
-    refresh();
-  }, [refresh]);
+  useFocusEffect(
+    refresh
+  );
 
   return (
     <View style={styles.container}>

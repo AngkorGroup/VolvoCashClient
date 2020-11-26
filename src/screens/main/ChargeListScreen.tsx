@@ -1,8 +1,9 @@
 import ListItem from 'components/charge-list/ListItem';
 import ExitButton from 'components/header/ExitButton';
 import Header from 'components/header/Header';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { RefreshControl, StyleSheet, View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { theme } from 'utils/styles';
 import { FlatList } from 'react-native-gesture-handler';
 import {
@@ -21,9 +22,9 @@ const ChargeListScreen = () => {
     dispatch(getChargeListCall());
   }, [dispatch]);
 
-  useEffect(() => {
-    refresh();
-  }, [refresh]);
+  useFocusEffect(
+    refresh
+  );
 
   return (
     <View style={styles.safeContainer}>
