@@ -7,25 +7,25 @@ export const CURRENCY_SYMBOL_MAP = {
 
 export interface IMoney {
   value: number;
-  currency: Currency;
+  currencyCode: Currency;
   currencyLabel: string;
   label: string;
 }
 
 export class Money {
   public value: number;
-  public currency: Currency;
+  public currencyCode: Currency;
   public currencyLabel: string;
   public label: string;
 
   constructor(json: IMoney) {
     this.value = json.value;
-    this.currency = json.currency;
+    this.currencyCode = json.currencyCode;
     this.currencyLabel = json.currencyLabel;
     this.label = json.label;
   }
 
   toString() {
-    return `${CURRENCY_SYMBOL_MAP[this.currency]} ${this.value.toFixed(2)}`;
+    return `${CURRENCY_SYMBOL_MAP[this.currencyCode]} ${this.value.toFixed(2)}`;
   }
 }
