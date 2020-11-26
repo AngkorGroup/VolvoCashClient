@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import BackButton from 'components/header/BackButton';
 import Header from 'components/header/Header';
 import { RefreshControl, StyleSheet, View } from 'react-native';
