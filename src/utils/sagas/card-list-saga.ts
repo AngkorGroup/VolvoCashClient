@@ -28,10 +28,22 @@ const parseSections = (action: GetCardListSuccess) => {
       acc[card.contact.type].push(card);
       return acc;
     }, {} as { [key: string]: Card[] }),
-  ).map(([cardCategory, cardArr]: [string, Card[]]) => ({
-    title: cardCategory,
-    data: cardArr,
-  }));
+  )
+    .map(([cardCategory, cardArr]: [string, Card[]]) => {
+      return {
+        title: cardCategory,
+        data: cardArr,
+      };
+    })
+    .sort((a, b) => {
+      if (a.title === 'Primary' && b.title === 'Secondary') {
+        return -1;
+      }
+      if (a.title === 'Secondary' && b.title === 'Primary') {
+        return 1;
+      }
+      return 0;
+    });
 };
 
 const parseOwnCards = (action: GetCardListSuccess, currentUser: Contact) => {
