@@ -2,25 +2,40 @@ import Button from 'components/button/Button';
 import BackButton from 'components/header/BackButton';
 import Header from 'components/header/Header';
 import Input from 'components/input/Input';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Alert, StyleSheet, View } from 'react-native';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 import { useForm, Controller } from 'react-hook-form';
 import { IContact } from 'models/Contact';
 import { useDispatch, useSelector } from 'react-redux';
 import { postContactDetailCall } from 'utils/redux/services/contact-actions';
-import { selectLoading } from 'utils/redux/ui/contact-form-screen/contact-form-screen-reducer';
+import {
+  selectLoading,
+  selectError,
+} from 'utils/redux/ui/contact-form-screen/contact-form-screen-reducer';
+import { dismissError } from 'utils/redux/actions';
 
 const ContactFormScreen = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
   const { control, handleSubmit, formState } = useForm<IContact>({
     mode: 'all',
   });
   const onSubmit = (contact: IContact) => {
     dispatch(postContactDetailCall({ ...contact, documentType: 'DNI' }));
   };
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert(
+        'Ocurrió un error',
+        'Asegúrate que has escrito bien los campos o vuelve a intentarlo más tarde',
+        [{ text: 'OK', onPress: () => dispatch(dismissError()) }],
+      );
+    }
+  }, [error, dispatch]);
 
   return (
     <View style={styles.container}>
