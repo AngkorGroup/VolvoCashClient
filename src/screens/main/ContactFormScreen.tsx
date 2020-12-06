@@ -17,18 +17,27 @@ import {
 import { dismissError } from 'utils/redux/actions';
 import { useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
+import { selectDocumentType } from 'utils/redux/ui/select-documents-screen/select-documents-screen-reducer';
+import { setDocumentType } from 'utils/redux/ui/select-documents-screen/select-documents-screen-actions';
 
 const ContactFormScreen = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const documentType = useSelector(selectDocumentType);
   const navigation = useNavigation();
   const { control, handleSubmit, formState } = useForm<IContact>({
     mode: 'all',
   });
   const onSubmit = (contact: IContact) => {
-    dispatch(postContactDetailCall({ ...contact, documentTypeId: 1 }));
+    dispatch(
+      postContactDetailCall({ ...contact, documentTypeId: documentType?.id }),
+    );
   };
+
+  useEffect(() => {
+    dispatch(setDocumentType());
+  }, [dispatch]);
 
   useEffect(() => {
     if (error) {
@@ -85,6 +94,7 @@ const ContactFormScreen = () => {
           defaultValue=""
           render={({ onChange, onBlur, value }) => (
             <Input
+              keyboardType="phone-pad"
               value={value}
               onBlur={onBlur}
               onChangeText={(text) => onChange(text)}
@@ -102,6 +112,7 @@ const ContactFormScreen = () => {
             <Input
               value={value}
               onBlur={onBlur}
+              keyboardType="email-address"
               onChangeText={(text) => onChange(text)}
               placeholder="Correo electrónico"
               containerStyle={styles.input}
@@ -109,6 +120,7 @@ const ContactFormScreen = () => {
           )}
         />
         <Input
+          value={documentType?.abbreviation}
           placeholder="Tipo de documento"
           containerStyle={styles.input}
           editableStyles={false}
@@ -127,7 +139,7 @@ const ContactFormScreen = () => {
               value={value}
               onBlur={onBlur}
               onChangeText={(text) => onChange(text)}
-              placeholder="DNI"
+              placeholder="Número del documento"
               containerStyle={styles.input}
             />
           )}

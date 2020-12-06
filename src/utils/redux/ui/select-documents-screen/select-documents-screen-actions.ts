@@ -24,7 +24,7 @@ export interface GetDocumentsError extends Action {
 
 export interface SetDocumentType extends Action {
   type: typeof SET_DOCUMENT_TYPE;
-  payload: IDocumentType;
+  payload?: IDocumentType;
 }
 
 export type DocumentsScreenAction =
@@ -47,7 +47,7 @@ export function getDocumentsCall(
   };
 }
 
-export function setDocumentType(documentType: IDocumentType): SetDocumentType {
+export function setDocumentType(documentType?: IDocumentType): SetDocumentType {
   return {
     type: SET_DOCUMENT_TYPE,
     payload: documentType,
