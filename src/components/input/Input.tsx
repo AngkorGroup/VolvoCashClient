@@ -1,13 +1,10 @@
 import Icon, { IconFamily } from 'components/icon/Icon';
 import React from 'react';
+import { StyleSheet, Text, TextInputProps, ViewStyle } from 'react-native';
 import {
-  StyleSheet,
-  Text,
-  TextInputProps,
-  View,
-  ViewStyle,
-} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+  TextInput,
+  TouchableWithoutFeedback,
+} from 'react-native-gesture-handler';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 
@@ -18,6 +15,7 @@ interface InputProps {
   containerStyle?: ViewStyle;
   innerLabel?: string;
   editableStyles?: boolean;
+  onPress?: () => void;
 }
 
 const Input: React.FC<InputProps & TextInputProps> = ({
@@ -27,6 +25,7 @@ const Input: React.FC<InputProps & TextInputProps> = ({
   containerStyle,
   innerLabel,
   editableStyles = true,
+  onPress,
   ...props
 }) => {
   const containerStyles: any[] = [styles.container];
@@ -41,7 +40,7 @@ const Input: React.FC<InputProps & TextInputProps> = ({
     inputStyles.push(styles.inputMargin);
   }
   return (
-    <View style={containerStyles}>
+    <TouchableWithoutFeedback style={containerStyles} onPress={onPress}>
       {iconFamily && iconName && (
         <Icon family={iconFamily} name={iconName} style={styles.icon} />
       )}
@@ -51,9 +50,10 @@ const Input: React.FC<InputProps & TextInputProps> = ({
         numberOfLines={1}
         placeholder={placeholder}
         placeholderTextColor={theme.secondary.color}
+        pointerEvents={onPress ? 'none' : undefined}
         {...props}
       />
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
