@@ -15,16 +15,19 @@ import {
   selectError,
 } from 'utils/redux/ui/contact-form-screen/contact-form-screen-reducer';
 import { dismissError } from 'utils/redux/actions';
+import { useNavigation } from '@react-navigation/native';
+import * as routes from 'utils/routes';
 
 const ContactFormScreen = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const navigation = useNavigation();
   const { control, handleSubmit, formState } = useForm<IContact>({
     mode: 'all',
   });
   const onSubmit = (contact: IContact) => {
-    dispatch(postContactDetailCall({ ...contact, documentType: 'DNI' }));
+    dispatch(postContactDetailCall({ ...contact, documentTypeId: 1 }));
   };
 
   useEffect(() => {
@@ -104,6 +107,15 @@ const ContactFormScreen = () => {
               containerStyle={styles.input}
             />
           )}
+        />
+        <Input
+          placeholder="Tipo de documento"
+          containerStyle={styles.input}
+          editableStyles={false}
+          editable={false}
+          onPress={() =>
+            navigation.navigate(routes.SELECT_DOCUMENT_TYPE_SCREEN)
+          }
         />
         <Controller
           control={control}

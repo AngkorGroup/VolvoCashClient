@@ -5,6 +5,7 @@ import TransferListScreen from './TransferListScreen';
 import ContactFormScreen from './ContactFormScreen';
 import SelectCardScreen from './SelectCardScreen';
 import TransferFormScreen from './TransferFormScreen';
+import SelectDocumentScreen from './SelectDocumentScreen';
 
 const TransferStack = createStackNavigator();
 
@@ -25,6 +26,10 @@ const TransferNavigation = () => (
     <TransferStack.Screen
       name={routes.TRANSFER_FORM_SCREEN}
       component={TransferFormScreen}
+    />
+    <TransferStack.Screen
+      name={routes.SELECT_DOCUMENT_TYPE_SCREEN}
+      component={SelectDocumentScreen}
     />
   </TransferStack.Navigator>
 );
