@@ -11,9 +11,13 @@ import {
 } from 'utils/redux/ui/select-documents-screen/select-documents-screen-reducer';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { getDocumentsCall } from 'utils/redux/ui/select-documents-screen/select-documents-screen-actions';
+import {
+  getDocumentsCall,
+  setDocumentType,
+} from 'utils/redux/ui/select-documents-screen/select-documents-screen-actions';
 import Divider from 'components/layout/Divider';
 import { unit } from 'utils/responsive';
+import { IDocumentType } from 'models/DocumentType';
 
 const SelectDocumentScreen = () => {
   const dispatch = useDispatch();
@@ -27,6 +31,11 @@ const SelectDocumentScreen = () => {
   }, [dispatch]);
 
   useFocusEffect(refresh);
+
+  const handlePress = (documentType: IDocumentType) => {
+    dispatch(setDocumentType(documentType));
+    navigation.goBack();
+  };
 
   return (
     <View style={styles.container}>
@@ -45,7 +54,7 @@ const SelectDocumentScreen = () => {
         showsVerticalScrollIndicator={false}
         renderItem={({ item: documentType }) => (
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={() => handlePress(documentType)}
             containerStyle={styles.itemContainer}>
             <Text style={styles.itemText}>{documentType.name}</Text>
           </TouchableOpacity>

@@ -5,6 +5,7 @@ import {
   GET_DOCUMENTS_CALL,
   GET_DOCUMENTS_ERROR,
   GET_DOCUMENTS_SUCCESS,
+  SET_DOCUMENT_TYPE,
 } from 'utils/redux/actions';
 import { RequestAction, RequestActionOptions } from 'utils/sagas/request-saga';
 
@@ -21,10 +22,16 @@ export interface GetDocumentsError extends Action {
   type: typeof GET_DOCUMENTS_ERROR;
 }
 
+export interface SetDocumentType extends Action {
+  type: typeof SET_DOCUMENT_TYPE;
+  payload: IDocumentType;
+}
+
 export type DocumentsScreenAction =
   | GetDocumentsCall
   | GetDocumentsError
   | GetDocumentsSuccess
+  | SetDocumentType
   | DismissError;
 
 export function getDocumentsCall(
@@ -37,5 +44,12 @@ export function getDocumentsCall(
       method: 'get',
     },
     meta: options,
+  };
+}
+
+export function setDocumentType(documentType: IDocumentType): SetDocumentType {
+  return {
+    type: SET_DOCUMENT_TYPE,
+    payload: documentType,
   };
 }
