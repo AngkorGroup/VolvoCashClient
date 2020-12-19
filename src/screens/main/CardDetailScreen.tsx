@@ -108,7 +108,6 @@ const Movements = () => {
           movement.displayName.includes(text) ||
           movement.createdAt.includes(text) ||
           movement.amount.toString().includes(text),
-          //movement.charge.toString().includes(text),
       ),
     );
   };
