@@ -10,7 +10,9 @@ export const palette = {
   slate: '#919296',
   sky: '#BADCE6',
   fog: '#d8d7d5',
+  orange: '#DD7610',
   raspberry: '#D84451',
+  grass: '#78B833',
 };
 
 export const theme = {
@@ -34,6 +36,9 @@ export const theme = {
   },
   accent: {
     color: palette.ocean,
+  },
+  accepted: {
+    backgroundColor: palette.grass,
   },
   primary: {
     color: palette.granite,
