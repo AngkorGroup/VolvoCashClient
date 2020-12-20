@@ -10,7 +10,7 @@ export interface IContact {
   documentTypeId?: number;
   documentNumber?: string;
   status?: string;
-  clientId?: string;
+  clientId?: number;
   client?: IClient;
   contactParentId?: number;
 }
@@ -27,7 +27,7 @@ export class Contact {
   public documentTypeId?: number;
   public documentNumber?: string;
   public status?: string;
-  public clientId?: string;
+  public clientId?: number;
   public client?: IClient;
   public contactParentId?: number;
 

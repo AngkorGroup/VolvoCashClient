@@ -49,7 +49,22 @@ const CardDetailScreen = () => {
       />
       <View style={styles.infoContainer}>
         <View>
-          <Text style={styles.balanceLabel}>Saldo disponible</Text>
+          {card.contact?.type === 'Secondary' && (
+            <Text
+              numberOfLines={1}
+              style={[
+                styles.balanceLabel,
+                theme.tiny,
+              ]}>{`${card.contact?.fullName}`}</Text>
+          )}
+          {!!card.contact?.client && (
+            <Text
+              numberOfLines={1}
+              style={[
+                styles.balanceLabel,
+                theme.tiny,
+              ]}>{`${card.contact?.client?.name}`}</Text>
+          )}
           <Text style={styles.balanceText}>{card.balance.toString()}</Text>
         </View>
         {card.contact?.type === 'Primary' && (
@@ -137,7 +152,7 @@ const Movements = () => {
             title={movement.displayName}
             subtitle={movement.createdAt}
             value={movement.amount.toString()}
-            status= {movement.charge?.status}
+            status={movement.charge?.status}
             mode={movement.amount.value >= 0 ? 'positive' : 'negative'}
           />
         )}
