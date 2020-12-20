@@ -46,7 +46,10 @@ const TransferListScreen = () => {
   const handleChangeText = (text: string) => {
     setQuery(text);
     setFilteredContacts(
-      contacts.filter((contact: Contact) => contact.fullName.includes(text)),
+      contacts.filter(
+        (contact: Contact) =>
+          contact.fullName.includes(text) || contact.phone?.includes(text),
+      ),
     );
   };
 
