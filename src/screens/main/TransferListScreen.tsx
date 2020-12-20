@@ -34,16 +34,14 @@ const TransferListScreen = () => {
     useCallback(() => {
       setFilteredContacts(contacts);
       setQuery('');
-    }, [contacts])
+    }, [contacts]),
   );
 
   const refresh = useCallback(() => {
     dispatch(getContactListCall());
   }, [dispatch]);
 
-  useFocusEffect(
-    refresh
-  );
+  useFocusEffect(refresh);
 
   const handleChangeText = (text: string) => {
     setQuery(text);
