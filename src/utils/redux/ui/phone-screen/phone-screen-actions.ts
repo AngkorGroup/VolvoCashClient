@@ -14,6 +14,9 @@ export interface RequestCodeCall extends RequestAction {
 
 export interface RequestCodeSuccess extends Action {
   type: typeof REQUEST_CODE_SUCCESS;
+  payload?: {
+    smsCode: string;
+  };
 }
 
 export interface RequestCodeError extends Action {
