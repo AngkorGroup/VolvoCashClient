@@ -33,15 +33,13 @@ const getStyleByStatus = (status: Status) => {
 const getStatusLabel = (status: Status) => {
   switch (status) {
     case 'Pending':
-      return 'Pendiente';
-    case 'Accepted':
-      return 'Aceptado';
+      return '⏳';
     case 'Rejected':
-      return 'Rechazado';
     case 'Canceled':
-      return 'Cancelado';
+      return '❌';
+    case 'Accepted':
     default:
-      return 'Pendiente';
+      return '';
   }
 };
 
@@ -60,13 +58,7 @@ const ListItem: React.FC<ListItemProps> = ({
         </Text>
         <Text style={styles.subtitle}>{subtitle}</Text>
       </View>
-      {status && status !== 'Accepted' && (
-        <View style={[styles.badge, styles[getStyleByStatus(status)]]}>
-          <Text style={styles.statusText} numberOfLines={1}>
-            {getStatusLabel(status)}
-          </Text>
-        </View>
-      )}
+      {status && status !== 'Accepted' && <Text>{getStatusLabel(status)}</Text>}
       <View style={styles.rightContainer}>
         <Text style={styles[mode]}>{value}</Text>
       </View>
