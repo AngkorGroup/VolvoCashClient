@@ -137,6 +137,7 @@ const Movements = () => {
             title={movement.displayName}
             subtitle={movement.createdAt}
             value={movement.amount.toString()}
+            status= {movement.charge?.status}
             mode={movement.amount.value >= 0 ? 'positive' : 'negative'}
           />
         )}

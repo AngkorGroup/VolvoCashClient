@@ -1,5 +1,7 @@
 import { Currency, IMoney, Money } from './Money';
+import { ICharge, Charge } from './Charge';
 
+export type Status = 'Pending' | 'Accepted' | 'Rejected' | 'Canceled';
 type MovementType = 'in' | 'out';
 
 export interface IMovement {
@@ -9,6 +11,7 @@ export interface IMovement {
   amount: IMoney;
   currency: Currency;
   type: MovementType;
+  charge: ICharge;
   createdAt: string;
 }
 
@@ -18,6 +21,7 @@ export class Movement {
   public description: string;
   public amount: Money;
   public type: MovementType;
+  public charge?: Charge;
   public createdAt: string;
   public currency: Currency;
 
@@ -27,6 +31,7 @@ export class Movement {
     this.description = json.description;
     this.amount = new Money(json.amount);
     this.type = json.type;
+    this.charge = json.charge ? new Charge(json.charge) : undefined;
     this.createdAt = json.createdAt;
     this.currency = json.currency;
   }

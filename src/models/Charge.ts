@@ -32,7 +32,7 @@ export class Charge {
   constructor(json: ICharge) {
     this.id = json.id;
     this.amount = new Money(json.amount);
-    this.status = json.status;
+    this.status = json.status || '';
     this.displayName = json.displayName;
     this.description = json.description;
     this.operationCode = json.operationCode;
