@@ -24,7 +24,6 @@ const SelectDocumentScreen = () => {
   const navigation = useNavigation();
   const loading = useSelector(selectLoading);
   const documentTypes = useSelector(selectDocumentTypeList);
-  console.log('documentTypes: ', documentTypes);
 
   const refresh = useCallback(() => {
     dispatch(getDocumentsCall());
