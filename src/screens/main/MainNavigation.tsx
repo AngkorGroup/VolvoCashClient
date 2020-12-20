@@ -9,15 +9,12 @@ import { theme } from 'utils/styles';
 import Img from 'react-native-fast-image';
 import CardNavigation from './CardNavigation';
 import TransferNavigation from './TransferNavigation';
-import {
-  selectChargeList
-} from 'utils/redux/ui/charge-list-screen/charge-list-screen-reducer';
+import { selectChargeList } from 'utils/redux/ui/charge-list-screen/charge-list-screen-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChargeListCall } from 'utils/redux/services/charge-list-actions';
 import IconWithBadge from '../../components/tab/IconWithBadge';
 
 const Tab = createBottomTabNavigator();
-
 
 const AppTabNavigation = () => {
   const chargeList = useSelector(selectChargeList);
@@ -88,9 +85,12 @@ const AppTabNavigation = () => {
           options={{
             tabBarLabel: 'Pagos pendientes',
             tabBarIcon: ({ focused, size }) => (
-              <IconWithBadge name={focused
-                ? require('assets/images/payment-filled.png')
-                : require('assets/images/payment.png')}
+              <IconWithBadge
+                name={
+                  focused
+                    ? require('assets/images/payment-filled.png')
+                    : require('assets/images/payment.png')
+                }
                 badgeCount={chargeCount}
                 size={size}
               />
@@ -98,8 +98,9 @@ const AppTabNavigation = () => {
           }}
         />
       </Tab.Navigator>
-    </SafeAreaView>)
-}
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   safeArea: {

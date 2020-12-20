@@ -9,6 +9,7 @@ import confirmationModal from 'utils/redux/ui/confirmation-modal/confirmation-mo
 import transfersScreen from 'utils/redux/ui/transfers-screen/transfers-screen-reducer';
 import contactFormScreen from 'utils/redux/ui/contact-form-screen/contact-form-screen-reducer';
 import selectCardScreen from 'utils/redux/ui/select-card-screen/select-card-screen-reducer';
+import selectDocumentScreen from 'utils/redux/ui/select-documents-screen/select-documents-screen-reducer';
 import transferFormScreen from 'utils/redux/ui/transfer-form-screen/transfer-form-screen-reducer';
 
 const rootReducer = combineReducers({
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     transfersScreen,
     contactFormScreen,
     selectCardScreen,
+    selectDocumentScreen,
     transferFormScreen,
   }),
 });
