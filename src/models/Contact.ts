@@ -1,3 +1,5 @@
+import { IClient } from './Client';
+
 export interface IContact {
   id: number;
   firstName: string;
@@ -9,6 +11,7 @@ export interface IContact {
   documentNumber?: string;
   status?: string;
   clientId?: string;
+  client?: IClient;
   contactParentId?: number;
 }
 
@@ -25,6 +28,7 @@ export class Contact {
   public documentNumber?: string;
   public status?: string;
   public clientId?: string;
+  public client?: IClient;
   public contactParentId?: number;
 
   constructor(json: IContact) {
@@ -38,6 +42,7 @@ export class Contact {
     this.documentNumber = json.documentNumber;
     this.status = json.status;
     this.clientId = json.clientId;
+    this.client = json.client;
     this.contactParentId = json.contactParentId;
   }
 

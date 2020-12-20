@@ -16,20 +16,6 @@ interface ListItemProps {
   mode: Mode;
 }
 
-const getStyleByStatus = (status: Status) => {
-  switch (status) {
-    case 'Pending':
-      return 'pending';
-    case 'Accepted':
-      return 'approved';
-    case 'Rejected':
-    case 'Canceled':
-      return 'rejected';
-    default:
-      return 'approved';
-  }
-};
-
 const getStatusLabel = (status: Status) => {
   switch (status) {
     case 'Pending':

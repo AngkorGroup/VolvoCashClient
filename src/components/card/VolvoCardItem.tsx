@@ -46,16 +46,16 @@ const VolvoCardItem: React.FC<VolvoCardProps> = ({
       </View>
       <View style={styles.infoContainer}>
         <View>
-          <Text style={styles.subtitle}>
-            {card.cardType.displayName} {getCurrency(card.cardType.currency)}
-          </Text>
+          <Text style={styles.subtitle}>{card?.cardType?.displayName}</Text>
           <Text ellipsizeMode={'tail'} numberOfLines={1} style={styles.title}>
             {card.calculatedBalance.label}
           </Text>
-          <Text style={styles.info}>
-            Saldo disponible{' '}
-            {type === 'Secondary' && ` - ${card.contact?.fullName}`}
-          </Text>
+          {type === 'Secondary' && (
+            <Text style={styles.info}>{`${card.contact?.fullName}`}</Text>
+          )}
+          {!!card.contact?.client && (
+            <Text style={styles.info}>{`${card.contact?.client?.name}`}</Text>
+          )}
         </View>
         <Icon
           style={styles.arrow}
