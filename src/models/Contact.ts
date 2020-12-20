@@ -5,7 +5,7 @@ export interface IContact {
   type: ContactType;
   phone?: string;
   email?: string;
-  documentType?: string;
+  documentTypeId?: number;
   documentNumber?: string;
   status?: string;
   clientId?: string;
@@ -21,7 +21,7 @@ export class Contact {
   public type: ContactType;
   public phone?: string;
   public email?: string;
-  public documentType?: string;
+  public documentTypeId?: number;
   public documentNumber?: string;
   public status?: string;
   public clientId?: string;
@@ -34,7 +34,7 @@ export class Contact {
     this.type = json.type;
     this.phone = json.phone;
     this.email = json.email;
-    this.documentType = json.documentType;
+    this.documentTypeId = json.documentTypeId;
     this.documentNumber = json.documentNumber;
     this.status = json.status;
     this.clientId = json.clientId;

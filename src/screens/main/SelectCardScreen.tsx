@@ -28,9 +28,7 @@ const SelectCardScreen = () => {
     dispatch(getCardListCall());
   }, [dispatch]);
 
-  useFocusEffect(
-    refresh
-  );
+  useFocusEffect(refresh);
 
   return (
     <View style={styles.container}>

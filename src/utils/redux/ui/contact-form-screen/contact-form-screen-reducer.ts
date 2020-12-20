@@ -1,4 +1,6 @@
 import {
+  DismissError,
+  DISMISS_ALERT,
   POST_CONTACT_DETAIL_CALL,
   POST_CONTACT_DETAIL_ERROR,
   POST_CONTACT_DETAIL_SUCCESS,
@@ -19,6 +21,9 @@ interface ContactFormScreenState {
 export const selectLoading = (state: RootState) =>
   selectContactFormScreen(state).loading;
 
+export const selectError = (state: RootState) =>
+  selectContactFormScreen(state).error;
+
 const initialState: ContactFormScreenState = {
   loading: false,
   error: false,
@@ -27,7 +32,8 @@ const initialState: ContactFormScreenState = {
 type ContactFormScreenAction =
   | PostContactDetailSuccess
   | PostContactDetailCall
-  | PostContactDetailError;
+  | PostContactDetailError
+  | DismissError;
 
 export default function (
   state: ContactFormScreenState = initialState, // NOSONAR
@@ -51,6 +57,11 @@ export default function (
         ...state,
         loading: false,
         error: true,
+      };
+    case DISMISS_ALERT:
+      return {
+        ...state,
+        error: false,
       };
     default:
       return state;
