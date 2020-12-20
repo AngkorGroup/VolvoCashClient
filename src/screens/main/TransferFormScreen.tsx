@@ -40,7 +40,7 @@ const TransferFormScreen = () => {
     dispatch(
       postTransferDetailCall({
         amount: {
-          currency: card.balance.currency,
+          currencyCode: card.balance.currencyCode,
           value: form.amount,
           label: card.calculatedBalance.label,
           currencyLabel: card.calculatedBalance.currencyLabel,
