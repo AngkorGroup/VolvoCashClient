@@ -4,7 +4,6 @@ import { unit } from 'utils/responsive';
 import { theme, palette } from 'utils/styles';
 import { Status } from 'models/Movement';
 
-
 const width = Dimensions.get('window').width;
 
 type Mode = 'positive' | 'negative';
@@ -56,7 +55,9 @@ const ListItem: React.FC<ListItemProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <Text  numberOfLines={1}  style={styles.title}>{title}</Text>
+        <Text numberOfLines={1} style={styles.title}>
+          {title}
+        </Text>
         <Text style={styles.subtitle}>{subtitle}</Text>
       </View>
       {status && status !== 'Accepted' && (

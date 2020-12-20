@@ -1,5 +1,5 @@
 import { Currency, IMoney, Money } from './Money';
-import {ICharge, Charge} from './Charge';
+import { ICharge, Charge } from './Charge';
 
 export type Status = 'Pending' | 'Accepted' | 'Rejected' | 'Canceled';
 type MovementType = 'in' | 'out';
@@ -31,7 +31,7 @@ export class Movement {
     this.description = json.description;
     this.amount = new Money(json.amount);
     this.type = json.type;
-    this.charge = json.charge ? new Charge(json.charge):undefined;
+    this.charge = json.charge ? new Charge(json.charge) : undefined;
     this.createdAt = json.createdAt;
     this.currency = json.currency;
   }
