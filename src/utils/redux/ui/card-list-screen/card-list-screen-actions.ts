@@ -51,6 +51,7 @@ export type CardListScreenAction =
   | DismissError;
 
 export function getCardListCall(
+  clientId?: number,
   options?: RequestActionOptions,
 ): GetCardListCall {
   return {
@@ -58,6 +59,9 @@ export function getCardListCall(
     payload: {
       url: '/cards',
       method: 'get',
+      data: {
+        clientId,
+      },
     },
     meta: options,
   };

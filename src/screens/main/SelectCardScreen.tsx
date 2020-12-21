@@ -16,6 +16,11 @@ import { unit } from 'utils/responsive';
 import Spacing from 'components/layout/Spacing';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as routes from 'utils/routes';
+import { Contact } from 'models/Contact';
+
+interface Params {
+  contact: Contact;
+}
 
 const SelectCardScreen = () => {
   const dispatch = useDispatch();
@@ -23,10 +28,11 @@ const SelectCardScreen = () => {
   const loading = useSelector(selectLoading);
   const cards = useSelector(selectCardList);
   const { params } = useRoute();
+  const { contact } = params as Params;
 
   const refresh = useCallback(() => {
-    dispatch(getCardListCall());
-  }, [dispatch]);
+    dispatch(getCardListCall(contact.clientId));
+  }, [dispatch, contact]);
 
   useFocusEffect(refresh);
 
@@ -51,7 +57,7 @@ const SelectCardScreen = () => {
             onPress={() =>
               navigation.navigate(routes.TRANSFER_FORM_SCREEN, {
                 card,
-                contact: (params as any).contact,
+                contact,
               })
             }
           />
