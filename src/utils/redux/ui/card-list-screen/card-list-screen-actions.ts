@@ -9,16 +9,26 @@ import {
   SET_CARD_LIST,
   SET_OWN_CARD_LIST,
 } from 'utils/redux/actions';
-import { RequestAction, RequestActionOptions } from 'utils/sagas/request-saga';
+import { RequestActionOptions, RequestPayload } from 'utils/sagas/request-saga';
 import { CardSections } from './card-list-screen-reducer';
 
-export interface GetCardListCall extends RequestAction {
+// all_cards: my cards and those of my sub accounts
+// own_cards: only my cards, from all my companies (clients)
+type GetCardListUseCase = 'all_cards' | 'own_cards';
+export interface GetCardListCall {
   type: typeof GET_CARD_LIST_CALL;
+  payload: RequestPayload;
+  meta: {
+    for: GetCardListUseCase;
+  };
 }
 
 export interface GetCardListSuccess extends Action {
   type: typeof GET_CARD_LIST_SUCCESS;
   payload: Card[];
+  meta: {
+    for: GetCardListUseCase;
+  };
 }
 
 export interface GetCardListError extends Action {
@@ -51,7 +61,7 @@ export type CardListScreenAction =
   | DismissError;
 
 export function getCardListCall(
-  clientId?: number,
+  contactId?: number,
   options?: RequestActionOptions,
 ): GetCardListCall {
   return {
@@ -60,10 +70,13 @@ export function getCardListCall(
       url: '/cards',
       method: 'get',
       data: {
-        clientId,
+        contactId,
       },
     },
-    meta: options,
+    meta: {
+      ...options,
+      for: contactId ? 'own_cards' : 'all_cards',
+    },
   };
 }
 

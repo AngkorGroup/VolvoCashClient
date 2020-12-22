@@ -46,17 +46,18 @@ const parseSections = (action: GetCardListSuccess) => {
     });
 };
 
-const parseOwnCards = (action: GetCardListSuccess, currentUser: Contact) => {
-  return action.payload.filter((card) => card.contactId === currentUser.id);
-};
-
 function* onGetCardListSuccess(action: GetCardListSuccess) {
-  const cardSections = parseSections(action);
-  yield put(setCardList(cardSections));
-
-  const currentUser = yield select(selectContact);
-  const ownCards = parseOwnCards(action, currentUser);
-  yield put(setOwnCardList(ownCards));
+  switch (action.meta.for) {
+    case 'all_cards':
+      const cardSections = parseSections(action);
+      yield put(setCardList(cardSections));
+      break;
+    case 'own_cards':
+      yield put(setOwnCardList(action.payload));
+      break;
+    default:
+      console.error('Unexpected GetCardListSuccess.meta.for.');
+  }
 }
 
 function* onGoToCardDetail(_: GoToCardDetail) {

@@ -31,7 +31,7 @@ const SelectCardScreen = () => {
   const { contact } = params as Params;
 
   const refresh = useCallback(() => {
-    dispatch(getCardListCall(contact.clientId));
+    dispatch(getCardListCall(contact.id));
   }, [dispatch, contact]);
 
   useFocusEffect(refresh);
