@@ -5,41 +5,41 @@ import { RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { theme, palette } from 'utils/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
-import {
-  selectDocumentTypeList,
-  selectLoading,
-} from 'utils/redux/ui/select-documents-screen/select-documents-screen-reducer';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import {
-  getDocumentsCall,
-  setDocumentType,
-} from 'utils/redux/ui/select-documents-screen/select-documents-screen-actions';
 import Divider from 'components/layout/Divider';
 import { unit } from 'utils/responsive';
-import { IDocumentType } from 'models/DocumentType';
+import {
+  selectClientList,
+  selectLoading,
+} from 'utils/redux/ui/select-client-screen/select-client-screen-reducer';
+import { IClient } from 'models/Client';
+import {
+  getClientsCall,
+  setClient,
+} from 'utils/redux/ui/select-client-screen/select-client-screen-actions';
 
-const SelectDocumentScreen = () => {
+const SelectClientScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const loading = useSelector(selectLoading);
-  const documentTypes = useSelector(selectDocumentTypeList);
+  const clients = useSelector(selectClientList);
 
   const refresh = useCallback(() => {
-    dispatch(getDocumentsCall());
+    dispatch(getClientsCall());
   }, [dispatch]);
 
   useFocusEffect(refresh);
 
-  const handlePress = (documentType: IDocumentType) => {
-    dispatch(setDocumentType(documentType));
+  const handlePress = (client: IClient) => {
+    dispatch(setClient(client));
     navigation.goBack();
   };
 
   return (
     <View style={styles.container}>
       <Header
-        title="Selecciona un tipo de documento"
+        title="Selecciona un cliente"
         alignment="left"
         leftButton={<BackButton />}
       />
@@ -48,14 +48,14 @@ const SelectDocumentScreen = () => {
           <RefreshControl refreshing={loading} onRefresh={refresh} />
         }
         style={styles.list}
-        data={documentTypes}
-        keyExtractor={(documentType) => documentType.id.toString()}
+        data={clients}
+        keyExtractor={(client) => client?.id?.toString() || ''}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item: documentType }) => (
+        renderItem={({ item: client }) => (
           <TouchableOpacity
-            onPress={() => handlePress(documentType)}
+            onPress={() => handlePress(client)}
             containerStyle={styles.itemContainer}>
-            <Text style={styles.itemText}>{documentType.name}</Text>
+            <Text style={styles.itemText}>{client.name}</Text>
           </TouchableOpacity>
         )}
         ItemSeparatorComponent={Divider}
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectDocumentScreen;
+export default SelectClientScreen;

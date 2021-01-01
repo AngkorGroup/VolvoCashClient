@@ -19,9 +19,9 @@ const VolvoCard: React.FC<VolvoCardProps> = ({ card, onPress }) => {
       style={[styles.container, bgColor]}
       activeOpacity={theme.opacity}
       onPress={onPress}>
-      <Text style={styles.primaryText}>{card.cardType.displayName}</Text>
+      <Text style={styles.primaryText}>{card?.cardType?.displayName}</Text>
       <Text style={styles.secondaryText}>
-        {card.contact.type === 'Secondary' ? card.contact.fullName : ''}
+        {card?.contact?.type === 'Secondary' ? card.contact.fullName : ''}
       </Text>
       <Text style={styles.primaryText}>{card.balance.toString()}</Text>
     </TouchableOpacity>

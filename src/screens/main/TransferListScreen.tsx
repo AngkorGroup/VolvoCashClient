@@ -34,21 +34,22 @@ const TransferListScreen = () => {
     useCallback(() => {
       setFilteredContacts(contacts);
       setQuery('');
-    }, [contacts])
+    }, [contacts]),
   );
 
   const refresh = useCallback(() => {
     dispatch(getContactListCall());
   }, [dispatch]);
 
-  useFocusEffect(
-    refresh
-  );
+  useFocusEffect(refresh);
 
   const handleChangeText = (text: string) => {
     setQuery(text);
     setFilteredContacts(
-      contacts.filter((contact: Contact) => contact.fullName.includes(text)),
+      contacts.filter(
+        (contact: Contact) =>
+          contact.fullName.includes(text) || contact.phone?.includes(text),
+      ),
     );
   };
 
@@ -94,11 +95,13 @@ const TransferListScreen = () => {
           renderItem={({ item: contact }) => (
             <TouchableOpacity
               activeOpacity={theme.opacity}
+              containerStyle={styles.itemContainer}
               onPress={() =>
                 navigation.navigate(routes.SELECT_CARD_SCREEN, { contact })
               }>
               <Text style={styles.itemLabel}>{contact.fullName}</Text>
-              <Text style={styles.phoneLabel}>{contact.phone}</Text>
+              <Text style={styles.subtitleLabel}>{contact.client?.name}</Text>
+              <Text style={styles.subtitleLabel}>{contact.phone}</Text>
             </TouchableOpacity>
           )}
           ItemSeparatorComponent={Divider}
@@ -120,15 +123,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  itemContainer: {
+    marginVertical: unit(5),
+  },
   itemLabel: {
     ...theme.small,
     ...theme.primary,
-    marginTop: unit(5),
   },
-  phoneLabel: {
+  subtitleLabel: {
     ...theme.small,
     ...theme.secondary,
-    marginBottom: unit(5),
   },
   listContainer: {
     flex: 1,

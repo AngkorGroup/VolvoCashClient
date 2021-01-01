@@ -51,7 +51,7 @@ export type IconFamily =
 interface IconProps {
   family: IconFamily;
   name: string;
-  style?: ViewStyle;
+  style?: ViewStyle | ViewStyle[] | any[];
   size?: number;
   color?: string;
 }

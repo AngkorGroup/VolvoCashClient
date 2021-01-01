@@ -19,19 +19,25 @@ import { useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
 import { selectDocumentType } from 'utils/redux/ui/select-documents-screen/select-documents-screen-reducer';
 import { setDocumentType } from 'utils/redux/ui/select-documents-screen/select-documents-screen-actions';
+import { selectClient } from 'utils/redux/ui/select-client-screen/select-client-screen-reducer';
 
 const ContactFormScreen = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const documentType = useSelector(selectDocumentType);
+  const client = useSelector(selectClient);
   const navigation = useNavigation();
   const { control, handleSubmit, formState } = useForm<IContact>({
     mode: 'all',
   });
   const onSubmit = (contact: IContact) => {
     dispatch(
-      postContactDetailCall({ ...contact, documentTypeId: documentType?.id }),
+      postContactDetailCall({
+        ...contact,
+        documentTypeId: documentType?.id,
+        clientId: client?.id,
+      }),
     );
   };
 
@@ -118,6 +124,14 @@ const ContactFormScreen = () => {
               containerStyle={styles.input}
             />
           )}
+        />
+        <Input
+          value={client?.name}
+          placeholder="Empresa"
+          containerStyle={styles.input}
+          editableStyles={false}
+          editable={false}
+          onPress={() => navigation.navigate(routes.SELECT_CLIENT_SCREEN)}
         />
         <Input
           value={documentType?.abbreviation}

@@ -1,7 +1,7 @@
 import BackButton from 'components/header/BackButton';
 import Header from 'components/header/Header';
 import Input from 'components/input/Input';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { unit } from 'utils/responsive';
@@ -16,6 +16,11 @@ import { verifyCodeCall } from 'utils/redux/ui/sms-screen/sms-screen-actions';
 import { selectPhone, selectPushToken } from 'utils/redux/auth/auth-reducer';
 import { SMS_CODE_LENGTH } from 'utils/constants';
 import { dismissError } from 'utils/redux/actions';
+import { useRoute } from '@react-navigation/native';
+
+interface Params {
+  smsCode: string;
+}
 
 const SmsScreen = () => {
   const dispatch = useDispatch();
@@ -23,6 +28,28 @@ const SmsScreen = () => {
   const error = useSelector(selectError);
   const phone = useSelector(selectPhone);
   const deviceToken = useSelector(selectPushToken);
+  const { params } = useRoute();
+
+  const { smsCode } = params as Params;
+
+  useEffect(() => {
+    let timeout: any;
+    if (smsCode?.length === SMS_CODE_LENGTH) {
+      timeout = setTimeout(() => {
+        dispatch(
+          verifyCodeCall({
+            code: smsCode,
+            phone,
+            deviceToken,
+            devicePlatform: Platform.OS,
+          }),
+        );
+      }, 500);
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [smsCode, deviceToken, dispatch, phone]);
 
   const handleTextChange = (text: string) => {
     if (text.length === SMS_CODE_LENGTH) {
@@ -46,6 +73,7 @@ const SmsScreen = () => {
           para verificar tu número de teléfono.
         </Text>
         <Input
+          defaultValue={smsCode}
           placeholder="Código SMS"
           keyboardType="phone-pad"
           iconFamily="Entypo"
