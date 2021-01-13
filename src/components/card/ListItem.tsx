@@ -39,7 +39,7 @@ const ListItem: React.FC<ListItemProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <Text numberOfLines={1} style={styles.title}>
+        <Text numberOfLines={2} style={styles.title}>
           {title}
         </Text>
         <Text style={styles.subtitle}>{subtitle}</Text>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     alignSelf: 'flex-start',
-    width: width * 0.44,
+    width: width * 0.55,
   },
   rightContainer: {
     alignItems: 'flex-end',
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     ...theme.small,
     ...theme.secondary,
     marginBottom: unit(5),
+    fontSize: unit(11),
   },
   pending: {
     backgroundColor: palette.orange,
