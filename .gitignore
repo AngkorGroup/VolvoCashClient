@@ -1,5 +1,8 @@
+# Project
+ios/.bundle/
 .env.production
 .env.development
+
 # OSX
 #
 .DS_Store
