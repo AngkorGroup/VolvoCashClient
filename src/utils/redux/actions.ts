@@ -68,6 +68,8 @@ export const LOG_OUT_CALL = 'LOG_OUT_CALL';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_ERROR = 'LOG_OUT_ERROR';
 
+export const SET_MOVEMENTE_INFO = 'SET_MOVEMENTE_INFO';
+
 export interface DismissError extends Action {
   type: typeof DISMISS_ALERT;
 }

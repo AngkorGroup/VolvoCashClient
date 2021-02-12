@@ -4,6 +4,7 @@ import * as routes from 'utils/routes';
 import CardListScreen from './CardListScreen';
 import CardDetailScreen from './CardDetailScreen';
 import QrScreen from './QrScreen';
+import MovementDetailScreen from './MovementDetailScreen';
 
 const CardStack = createStackNavigator();
 
@@ -18,6 +19,10 @@ const CardNavigation = () => (
       component={CardDetailScreen}
     />
     <CardStack.Screen name={routes.QR_SCREEN} component={QrScreen} />
+    <CardStack.Screen
+      name={routes.MOVEMENT_DETAIL_SCREEN}
+      component={MovementDetailScreen}
+    />
   </CardStack.Navigator>
 );
 

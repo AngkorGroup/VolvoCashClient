@@ -4,6 +4,7 @@ import {
   Text,
   ViewStyle,
   StyleSheet,
+  TextStyle,
   View,
 } from 'react-native';
 import { unit } from 'utils/responsive';
@@ -18,6 +19,7 @@ interface ButtonProps {
   disabled?: boolean;
   small?: boolean;
   icon?: JSX.Element;
+  textStyle?: TextStyle | Array<TextStyle>;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -29,6 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   danger,
   small,
+  textStyle,
 }) => {
   const buttonStyle = [styles.container, style];
   const buttonTextStyle = [styles.buttonText] as any[];
@@ -46,6 +49,9 @@ const Button: React.FC<ButtonProps> = ({
   if (small) {
     buttonStyle.push(styles.containerSmall);
     buttonTextStyle.push(styles.textSmall);
+  }
+  if (textStyle) {
+    buttonTextStyle.push(textStyle);
   }
   return (
     <TouchableOpacity

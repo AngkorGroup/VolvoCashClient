@@ -1,11 +1,4 @@
-import React, { useEffect } from 'react';
-import CloseButton from 'components/header/CloseButton';
-import Header from 'components/header/Header';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import { theme } from 'utils/styles';
-import { unit } from 'utils/responsive';
-import Button from 'components/button/Button';
-import InfoRow from 'components/card/InfoRow';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCharge,
@@ -18,12 +11,16 @@ import {
   getChargeDetailCall,
 } from 'utils/redux/services/charge-detail-actions';
 import { closeConfirmationModal } from 'utils/redux/ui/confirmation-modal/confirmation-modal-actions';
+import Details from 'components/detail';
+import { initialState } from 'utils/redux/ui/movement-detail-screen/movement-detail-screen-reducer';
+import { customFormatDate, customFormatHour } from 'utils/moment';
 
 const ConfirmationModal = () => {
   const loading = useSelector(selectLoading);
   const confirmLoading = useSelector(selectConfirmLoading);
   const charge = useSelector(selectCharge);
   const chargeId = useSelector(selectChargeId);
+  const [payload, setPayload] = useState(initialState);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,80 +33,45 @@ const ConfirmationModal = () => {
     dispatch(closeConfirmationModal());
   };
 
+  useEffect(() => {
+    if (charge) {
+      setPayload({
+        description: charge.description || '',
+        displayName: charge.displayName || '',
+        imageUrl: charge.imageUrl,
+        amountLabel: charge.amount.label,
+        hour: customFormatHour(charge.createdAt),
+        date: customFormatDate(charge.createdAt),
+        operationCode: charge.operationCode || '',
+        cashier: `${charge.cashier?.firstName} ${charge.cashier?.lastName}`,
+      });
+    }
+  }, [charge]);
+
   return (
-    <View style={styles.container}>
-      <Header
-        title={'Confirmar cobro'}
-        alignment="center"
-        rightButton={<CloseButton onClose={handleClose} />}
-      />
-      {loading && (
-        <View style={styles.loaderContainer}>
-          <ActivityIndicator animating={true} color={theme.secondary.color} />
-        </View>
-      )}
-      {charge && (
-        <View style={styles.card}>
-          <InfoRow label="Monto" value={charge.amount.toString()} />
-          <InfoRow label="Concepto" value={charge.description} />
-          <InfoRow label="Vendedor" value={charge.cashier?.fullName || ''} />
-          {loading || confirmLoading ? (
-            <ActivityIndicator animating={true} color={theme.secondary.color} />
-          ) : (
-            <View style={styles.buttonsContainer}>
-              <Button
-                title="Rechazar"
-                danger
-                style={styles.button}
-                onPress={() => {
-                  if (chargeId) {
-                    dispatch(
-                      confirmChargeCall(chargeId, false, { replace: true }),
-                    );
-                  }
-                }}
-              />
-              <Button
-                title="Confirmar"
-                style={styles.button}
-                onPress={() => {
-                  if (chargeId) {
-                    dispatch(
-                      confirmChargeCall(chargeId, true, { replace: true }),
-                    );
-                  }
-                }}
-              />
-            </View>
-          )}
-        </View>
-      )}
-    </View>
+    <Details
+      buttons={{
+        cancel: true,
+        confirm: true,
+        share: false,
+        close: true,
+      }}
+      onCancel={() => {
+        if (chargeId) {
+          dispatch(confirmChargeCall(chargeId, false, { replace: true }));
+        }
+      }}
+      onClose={handleClose}
+      onConfirm={() => {
+        if (chargeId) {
+          dispatch(confirmChargeCall(chargeId, true, { replace: true }));
+        }
+      }}
+      loading={loading}
+      header="Confirmar cobro"
+      chargeInfo={payload}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    ...theme.background,
-  },
-  card: {
-    ...theme.surface,
-    ...theme.shadow,
-    marginVertical: unit(30),
-    paddingVertical: unit(60),
-    paddingHorizontal: unit(40),
-  },
-  buttonsContainer: {
-    alignItems: 'center',
-    marginTop: unit(100),
-  },
-  button: {
-    marginVertical: unit(5),
-  },
-  loaderContainer: {
-    marginVertical: unit(10),
-  },
-});
 
 export default ConfirmationModal;

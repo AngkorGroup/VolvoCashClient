@@ -24,9 +24,12 @@ import {
   selectCardBatches,
 } from 'utils/redux/ui/card-detail-screen/card-detail-screen-reducer';
 import { getCardDetailCall } from 'utils/redux/ui/card-detail-screen/card-detail-screen-action';
+import { setMovement } from 'utils/redux/ui/movement-detail-screen/movement-detail-screen-action';
 import { useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
 import { Batch } from 'models/Batch';
+import { Movement } from 'models/Movement';
+import { customFormatDate, customFormatHour } from 'utils/moment';
 
 type CardDetailTab = 'Movimientos' | 'Vencimientos';
 
@@ -103,7 +106,7 @@ const Movements = () => {
   const loading = useSelector(selectLoading);
   const [filteredMovements, setFilteredMovements] = useState(movements);
   const dispatch = useDispatch();
-
+  const navigation = useNavigation();
   useEffect(() => {
     setFilteredMovements(movements);
     setQuery('');
@@ -114,6 +117,29 @@ const Movements = () => {
   if (!card) {
     return <ActivityIndicator animating={true} />;
   }
+
+  const goChargeDetail = ({ charge, transfer }: Movement) => {
+    const item = charge || transfer;
+    if (item) {
+      const cashier = charge
+        ? `${charge.cashier?.firstName} ${charge.cashier?.lastName}`
+        : '';
+      const payload = {
+        description:
+          (charge ? charge.description : transfer?.displayName) || '',
+        displayName: item.displayName || '',
+        imageUrl: item.imageUrl,
+        amountLabel: item.amount.label,
+        hour: customFormatHour(item.createdAt),
+        date: customFormatDate(item.createdAt),
+        operationCode: item.operationCode || '',
+        cashier,
+      };
+
+      dispatch(setMovement(payload));
+      navigation.navigate(routes.MOVEMENT_DETAIL_SCREEN);
+    }
+  };
 
   const handleChangeText = (text: string) => {
     setQuery(text);
@@ -154,6 +180,7 @@ const Movements = () => {
             value={movement.amount.toString()}
             status={movement.charge?.status}
             mode={movement.amount.value >= 0 ? 'positive' : 'negative'}
+            onPress={() => goChargeDetail(movement)}
           />
         )}
         ItemSeparatorComponent={() => <View style={styles.divider} />}
