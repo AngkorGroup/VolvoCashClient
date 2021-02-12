@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CloseButton from 'components/header/CloseButton';
 import Header from 'components/header/Header';
 import { View, ActivityIndicator } from 'react-native';

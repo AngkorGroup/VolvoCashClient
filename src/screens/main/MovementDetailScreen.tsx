@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { getChargeInfo } from 'utils/redux/ui/movement-detail-screen/movement-detail-screen-reducer';
@@ -6,7 +6,7 @@ import Details from 'components/detail';
 import Share from 'react-native-share';
 import RNFetchBlob from 'rn-fetch-blob';
 
-const ConfirmationScreen = () => {
+const MovementDetailScreen = () => {
   const [loading, setLoading] = useState(false);
   const chargeInfo = useSelector(getChargeInfo);
 
@@ -58,4 +58,4 @@ const ConfirmationScreen = () => {
   );
 };
 
-export default ConfirmationScreen;
+export default MovementDetailScreen;

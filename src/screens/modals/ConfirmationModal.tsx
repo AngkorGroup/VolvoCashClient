@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCharge,
   selectChargeId,
-  selectConfirmLoading,
   selectLoading,
 } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
 import {
@@ -17,7 +16,6 @@ import { customFormatDate, customFormatHour } from 'utils/moment';
 
 const ConfirmationModal = () => {
   const loading = useSelector(selectLoading);
-  const confirmLoading = useSelector(selectConfirmLoading);
   const charge = useSelector(selectCharge);
   const chargeId = useSelector(selectChargeId);
   const [payload, setPayload] = useState(initialState);
