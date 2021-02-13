@@ -10,10 +10,8 @@ interface InfoRowProps {
 }
 
 const InfoRow: React.FC<InfoRowProps> = ({ label, value, textStyle }) => {
-  const labelStyles = [styles.label];
   const valueStyles = [styles.value];
   if (textStyle) {
-    labelStyles.push(textStyle);
     valueStyles.push(textStyle);
   }
   return (

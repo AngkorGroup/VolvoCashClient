@@ -58,11 +58,7 @@ const DetailScreen: React.FC<IDetail> = ({
             {Boolean(chargeInfo.operationCode) && (
               <InfoRow label="Operación" value={`${chargeInfo.operationCode}`} />
             )}
-            <InfoRow
-              // textStyle={styles.amountRow}
-              label="Monto"
-              value={chargeInfo.amountLabel}
-            />
+            <InfoRow label="Monto" value={chargeInfo.amountLabel} />
             <InfoRow label="Concepto" value={chargeInfo.displayName || '-'} />
             <InfoRow label="Observación" value={chargeInfo.description} />
             {Boolean(chargeInfo.cashier) && (

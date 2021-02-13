@@ -20,7 +20,7 @@ interface ListItemProps {
   value: string;
   status?: Status;
   mode: Mode;
-  onPress?: Function;
+  onPress?: () => void;
 }
 
 const getStatusLabel = (status: Status) => {
