@@ -143,8 +143,8 @@ android {
         applicationId "com.volvo.cash"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 16
-        versionName "1.4.2"
+        versionCode 17
+        versionName "1.4.3"
         multiDexEnabled true
     }
     splits {
