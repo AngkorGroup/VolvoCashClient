@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import CloseButton from 'components/header/CloseButton';
-import Header from 'components/header/Header';
-import { StyleSheet, View, Alert, ActivityIndicator } from 'react-native';
-import { theme } from 'utils/styles';
-import { unit } from 'utils/responsive';
-import Button from 'components/button/Button';
-import ShareButton from 'components/button/Share';
-import InfoRow from 'components/card/InfoRow';
-import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
+
+import { useSelector, useDispatch } from 'react-redux';
 import Share from 'react-native-share';
 import RNFetchBlob from 'rn-fetch-blob';
-import { selectCharge } from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
+import Details from 'components/detail';
+import {
+  selectCharge,
+  selectChargeId,
+} from 'utils/redux/ui/confirmation-modal/confirmation-modal-reducer';
+import { initialState } from 'utils/redux/ui/movement-detail-screen/movement-detail-screen-reducer';
+import { customFormatDate, customFormatHour } from 'utils/moment';
+import { getChargeDetailCall } from 'utils/redux/services/charge-detail-actions';
 
 const SuccessModal = () => {
-  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const charge = useSelector(selectCharge);
+  const [payload, setPayload] = useState(initialState);
+  const chargeId = useSelector(selectChargeId);
+  const dispatch = useDispatch();
 
   const handleSharePress = async (imageUrl: string) => {
     setLoading(true);
@@ -46,63 +48,40 @@ const SuccessModal = () => {
       });
   };
 
+  useEffect(() => {
+    if (chargeId) {
+      dispatch(getChargeDetailCall(chargeId));
+    }
+  }, [dispatch, chargeId]);
+  useEffect(() => {
+    if (charge) {
+      setPayload({
+        description: charge.description || '',
+        displayName: charge.displayName || '',
+        imageUrl: charge.imageUrl,
+        amountLabel: charge.amount.label,
+        hour: customFormatHour(charge.createdAt),
+        date: customFormatDate(charge.createdAt),
+        operationCode: charge.operationCode || '',
+        cashier: `${charge.cashier?.firstName} ${charge.cashier?.lastName}`,
+      });
+    }
+  }, [charge]);
+
   return (
-    <View style={styles.container}>
-      <Header
-        title={'Cobro exitoso'}
-        alignment="center"
-        rightButton={<CloseButton />}
-      />
-      {loading && (
-        <ActivityIndicator animating={true} color={theme.secondary.color} />
-      )}
-      {charge && (
-        <View style={styles.card}>
-          <InfoRow label="Operación" value={charge.operationCode || '-'} />
-          <InfoRow label="Monto" value={charge.amount.toString()} />
-          <InfoRow label="Concepto" value={charge.description} />
-          <InfoRow label="Vendedor" value={charge.cashier?.fullName || ''} />
-          <View style={styles.shareContainer}>
-            <ShareButton onPress={() => handleSharePress(charge.imageUrl)} />
-          </View>
-          <View style={styles.buttonsContainer}>
-            <Button
-              title="Aceptar"
-              style={styles.button}
-              onPress={() => {
-                navigation.goBack();
-              }}
-            />
-          </View>
-        </View>
-      )}
-    </View>
+    <Details
+      buttons={{
+        cancel: false,
+        confirm: true,
+        share: false,
+        close: false,
+      }}
+      handleSharePress={() => handleSharePress(charge?.imageUrl || '')}
+      loading={loading}
+      header="Cobro exitoso"
+      chargeInfo={payload}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    ...theme.background,
-  },
-  card: {
-    ...theme.surface,
-    ...theme.shadow,
-    marginVertical: unit(30),
-    paddingVertical: unit(60),
-    paddingHorizontal: unit(40),
-    alignItems: 'center',
-  },
-  buttonsContainer: {
-    alignItems: 'center',
-    marginTop: unit(100),
-  },
-  button: {
-    marginVertical: unit(5),
-  },
-  shareContainer: {
-    marginTop: unit(30),
-  },
-});
 
 export default SuccessModal;

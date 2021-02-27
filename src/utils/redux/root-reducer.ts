@@ -12,6 +12,7 @@ import selectCardScreen from 'utils/redux/ui/select-card-screen/select-card-scre
 import selectDocumentScreen from 'utils/redux/ui/select-documents-screen/select-documents-screen-reducer';
 import selectClientScreen from 'utils/redux/ui/select-client-screen/select-client-screen-reducer';
 import transferFormScreen from 'utils/redux/ui/transfer-form-screen/transfer-form-screen-reducer';
+import movementDetailScreen from 'utils/redux/ui/movement-detail-screen/movement-detail-screen-reducer';
 
 const rootReducer = combineReducers({
   auth,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
     selectDocumentScreen,
     transferFormScreen,
     selectClientScreen,
+    movementDetailScreen,
   }),
 });
 

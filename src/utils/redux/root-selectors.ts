@@ -22,3 +22,5 @@ export const selectClientScreen = (state: RootState) =>
   state.ui.selectClientScreen;
 export const selectTransferFormScreen = (state: RootState) =>
   state.ui.transferFormScreen;
+export const selectMovementInfo = (state: RootState) =>
+  state.ui.movementDetailScreen;

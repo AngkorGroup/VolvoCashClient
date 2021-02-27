@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import { unit } from 'utils/responsive';
 import { theme, palette } from 'utils/styles';
 import { Status } from 'models/Movement';
@@ -14,6 +20,7 @@ interface ListItemProps {
   value: string;
   status?: Status;
   mode: Mode;
+  onPress?: () => void;
 }
 
 const getStatusLabel = (status: Status) => {
@@ -35,9 +42,10 @@ const ListItem: React.FC<ListItemProps> = ({
   value,
   mode,
   status = undefined,
+  onPress = () => { },
 }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={() => onPress()} style={styles.container}>
       <View style={styles.leftContainer}>
         <Text numberOfLines={2} style={styles.title}>
           {title}
@@ -48,7 +56,7 @@ const ListItem: React.FC<ListItemProps> = ({
       <View style={styles.rightContainer}>
         <Text style={styles[mode]}>{value}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

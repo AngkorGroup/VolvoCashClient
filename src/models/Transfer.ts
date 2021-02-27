@@ -21,9 +21,9 @@ export class Transfer {
   public displayName: string;
   public imageUrl: string;
   public originCardId: number;
-  public originCard: ICard;
+  public originCard?: ICard;
   public destinyCardId: number;
-  public destinyCard: ICard;
+  public destinyCard?: ICard;
   public createdAt: string;
 
   constructor(json: ITransfer) {
@@ -33,9 +33,11 @@ export class Transfer {
     this.displayName = json.displayName;
     this.imageUrl = json.imageUrl;
     this.originCardId = json.originCardId;
-    this.originCard = new Card(json.originCard);
+    this.originCard = json.originCard ? new Card(json.originCard) : undefined;
     this.destinyCardId = json.destinyCardId;
-    this.destinyCard = new Card(json.destinyCard);
+    this.destinyCard = json.destinyCard
+      ? new Card(json.destinyCard)
+      : undefined;
     this.createdAt = json.createdAt;
   }
 }

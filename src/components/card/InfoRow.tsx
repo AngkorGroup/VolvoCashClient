@@ -1,21 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextStyle } from 'react-native';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 
 interface InfoRowProps {
   label: string;
   value: string;
+  textStyle?: TextStyle;
 }
 
-const InfoRow: React.FC<InfoRowProps> = ({ label, value }) => {
+const InfoRow: React.FC<InfoRowProps> = ({ label, value, textStyle }) => {
+  const valueStyles = [styles.value];
+  if (textStyle) {
+    valueStyles.push(textStyle);
+  }
   return (
     <View style={styles.row}>
       <View style={styles.labelContainer}>
-        <Text style={styles.label}>{label}</Text>
+        <Text style={styles.label}>{label} :</Text>
       </View>
       <View style={styles.valueContainer}>
-        <Text style={styles.value}>{value}</Text>
+        <Text style={valueStyles}>{value}</Text>
       </View>
     </View>
   );
@@ -23,18 +28,21 @@ const InfoRow: React.FC<InfoRowProps> = ({ label, value }) => {
 
 const styles = StyleSheet.create({
   label: {
-    ...theme.secondary,
+    textAlign: 'right',
+    ...theme.primary,
     ...theme.small,
+    fontWeight: '700',
   },
   value: {
     ...theme.primary,
-    ...theme.mediumLight,
+    ...theme.surface,
   },
   row: {
     flexDirection: 'row',
     marginVertical: unit(10),
   },
   labelContainer: {
+    marginRight: unit(10),
     flex: 4.5,
   },
   valueContainer: {
