@@ -12,6 +12,7 @@ import {
 import { initialState } from 'utils/redux/ui/movement-detail-screen/movement-detail-screen-reducer';
 import { customFormatDate, customFormatHour } from 'utils/moment';
 import { getChargeDetailCall } from 'utils/redux/services/charge-detail-actions';
+import { useNavigation } from '@react-navigation/native';
 
 const SuccessModal = () => {
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,7 @@ const SuccessModal = () => {
   const [payload, setPayload] = useState(initialState);
   const chargeId = useSelector(selectChargeId);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const handleSharePress = async (imageUrl: string) => {
     setLoading(true);
@@ -73,13 +75,16 @@ const SuccessModal = () => {
       buttons={{
         cancel: false,
         confirm: true,
-        share: false,
+        share: true,
         close: false,
       }}
-      handleSharePress={() => handleSharePress(charge?.imageUrl || '')}
+      handleSharePress={handleSharePress}
       loading={loading}
       header="Cobro exitoso"
       chargeInfo={payload}
+      onConfirm={() => {
+        navigation.goBack();
+      }}
     />
   );
 };

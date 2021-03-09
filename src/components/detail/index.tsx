@@ -21,22 +21,22 @@ interface IDetail {
   header: string;
   loading: boolean;
   chargeInfo: MovementInfo;
-  onCancel?: Function;
-  onClose?: Function;
-  onConfirm?: Function;
+  onCancel?: () => void;
+  onClose?: () => void;
+  onConfirm?: () => void;
   buttons: IButtons;
-  handleSharePress?: Function;
+  handleSharePress?: (imageUrl: string) => void;
 }
 
 const DetailScreen: React.FC<IDetail> = ({
   header,
   loading = false,
   chargeInfo,
-  onCancel = () => { },
-  onClose = () => { },
-  onConfirm = () => { },
+  onCancel,
+  onClose,
+  onConfirm,
   buttons,
-  handleSharePress = () => { },
+  handleSharePress,
 }) => {
   return (
     <View style={styles.container}>
@@ -54,47 +54,47 @@ const DetailScreen: React.FC<IDetail> = ({
           animating={true}
         />
       ) : (
-          <View style={styles.card}>
-            {Boolean(chargeInfo.operationCode) && (
-              <InfoRow label="Operación" value={`${chargeInfo.operationCode}`} />
-            )}
-            <InfoRow label="Monto" value={chargeInfo.amountLabel} />
-            <InfoRow label="Concepto" value={chargeInfo.displayName || '-'} />
-            <InfoRow label="Observación" value={chargeInfo.description} />
-            {Boolean(chargeInfo.cashier) && (
-              <InfoRow label="Cajero" value={chargeInfo.cashier} />
-            )}
-            <InfoRow label="Fecha" value={chargeInfo.date || getCurrentDate()} />
-            <InfoRow label="Hora" value={chargeInfo.hour || getCurrentHour()} />
+        <View style={styles.card}>
+          {Boolean(chargeInfo.operationCode) && (
+            <InfoRow label="Operación" value={`${chargeInfo.operationCode}`} />
+          )}
+          <InfoRow label="Monto" value={chargeInfo.amountLabel} />
+          <InfoRow label="Concepto" value={chargeInfo.displayName || '-'} />
+          <InfoRow label="Observación" value={chargeInfo.description} />
+          {Boolean(chargeInfo.cashier) && (
+            <InfoRow label="Cajero" value={chargeInfo.cashier} />
+          )}
+          <InfoRow label="Fecha" value={chargeInfo.date || getCurrentDate()} />
+          <InfoRow label="Hora" value={chargeInfo.hour || getCurrentHour()} />
 
-            {Boolean(buttons.share && chargeInfo.imageUrl) && (
-              <View style={styles.shareContainer}>
-                <ShareButton
-                  onPress={() => handleSharePress(chargeInfo.imageUrl)}
-                />
-              </View>
-            )}
-            <View style={styles.buttonsContainer}>
-              {buttons.cancel && (
-                <Button
-                  title="Rechazar"
-                  textStyle={theme.red}
-                  style={styles.button}
-                  onPress={() => {
-                    onCancel();
-                  }}
-                />
-              )}
-              {buttons.confirm && (
-                <Button
-                  title="Confirmar"
-                  style={styles.button}
-                  onPress={() => onConfirm()}
-                />
-              )}
+          {Boolean(buttons.share && chargeInfo.imageUrl) && (
+            <View style={styles.shareContainer}>
+              <ShareButton
+                onPress={() => {
+                  handleSharePress && handleSharePress(chargeInfo.imageUrl);
+                }}
+              />
             </View>
+          )}
+          <View style={styles.buttonsContainer}>
+            {buttons.cancel && (
+              <Button
+                title="Rechazar"
+                textStyle={theme.red}
+                style={styles.button}
+                onPress={onCancel}
+              />
+            )}
+            {buttons.confirm && (
+              <Button
+                title="Confirmar"
+                style={styles.button}
+                onPress={onConfirm}
+              />
+            )}
           </View>
-        )}
+        </View>
+      )}
     </View>
   );
 };
