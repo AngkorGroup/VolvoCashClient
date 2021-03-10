@@ -48,7 +48,10 @@ export function postContactDetailCall(
 
 export interface GetContactListSuccess extends Action {
   type: typeof GET_CONTACT_LIST_SUCCESS;
-  payload: Contact[];
+  payload: {
+    data: Contact[];
+    showButton: boolean;
+  };
 }
 
 export interface GetContactListError extends Action {

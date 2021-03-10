@@ -14,18 +14,18 @@ import { getContactListCall } from 'utils/redux/services/contact-actions';
 import {
   selectContactList,
   selectLoading,
+  selectShowButton,
 } from 'utils/redux/ui/transfers-screen/transfers-screen-reducer';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 import * as routes from 'utils/routes';
 import { useNavigation } from '@react-navigation/native';
-import { selectContact } from 'utils/redux/auth/auth-reducer';
 
 const TransferListScreen = () => {
   const [query, setQuery] = useState('');
   const loading = useSelector(selectLoading);
+  const showButton = useSelector(selectShowButton);
   const contacts = useSelector(selectContactList);
-  const currentUser = useSelector(selectContact);
   const [filteredContacts, setFilteredContacts] = useState(contacts);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -60,7 +60,7 @@ const TransferListScreen = () => {
         alignment="center"
         rightButton={<ExitButton />}
       />
-      {currentUser?.type === 'Primary' && (
+      {showButton && (
         <View style={styles.infoContainer}>
           <Button
             title="Nuevo Contacto"
