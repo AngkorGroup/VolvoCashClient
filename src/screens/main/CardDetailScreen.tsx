@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { unit } from 'utils/responsive';
-import { theme } from 'utils/styles';
+import { theme, window } from 'utils/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCard,
@@ -51,10 +51,9 @@ const CardDetailScreen = () => {
         leftButton={<BackButton />}
       />
       <View style={styles.infoContainer}>
-        <View>
+        <View style={styles.infoLeftContainer}>
           {card.contact?.type === 'Secondary' && (
             <Text
-              numberOfLines={1}
               style={[
                 styles.balanceLabel,
                 theme.tiny,
@@ -62,7 +61,6 @@ const CardDetailScreen = () => {
           )}
           {!!card.contact?.client && (
             <Text
-              numberOfLines={1}
               style={[
                 styles.balanceLabel,
                 theme.tiny,
@@ -71,15 +69,17 @@ const CardDetailScreen = () => {
           <Text style={styles.balanceText}>{card.balance.toString()}</Text>
         </View>
         {card.contact?.type === 'Primary' && (
-          <Button
-            title="Generar código QR"
-            onPress={() => {
-              navigation.navigate(routes.QR_SCREEN);
-            }}
-            icon={
-              <Icon family="MaterialIcon" name="qr-code-2" size={unit(50)} />
-            }
-          />
+          <View style={styles.infoRightContainer}>
+            <Button
+              title="Generar código QR"
+              onPress={() => {
+                navigation.navigate(routes.QR_SCREEN);
+              }}
+              icon={
+                <Icon family="MaterialIcon" name="qr-code-2" size={unit(50)} />
+              }
+            />
+          </View>
         )}
       </View>
       <View style={styles.tabBar}>
@@ -267,9 +267,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: unit(90),
-    padding: unit(20),
     marginVertical: unit(15),
+  },
+  infoLeftContainer: {
+    width: window.width - unit(180),
+    padding: unit(10),
+  },
+  infoRightContainer: {
+    width: unit(180),
+    alignItems: 'center',
   },
   balanceLabel: {
     ...theme.small,
