@@ -9,6 +9,7 @@ import InfoRow from 'components/card/InfoRow';
 import { theme, palette } from 'utils/styles';
 import { getCurrentDate, getCurrentHour } from 'utils/moment';
 import { MovementInfo } from 'utils/redux/ui/movement-detail-screen/movement-detail-screen-action';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface IButtons {
   cancel: boolean;
@@ -54,7 +55,7 @@ const DetailScreen: React.FC<IDetail> = ({
           animating={true}
         />
       ) : (
-        <View style={styles.card}>
+        <ScrollView contentContainerStyle={styles.card}>
           {Boolean(chargeInfo.operationCode) && (
             <InfoRow label="Operación" value={`${chargeInfo.operationCode}`} />
           )}
@@ -93,7 +94,7 @@ const DetailScreen: React.FC<IDetail> = ({
               />
             )}
           </View>
-        </View>
+        </ScrollView>
       )}
     </View>
   );
