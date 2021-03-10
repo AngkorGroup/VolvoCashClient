@@ -27,6 +27,7 @@ interface IDetail {
   onConfirm?: () => void;
   buttons: IButtons;
   handleSharePress?: (imageUrl: string) => void;
+  confirmText?: string;
 }
 
 const DetailScreen: React.FC<IDetail> = ({
@@ -38,6 +39,7 @@ const DetailScreen: React.FC<IDetail> = ({
   onConfirm,
   buttons,
   handleSharePress,
+  confirmText,
 }) => {
   return (
     <View style={styles.container}>
@@ -88,7 +90,7 @@ const DetailScreen: React.FC<IDetail> = ({
             )}
             {buttons.confirm && (
               <Button
-                title="Confirmar"
+                title={confirmText || 'Confirmar'}
                 style={styles.button}
                 onPress={onConfirm}
               />

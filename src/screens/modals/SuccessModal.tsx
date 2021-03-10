@@ -85,6 +85,7 @@ const SuccessModal = () => {
       onConfirm={() => {
         navigation.goBack();
       }}
+      confirmText="Aceptar"
     />
   );
 };
