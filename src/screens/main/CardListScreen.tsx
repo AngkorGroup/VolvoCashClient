@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectLoading,
   selectSections,
+  selectTotalBalance,
 } from 'utils/redux/ui/card-list-screen/card-list-screen-reducer';
 import {
   getCardListCall,
@@ -23,7 +24,8 @@ const SECTION_NAME_MAP: { [key: string]: string } = {
 
 const CardListScreen = () => {
   const loading = useSelector(selectLoading);
-  let sections = useSelector(selectSections);
+  const sections = useSelector(selectSections);
+  const totalBalance = useSelector(selectTotalBalance);
 
   const dispatch = useDispatch();
 
@@ -40,6 +42,11 @@ const CardListScreen = () => {
         alignment="center"
         rightButton={<ExitButton />}
       />
+      {!!totalBalance?.label && (
+        <Text style={styles.header}>
+          {'Saldo global: ' + totalBalance.label}
+        </Text>
+      )}
       <SectionList
         refreshing={loading}
         onRefresh={refresh}

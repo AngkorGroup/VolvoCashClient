@@ -16,7 +16,7 @@ import { Contact } from 'models/Contact';
 
 const parseSections = (action: GetCardListSuccess) => {
   return Object.entries(
-    action.payload.reduce((acc, iCard) => {
+    action.payload.data.reduce((acc, iCard) => {
       const card = new Card(iCard);
       if (!card.contact) {
         return acc;
@@ -53,7 +53,7 @@ function* onGetCardListSuccess(action: GetCardListSuccess) {
       yield put(setCardList(cardSections));
       break;
     case 'own_cards':
-      yield put(setOwnCardList(action.payload));
+      yield put(setOwnCardList(action.payload.data));
       break;
     default:
       console.error('Unexpected GetCardListSuccess.meta.for.');

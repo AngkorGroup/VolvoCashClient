@@ -1,4 +1,5 @@
 import { Card } from 'models/Card';
+import { IMoney } from 'models/Money';
 import {
   DISMISS_ALERT,
   GET_CARD_LIST_CALL,
@@ -16,10 +17,14 @@ interface CardListScreenState {
   loading: boolean;
   error: boolean;
   sections: CardSections;
+  totalBalance?: IMoney;
 }
 
 export const selectLoading = (state: RootState) =>
   selectCardListScreen(state).loading;
+
+export const selectTotalBalance = (state: RootState) =>
+  selectCardListScreen(state).totalBalance;
 
 export const selectError = (state: RootState) =>
   selectCardListScreen(state).error;
@@ -35,6 +40,7 @@ const initialState: CardListScreenState = {
   loading: false,
   error: false,
   sections: [],
+  totalBalance: undefined,
 };
 
 export default function (
@@ -51,6 +57,7 @@ export default function (
     case GET_CARD_LIST_SUCCESS:
       return {
         ...state,
+        totalBalance: action.payload.totalBalance,
         loading: false,
         error: false,
       };

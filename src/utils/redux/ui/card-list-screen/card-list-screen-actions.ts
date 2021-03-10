@@ -1,4 +1,5 @@
 import { Card } from 'models/Card';
+import { IMoney } from 'models/Money';
 import { Action } from 'redux';
 import {
   DismissError,
@@ -25,7 +26,10 @@ export interface GetCardListCall {
 
 export interface GetCardListSuccess extends Action {
   type: typeof GET_CARD_LIST_SUCCESS;
-  payload: Card[];
+  payload: {
+    data: Card[];
+    totalBalance: IMoney;
+  };
   meta: {
     for: GetCardListUseCase;
   };
