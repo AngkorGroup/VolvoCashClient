@@ -11,8 +11,6 @@ import { navigate } from 'utils/navigation';
 import * as routes from 'utils/routes';
 import { getCardDetailCall } from 'utils/redux/ui/card-detail-screen/card-detail-screen-action';
 import { selectCard } from 'utils/redux/ui/card-detail-screen/card-detail-screen-reducer';
-import { selectContact } from 'utils/redux/auth/auth-reducer';
-import { Contact } from 'models/Contact';
 
 const parseSections = (action: GetCardListSuccess) => {
   return Object.entries(
