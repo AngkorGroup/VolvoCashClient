@@ -1,6 +1,12 @@
 import Icon, { IconFamily } from 'components/icon/Icon';
 import React from 'react';
-import { StyleSheet, Text, TextInputProps, ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInputProps,
+  View,
+  ViewStyle,
+} from 'react-native';
 import {
   TextInput,
   TouchableWithoutFeedback,
@@ -44,15 +50,23 @@ const Input: React.FC<InputProps & TextInputProps> = ({
       {iconFamily && iconName && (
         <Icon family={iconFamily} name={iconName} style={styles.icon} />
       )}
-      {innerLabel && <Text style={styles.inputMargin}>{innerLabel}</Text>}
-      <TextInput
-        style={inputStyles}
-        numberOfLines={1}
-        placeholder={placeholder}
-        placeholderTextColor={theme.secondary.color}
-        pointerEvents={onPress ? 'none' : undefined}
-        {...props}
-      />
+      {innerLabel && (
+        <View
+          style={styles.wrapper}
+          pointerEvents={onPress ? 'none' : undefined}>
+          <Text style={styles.inputMargin}>{innerLabel}</Text>
+        </View>
+      )}
+      <View style={styles.wrapper} pointerEvents={onPress ? 'none' : undefined}>
+        <TextInput
+          style={inputStyles}
+          numberOfLines={1}
+          placeholder={placeholder}
+          placeholderTextColor={theme.secondary.color}
+          pointerEvents={onPress ? 'none' : undefined}
+          {...props}
+        />
+      </View>
     </TouchableWithoutFeedback>
   );
 };
@@ -80,6 +94,9 @@ const styles = StyleSheet.create({
   },
   inputMargin: {
     marginHorizontal: unit(10),
+  },
+  wrapper: {
+    flex: 1,
   },
 });
 
