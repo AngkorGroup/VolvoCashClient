@@ -50,13 +50,7 @@ const Input: React.FC<InputProps & TextInputProps> = ({
       {iconFamily && iconName && (
         <Icon family={iconFamily} name={iconName} style={styles.icon} />
       )}
-      {innerLabel && (
-        <View
-          style={styles.wrapper}
-          pointerEvents={onPress ? 'none' : undefined}>
-          <Text style={styles.inputMargin}>{innerLabel}</Text>
-        </View>
-      )}
+      {innerLabel && <Text style={styles.inputMargin}>{innerLabel}</Text>}
       <View style={styles.wrapper} pointerEvents={onPress ? 'none' : undefined}>
         <TextInput
           style={inputStyles}
