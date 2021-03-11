@@ -3,13 +3,7 @@ import BackButton from 'components/header/BackButton';
 import Header from 'components/header/Header';
 import Input from 'components/input/Input';
 import React, { useEffect } from 'react';
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { unit } from 'utils/responsive';
 import { theme } from 'utils/styles';
 import { useForm, Controller } from 'react-hook-form';
@@ -26,7 +20,6 @@ import * as routes from 'utils/routes';
 import { selectDocumentType } from 'utils/redux/ui/select-documents-screen/select-documents-screen-reducer';
 import { setDocumentType } from 'utils/redux/ui/select-documents-screen/select-documents-screen-actions';
 import { selectClient } from 'utils/redux/ui/select-client-screen/select-client-screen-reducer';
-import { ScrollView } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const ContactFormScreen = () => {
