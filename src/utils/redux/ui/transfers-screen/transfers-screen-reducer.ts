@@ -16,10 +16,14 @@ interface ContactListScreenState {
   loading: boolean;
   error: boolean;
   contactList: Contact[];
+  showButton: boolean;
 }
 
 export const selectLoading = (state: RootState) =>
   selectTransfersScreen(state).loading;
+
+export const selectShowButton = (state: RootState) =>
+  selectTransfersScreen(state).showButton;
 
 export const selectError = (state: RootState) =>
   selectTransfersScreen(state).error;
@@ -34,6 +38,7 @@ const initialState: ContactListScreenState = {
   loading: false,
   error: false,
   contactList: [],
+  showButton: false,
 };
 
 type ContactListScreenAction =
@@ -57,7 +62,8 @@ export default function (
         ...state,
         loading: false,
         error: false,
-        contactList: action.payload,
+        contactList: action.payload.data,
+        showButton: action.payload.showButton,
       };
     case GET_CONTACT_LIST_ERROR:
       return {

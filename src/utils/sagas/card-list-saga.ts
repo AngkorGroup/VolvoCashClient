@@ -11,12 +11,10 @@ import { navigate } from 'utils/navigation';
 import * as routes from 'utils/routes';
 import { getCardDetailCall } from 'utils/redux/ui/card-detail-screen/card-detail-screen-action';
 import { selectCard } from 'utils/redux/ui/card-detail-screen/card-detail-screen-reducer';
-import { selectContact } from 'utils/redux/auth/auth-reducer';
-import { Contact } from 'models/Contact';
 
 const parseSections = (action: GetCardListSuccess) => {
   return Object.entries(
-    action.payload.reduce((acc, iCard) => {
+    action.payload.data.reduce((acc, iCard) => {
       const card = new Card(iCard);
       if (!card.contact) {
         return acc;
@@ -53,7 +51,7 @@ function* onGetCardListSuccess(action: GetCardListSuccess) {
       yield put(setCardList(cardSections));
       break;
     case 'own_cards':
-      yield put(setOwnCardList(action.payload));
+      yield put(setOwnCardList(action.payload.data));
       break;
     default:
       console.error('Unexpected GetCardListSuccess.meta.for.');

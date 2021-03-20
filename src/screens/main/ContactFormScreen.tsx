@@ -20,6 +20,7 @@ import * as routes from 'utils/routes';
 import { selectDocumentType } from 'utils/redux/ui/select-documents-screen/select-documents-screen-reducer';
 import { setDocumentType } from 'utils/redux/ui/select-documents-screen/select-documents-screen-actions';
 import { selectClient } from 'utils/redux/ui/select-client-screen/select-client-screen-reducer';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const ContactFormScreen = () => {
   const dispatch = useDispatch();
@@ -62,7 +63,9 @@ const ContactFormScreen = () => {
         alignment="left"
         leftButton={<BackButton />}
       />
-      <View style={styles.contentContainer}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.contentContainer}
+        style={styles.scrollContainer}>
         <Controller
           control={control}
           name="firstName"
@@ -163,8 +166,9 @@ const ContactFormScreen = () => {
           onPress={handleSubmit(onSubmit)}
           disabled={!formState.isValid}
           loading={loading}
+          style={styles.button}
         />
-      </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 };
@@ -174,12 +178,17 @@ const styles = StyleSheet.create({
     flex: 1,
     ...theme.background,
   },
+  scrollContainer: {
+    width: '100%',
+  },
+  button: {
+    marginBottom: unit(50),
+  },
   input: {
     width: '100%',
     marginBottom: unit(20),
   },
   contentContainer: {
-    flex: 1,
     alignItems: 'center',
     margin: unit(30),
   },

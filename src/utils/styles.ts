@@ -1,6 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Color from 'color';
 import { unit } from 'utils/responsive';
+import { Dimensions } from 'react-native';
 
 export const palette = {
   ocean: '#16A6C9',
@@ -14,6 +15,8 @@ export const palette = {
   raspberry: '#D84451',
   grass: '#78B833',
 };
+
+export const window = Dimensions.get('window');
 
 export const theme = {
   opacity: 0.7,

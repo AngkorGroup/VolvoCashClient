@@ -10,20 +10,20 @@ export default StyleSheet.create({
   card: {
     ...theme.surface,
     ...theme.shadow,
-    marginVertical: unit(30),
-    paddingVertical: unit(60),
+    marginVertical: unit(20),
+    paddingVertical: unit(20),
     paddingHorizontal: unit(40),
     alignItems: 'center',
   },
   buttonsContainer: {
     alignItems: 'center',
-    marginTop: unit(100),
+    marginTop: unit(20),
   },
   button: {
-    marginVertical: unit(5),
+    marginVertical: unit(10),
   },
   shareContainer: {
-    marginTop: unit(30),
+    marginVertical: unit(10),
   },
   amountRow: {
     fontWeight: '700',
