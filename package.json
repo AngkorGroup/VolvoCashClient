@@ -38,6 +38,7 @@
     "react-native-share": "^4.1.0",
     "react-native-splash-screen": "^3.2.0",
     "react-native-vector-icons": "^7.1.0",
+    "react-native-version-check": "^3.4.2",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",

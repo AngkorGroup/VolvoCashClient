@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
 import LoginNavigation from 'screens/auth/LoginNavigation';
 import MainNavigation from 'screens/main/MainNavigation';
 import * as routes from 'utils/routes';
@@ -13,6 +14,9 @@ import TransferSuccessModal from 'screens/modals/TransferSuccessModal';
 import OneSignal from 'react-native-onesignal';
 import { PUSH_TOKEN } from '@env';
 import { navigate } from 'utils/navigation';
+import FastImage from 'react-native-fast-image';
+import VersionCheck from 'react-native-version-check';
+import UpdateVersionScreen from './UpdateVersionScreen';
 
 const RootStack = createStackNavigator();
 
@@ -20,6 +24,9 @@ const RootStack = createStackNavigator();
 // maybe RootStack or ModalStack (?)
 const AuthLoading = () => {
   const authToken = useSelector(selectAuthToken);
+  const [loading, setLoading] = useState(true);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
+  const [storeUrl, setStoreURL] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +41,15 @@ const AuthLoading = () => {
       OneSignal.removeEventListener('ids', onOpened);
       OneSignal.removeEventListener('received', onIds);
     };
+  }, []);
+
+  useEffect(() => {
+    VersionCheck.needUpdate().then(async (res: any) => {
+      console.log('res: ', res);
+      setLoading(false);
+      setNeedsUpdate(res?.isNeeded || false);
+      setStoreURL(res?.storeUrl || '');
+    });
   }, []);
 
   function onOpened(notification: any) {
@@ -58,6 +74,19 @@ const AuthLoading = () => {
 
   if (authToken) {
     developmentApi.setHeader('Authorization', `Bearer ${authToken}`);
+  }
+
+  if (loading) {
+    return (
+      <FastImage
+        source={require('assets/images/client-bg.png')}
+        style={styles.bg}
+      />
+    );
+  }
+
+  if (needsUpdate) {
+    return <UpdateVersionScreen storeUrl={storeUrl} />;
   }
 
   return (
@@ -87,5 +116,13 @@ const AuthLoading = () => {
     </RootStack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  bg: {
+    flex: 1,
+    resizeMode: 'contain',
+    justifyContent: 'center',
+  },
+});
 
 export default AuthLoading;
