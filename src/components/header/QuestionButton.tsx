@@ -2,11 +2,8 @@ import Alert from 'components/alert/Alert';
 import Icon from 'components/icon/Icon';
 import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { logOut } from 'utils/redux/actions';
 
 const QuestionButton = () => {
-  const dispatch = useDispatch();
   const [alert, setAlert] = useState(false);
   return (
     <>
@@ -21,7 +18,6 @@ const QuestionButton = () => {
         onCancel={() => setAlert(false)}
         onConfirm={() => {
           setAlert(false);
-          dispatch(logOut());
         }}
       />
     </>
