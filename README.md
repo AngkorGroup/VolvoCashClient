@@ -13,14 +13,13 @@
 
 ## Despliegue
 
-1. Actualizar version en `src/utils/constants.ts`
-2. Levantar el servidor: `yarn start`
-3. (iOS) Buildear: `yarn ios:build`
-4. (iOS) abrir `ios/VolvoCashClient.xcworkspace`. Actualizar Version y Build del target principal
-5. (iOS) Seleccionar "Build Any iOS device" y luego "Product > Archive"
-6. (iOS) Cuando termine y abra el Organizer, seleccionar build y "Validate App"
-7. (iOS) Si es valido y seleccionar build y "Distribute App"
-8. (iOS) Ir al AppStoreConnect y subir compilación al grupo de pruebas correcto (o producción)
-9. (Android) abrir Android Studio y esperar que todos los procesos terminen
-10. (Android) "Build > Generate Signed APK/Bundle > Bundle/Release > Next > Release" y esperar que que todos los procesos terminen
-11. (Android) Ir al Google Play Console y subir compilación al grupo de pruebas correcto (o producción)
+1. Levantar el servidor: `yarn start`
+2. (iOS) Buildear: `yarn ios:build`
+3. (iOS) abrir `ios/VolvoCashClient.xcworkspace`. Actualizar Version y Build del target principal
+4. (iOS) Seleccionar "Build Any iOS device" y luego "Product > Archive"
+5. (iOS) Cuando termine y abra el Organizer, seleccionar build y "Validate App"
+6. (iOS) Si es valido y seleccionar build y "Distribute App"
+7. (iOS) Ir al AppStoreConnect y subir compilación al grupo de pruebas correcto (o producción)
+8. (Android) abrir Android Studio y esperar que todos los procesos terminen
+9. (Android) "Build > Generate Signed APK/Bundle > Bundle/Release > Next > Release" y esperar que que todos los procesos terminen
+10. (Android) Ir al Google Play Console y subir compilación al grupo de pruebas correcto (o producción)

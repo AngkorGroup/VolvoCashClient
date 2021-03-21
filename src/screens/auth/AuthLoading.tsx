@@ -5,7 +5,11 @@ import MainNavigation from 'screens/main/MainNavigation';
 import * as routes from 'utils/routes';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAuthToken, setPushToken } from 'utils/redux/auth/auth-reducer';
+import {
+  selectAuthToken,
+  setPushToken,
+  setVersion,
+} from 'utils/redux/auth/auth-reducer';
 import { setChargeId } from 'utils/redux/services/charge-detail-actions';
 import ConfirmationModal from 'screens/modals/ConfirmationModal';
 import SuccessModal from 'screens/modals/SuccessModal';
@@ -45,10 +49,10 @@ const AuthLoading = () => {
 
   useEffect(() => {
     VersionCheck.needUpdate().then(async (res: any) => {
-      console.log('res: ', res);
       setLoading(false);
       setNeedsUpdate(res?.isNeeded || false);
       setStoreURL(res?.storeUrl || '');
+      dispatch(setVersion(res?.currentVersion));
     });
   }, []);
 

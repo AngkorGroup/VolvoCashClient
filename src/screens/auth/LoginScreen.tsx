@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Platform } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Button from 'components/button/Button';
 import { unit } from 'utils/responsive';
@@ -7,10 +7,12 @@ import { useNavigation } from '@react-navigation/native';
 import * as routes from 'utils/routes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from '../../utils/styles';
-import { ANDROID_VERSION, IOS_VERSION } from '../../utils/constants';
+import { selectVersion } from 'utils/redux/auth/auth-reducer';
+import { useSelector } from 'react-redux';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const version = useSelector(selectVersion);
   return (
     <FastImage
       source={require('assets/images/client-bg.png')}
@@ -30,9 +32,7 @@ const LoginScreen = () => {
                 navigation.navigate(routes.PHONE_SCREEN);
               }}
             />
-            <Text style={styles.text}>
-              {Platform.OS === 'android' ? ANDROID_VERSION : IOS_VERSION}
-            </Text>
+            <Text style={styles.text}>{version}</Text>
           </View>
         </View>
       </SafeAreaView>
