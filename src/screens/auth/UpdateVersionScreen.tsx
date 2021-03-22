@@ -1,18 +1,18 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Linking } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Button from 'components/button/Button';
 import { unit } from 'utils/responsive';
-import { useNavigation } from '@react-navigation/native';
-import * as routes from 'utils/routes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from '../../utils/styles';
-import { selectVersion } from 'utils/redux/auth/auth-reducer';
-import { useSelector } from 'react-redux';
 
-const LoginScreen = () => {
-  const navigation = useNavigation();
-  const version = useSelector(selectVersion);
+interface UpdateVersionScreenProps {
+  storeUrl: string;
+}
+
+const UpdateVersionScreen: React.FC<UpdateVersionScreenProps> = ({
+  storeUrl,
+}) => {
   return (
     <FastImage
       source={require('assets/images/client-bg.png')}
@@ -25,14 +25,16 @@ const LoginScreen = () => {
               style={styles.volvoCashLogo}
             />
           </View>
-          <View>
+          <View style={styles.bottomContainer}>
+            <Text style={styles.text}>
+              Necesitas la última versión para utilizar Volvo Cash
+            </Text>
             <Button
-              title="Ingresar"
+              title="Actualizar"
               onPress={() => {
-                navigation.navigate(routes.PHONE_SCREEN);
+                Linking.openURL(storeUrl);
               }}
             />
-            <Text style={styles.text}>{version}</Text>
           </View>
         </View>
       </SafeAreaView>
@@ -69,10 +71,14 @@ const styles = StyleSheet.create({
     marginVertical: unit(20),
   },
   text: {
-    paddingTop: unit(15),
+    padding: unit(30),
     textAlign: 'center',
     ...theme.primaryOverDark,
   },
+  bottomContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
-export default LoginScreen;
+export default UpdateVersionScreen;

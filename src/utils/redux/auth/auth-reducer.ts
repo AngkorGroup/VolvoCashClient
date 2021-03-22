@@ -6,6 +6,7 @@ import {
   SET_PHONE,
   SET_PUSH_TOKEN,
   VERIFY_CODE_SUCCESS,
+  SET_VERSION,
 } from 'utils/redux/actions';
 import { RootState } from '../root-reducer';
 import { selectAuth } from '../root-selectors';
@@ -17,6 +18,7 @@ interface AuthState {
   pushToken?: string;
   phone: string;
   contact?: IContact;
+  version?: string;
 }
 
 const initialState: AuthState = {
@@ -24,6 +26,7 @@ const initialState: AuthState = {
   phone: '',
   contact: undefined,
   pushToken: undefined,
+  version: '',
 };
 
 export const selectAuthToken = (state: RootState) =>
@@ -33,6 +36,8 @@ export const selectPushToken = (state: RootState) =>
   selectAuth(state).pushToken || '';
 
 export const selectPhone = (state: RootState) => selectAuth(state).phone;
+
+export const selectVersion = (state: RootState) => selectAuth(state).version;
 
 export const selectContact = (state: RootState) => {
   const contact = selectAuth(state).contact;
@@ -57,7 +62,28 @@ export function setPushToken(pushToken: string): SetPushToken {
   };
 }
 
-type AuthAction = VerifyCodeSuccess | SetPhone | LogOutCall | SetPushToken;
+export interface SetVersion extends Action {
+  type: typeof SET_VERSION;
+  payload: {
+    version: string;
+  };
+}
+
+export function setVersion(version: string): SetVersion {
+  return {
+    type: SET_VERSION,
+    payload: {
+      version,
+    },
+  };
+}
+
+type AuthAction =
+  | VerifyCodeSuccess
+  | SetPhone
+  | LogOutCall
+  | SetPushToken
+  | SetVersion;
 
 export default function (
   state: AuthState = initialState, // NOSONAR
@@ -74,6 +100,11 @@ export default function (
       return {
         ...state,
         phone: action.payload.phone,
+      };
+    case SET_VERSION:
+      return {
+        ...state,
+        version: action.payload.version,
       };
     case SET_PUSH_TOKEN:
       return {
