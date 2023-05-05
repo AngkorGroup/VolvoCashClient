@@ -16,6 +16,7 @@ import {
 } from 'utils/redux/ui/card-list-screen/card-list-screen-actions';
 import { unit } from 'utils/responsive';
 import { theme, palette } from 'utils/styles';
+import QuestionButton from 'components/header/QuestionButton';
 
 const SECTION_NAME_MAP: { [key: string]: string } = {
   Primary: 'Principales',
@@ -41,6 +42,7 @@ const CardListScreen = () => {
         title={'Tarjetas'}
         alignment="center"
         rightButton={<ExitButton />}
+        leftButton={<QuestionButton />}
       />
       {!!totalBalance?.label && (
         <Text style={styles.header}>
